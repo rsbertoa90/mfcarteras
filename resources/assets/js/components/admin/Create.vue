@@ -6,33 +6,8 @@
                  <label for="" class="col-12">Codigo</label>
                  <input required v-model.trim="formData.code" type="text" class="col-12">
              </div>
-             <div class="col-3 row">
-                 <label for="" class="col-12">Supercategoria</label>
-                 <select required  id="" v-model="supercategory" class="col-12 form-control">
-                     <option  v-for="supercategory in supercategories" 
-                             :key="supercategory.id"
-                             :value="supercategory" >
-                        {{supercategory.name}}
-                     </option>
-                     
-                 </select>
-             </div>
-             <div class="col-3 row">
-                 <label for="" class="col-12">Categoria</label>
-                 <select v-if="supercategory" required  id="" 
-                        v-model.trim="formData.category_id" class="col-12 form-control">
-                     <option  v-for="category in supercategory.categories" 
-                             :key="category.id"
-                             :value="category.id" >
-                        {{category.name}}
-                     </option>
-                     <option value="new">Nueva</option>
-                 </select>
-                 <input v-model.trim="newCategory"
-                        v-if="formData.category_id=='new'" 
-                        placeholder="Nueva Categoria" 
-                        type="text">
-             </div>
+             
+        
              <div class="col-3 row">
                  <label for="" class="col-12">Producto</label>
                  <textarea  rows="2" required  v-model.trim="formData.name" type="text" class="col-12"> </textarea>
@@ -49,10 +24,10 @@
 
 <script>
     export default {
-        props : ['supercategories'],
+   
         data(){
             return {
-                supercategory:null,
+            
                 newCategory :null,
                 formData: {
 
@@ -67,7 +42,7 @@
         },
         methods : {
             valid(){
-                if (this.supercategory){
+            
 
                 
                     var vm = this;
@@ -85,7 +60,7 @@
                         swal('error','ya existe un producto con el codigo'+vm.formData.code,'error');
                     } 
                     else {return true;}
-                }
+                
             },
             resetForm(){
                 this.formData =  {
@@ -103,7 +78,7 @@
                     if (this.formData.category_id == 'new')
                     {
                         
-                         var duplicated = this.supercategory.categories.find(function(el){
+                         var duplicated = this.categories.find(function(el){
                              return el.name.toLowerCase() == vm.newCategory.toLowerCase();
                          }); 
                          if (duplicated != null){

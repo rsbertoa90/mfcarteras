@@ -12,50 +12,7 @@
                 </div>
             </div>
        </a>
-       <a href="/contacto" class="col-12 col-lg-3 p-1">
-           <div class="text-center ">
-               <div class="overflow-hidden">
-                    <v-lazy-image class="img-container" src="/storage/images/app/contacto.jpg" alt="contacto" />
-               </div>
-               
-                    <div class="sm-overlay">
-                        <h4>CONTACTO</h4>
-                    </div>
-            </div>
-       </a>
-       <a href="/limpieza-por-mayor" class="col-12 col-lg-3 p-1">
-           <div class="text-center ">
-               <div class="overflow-hidden">
-                    <v-lazy-image class="img-container" src="/storage/images/app/limpieza.jpg" alt="limpieza" />
-               </div>
-               
-                    <div class="sm-overlay">
-                        <h4>PRODUCTOS DE LIMPIEZA</h4>
-                    </div>
-                </div>
-       </a>
-       <a href="/bazar-por-mayor" class="col-12 col-lg-3 p-1">
-           <div class="text-center ">
-               <div class="overflow-hidden">
-                    <v-lazy-image class="img-container" src="/storage/images/app/bazar.jpg" alt="bazar" />
-               </div>
-               
-                    <div class="sm-overlay">
-                        <h4>PRODUCTOS DE BAZAR</h4>
-                    </div>
-                </div>
-       </a>
-       <a href="/sucursales" class="col-12 col-lg-3 p-1">
-           <div class="text-center ">
-               <div class="overflow-hidden">
-                    <v-lazy-image class="img-container" src="/storage/images/app/sucursal.jpg" alt="sucursal" />
-               </div>
-               
-                    <div class="sm-overlay">
-                        <h4>SUCURSAL</h4>
-                    </div>
-                </div>
-       </a>
+      
       
     </div>
 </template>

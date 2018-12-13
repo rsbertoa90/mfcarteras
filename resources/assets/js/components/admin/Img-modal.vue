@@ -97,7 +97,7 @@
                         files : true,
                         success: function () {
                            $('#image-modal').modal('hide');
-                           vm.$emit('refresh');
+                           window.location.replace('/admin');
                         },
                     });
                 }

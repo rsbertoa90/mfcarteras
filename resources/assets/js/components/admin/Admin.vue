@@ -19,7 +19,7 @@
                 <hr>
                 <div class="row w-100">
                     <div class="col-12 col-lg-8">
-                        <admin-create :supercategories="supercategories" @productSaved="refresh"></admin-create>
+                        <admin-create @productSaved="refresh"></admin-create>
                     </div>
                     <div class="col-4 d-flex flex-column justify-content-center align-items-center">
                         <h4>Cambiar precios masivo</h4>
@@ -36,21 +36,7 @@
                 </div>
                 <hr>
                 <div >
-                    <div v-for="category in categories" :key="category.id" class="card flex-wrap">
-                        <div class="card-header" :id="category.id">
-                            <div class="d-flex align-items-center justify-content-start">
-                                
-                                    <input type="checkbox" class=" form-control" 
-                                            v-model="category.selected" @change="categoryChekbox(category)">
-                                    <h5 class="mb-0 ">
-                                        {{category.name.ucfirst()}}
-                                    </h5>
-                            
-                            </div>
-                        </div>
-                        <div :id="'category-'+category.id" class="" 
-                              aria-labelledby="headingOne" >
-                            <div class="card-body">
+                   
                             <table class="table table-striped table-bordered ">
                                 <thead class="">
                                     <th >imagen</th>
@@ -61,7 +47,7 @@
                                 <transition-group tag="tbody" 
                                                     enter-active-class="animated slideInLeft faster "
                                                     leave-active-class="animated fadeOutDown faster position-absolute ">
-                                    <tr v-for="product in category.products" :key="product.id">
+                                    <tr v-for="product in products" :key="product.id">
                                         <td >
                                             <img v-if="product.images.length > 0" 
                                                   :src="product.images[0].url" 
@@ -95,9 +81,6 @@
                                     </tr>
                                 </transition-group>
                             </table>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <image-modal :product="product"  ref="modal" @refresh="refresh()"></image-modal>
         </div>
@@ -116,9 +99,9 @@ import { mapActions } from 'vuex';
             adminCreate : adminCreate
         },
         computed : {
-            supercategories()
+            products()
             {
-                return this.$store.getters.getSupercategories;
+                return this.$store.getters.getProducts;
             },
             config(){
                 return this.$store.getters.getConfig;

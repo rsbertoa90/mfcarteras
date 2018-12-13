@@ -118,22 +118,21 @@ const app = new Vue({
     store,
     methods : {
         ...mapActions({
-            fetchCategories : 'categories/fetch',
             fetchUser : 'fetchUser',
             fetchConfig : 'fetchConfig',
             fetchStates : 'fetchStates',
-            fetchSupercategories : 'fetchSupercategories',
+            fetchProducts: 'fetchProducts'
+           
         }),
         
 
     },
     created()
     { 
-        this.fetchCategories();
-        this.fetchSupercategories();
         this.fetchUser();
         this.fetchConfig();
         this.fetchStates();
+        this.fetchProducts();
     }
 });
 

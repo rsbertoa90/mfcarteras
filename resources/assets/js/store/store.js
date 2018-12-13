@@ -2,25 +2,19 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 Vue.use(Vuex);
-import categories from './modules/categories.js'
+
 export const store = new Vuex.Store({
     state : {
         user : null,
         config : null,
         states:[],
-        supercategories:null,
+        products:[],
+        
     },
     getters :{
-        getSupercategories(store){
-            return store.supercategories;
+        getProducts(store){
+            return store.products;
         },
-        getSupercategory: (state) => (id) => {
-               if (state.supercategories) {
-                   return state.supercategories.find(cat => {
-                       return cat.id == id;
-                   });
-               }
-           },
         getUser(store){
             return store.user;
         },
@@ -45,6 +39,10 @@ export const store = new Vuex.Store({
         }
     },
     mutations : {
+
+        setProducts(state,payload){
+            state.products = payload;
+        },
         setUser(state,payload){
             state.user = payload;
            
@@ -55,11 +53,15 @@ export const store = new Vuex.Store({
         setStates(state,payload){
             state.states = payload;
         },
-        setSupercategories(state,payload){
-            state.supercategories = payload;
-        }
+       
     },
     actions : {
+        fetchProducts : ({commit},payload) => {
+            Vue.http.get('/api/products')
+                .then(res => {
+                    commit('setProducts',res.data);
+                });
+        },  
        fetchUser: ({
            commit
        }, payload) => {
@@ -87,19 +89,8 @@ export const store = new Vuex.Store({
                    commit('setStates', response.data);
                });
        },
-       fetchSupercategories: ({
-           commit
-       }, payload) => {
-
-           Vue.http.get('/api/supercategories')
-               .then(response => {
-                   commit('setSupercategories', response.data);
-               });
-       },
+      
     },
-    modules : {
-        categories
-    }
-
+ 
 });
 

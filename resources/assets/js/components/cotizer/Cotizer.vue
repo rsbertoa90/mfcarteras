@@ -32,25 +32,10 @@
              
              <hr>
              
-        <div id="accordion">
-            <div v-for="category in categories" 
-                  :key="'category-'+category.id" 
-                  class="card flex-wrap">
-                <div class="card-header" :id="'card'+category.id">
-                    <h5 class="mb-0">
-                        <button class="btn  btn-link w-100 text-left" 
-                                data-toggle="collapse" 
-                                :data-target="'#acordion'+category.id" 
-                                aria-expanded="true" 
-                                :aria-controls="category.name">
-                                 
-                                   {{category.name.ucfirst()}}
-                                   
-                        </button>
-                    </h5>
-                </div>
-                <div :id="'acordion'+category.id" class="collapse collapsed " aria-labelledby="headingOne" data-parent="#accordion">
-                    <div class="card-body">
+       
+         
+          
+               
                        <table class="table table-striped table-bordered ">
                            <thead class="">
                                <th>Foto</th>
@@ -61,7 +46,7 @@
                                
                            </thead>
                            <tbody>
-                               <tr v-for="product in category.products" :key="product.id" v-if="!product.paused">
+                               <tr v-for="product in products" :key="product.id" v-if="!product.paused">
                                    <td @click="show(product)" >
                                         <v-lazy-image v-if="product.images.length > 0" 
                                             class="sampleImage" :src="product.images[0].url" 
@@ -89,10 +74,7 @@
                                </tr>
                            </tbody>
                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+                  
         
         <transition enter-active-class="animated bounceIn" leave-active-class="animated fadeOutDown">
             <div v-if="total > 0" id="total"  class="col-12 row d-flex flex-column justify-content-center align-items-center w-100">
@@ -145,27 +127,32 @@
             'selector.code'(){
                 var  vm = this;
                 var res =false;
-                this.categories.forEach(cat => {
-                    cat.products.forEach(prod => {
-                        if (vm.selector.code == prod.code){
-                            vm.selector.product = prod;
-                            vm.selector.name = prod.name;
-                            res = true;
-                        }
-                    });
-                });
+               if (this.products){
+
+                   this.products.forEach(prod => {
+                       if (vm.selector.code == prod.code){
+                           vm.selector.product = prod;
+                           vm.selector.name = prod.name;
+                           res = true;
+                       }
+                   });
+               }
+            
                 if (!res){
                     vm.selector.product = null;
                     vm.selector.name='';
                 }
             },
             total() {
+                if(this.products){
+
+                
                    var result = [];
                    var vm = this;
-                    vm.categories.forEach(function(category){
-                    var prods = category.products.filter(function(el){     
+                   
+                    var prods = this.products.filter(function(el){     
                         return ( el.units != null & el.units > 0 );
-                    });
+                
                     if (prods.length > 0){
                         result.push(prods);
                     }
@@ -173,20 +160,22 @@
                 });
                    
                 vm.list = [].concat.apply([], result);
-               
+               }
             }
         },
         computed: {
             ...mapGetters({
-                categories : 'categories/getCategories',
+               products : 'getProducts',
                user : 'getUser'
             }),
             
             total() {
                 var vm = this;
                 var tot = 0;
-                vm.categories.forEach(function(category){
-                    category.products.forEach(function(product){
+                
+                if (this.products.length){
+                
+                    this.products.forEach(function(product){
                         if (product.units > 0)
                         {
                             
@@ -194,7 +183,7 @@
                             
                         }
                     });
-                });
+                }
                 return tot;
             }
         },

@@ -1,9 +1,31 @@
 <template>
     <div class="w-100">
-        
-        <div class="row d-flex justify-content-around align-items-center mt-4">
+       
+
+
+        <div class="fixed-navbar p-2"
+            :class="{'displayed' : scrollOnTop,
+                    'nondisplayed': !scrollOnTop}">
             
-            <div class="col-4">
+             <div class="col-4 ">
+                <ul class="d-flex justify-content-around align-items-end mb-0">
+                    <li> <a href="/cotizador"> Hace tu pedido </a> </li>
+                    <li> <a href="/contacto"> Contacto  </a> </li>
+                    <li> <a href="/contacto"> Ubicacion  </a> </li>
+                </ul>
+            </div>
+            <div class="col-1"></div>
+            
+            <div class="col-2 pt-3">
+                <a href="/">
+                    <span class="logo"
+                        :class="{'biglogo':scrollOnTop}">
+                        MF
+                    </span>
+                </a>
+            </div>
+
+             <div class="col-4 offset-1">
                 <form class="form-inline" action="/buscar">
                     <div class="input-group w-100">
                         <input type="text" class="form-control" 
@@ -20,55 +42,12 @@
                     </div>  
                 </form>
             </div>
-            
-            <div class="col-4 p-4">
-                <div class="p-4">
-                    <image-logo></image-logo>
-                </div>
-            </div>
 
-            <div class="col-4 flex-button">
-                <span class="white-bold bg-second p-2 flex-button rounded" style="width:60px">
-                    <span class="fa fa-phone"></span>
-                </span>  
-                <span class=" p-3 d-big"> 11 3008 5414</span>
-            </div>
+           
+          
         </div>
 
-        <div class="row nav-row">
-            <div class="row col-12">
-                <ul class="navbar">
-                    <li :class="{'hovered':supercat_id==1 && (overMenu || overNav)}" @mouseleave="overNav=false"  @mouseover="setsupercat(1)"> 
-                        <a href="/limpieza-por-mayor">  
-                            ARTICULOS DE LIMPIEZA <i class="fa fa-chevron-down"></i>  
-                        </a>
-                    </li>
-                    <li :class="{'hovered':supercat_id==2 && (overMenu || overNav)}" @mouseleave="overNav=false"  @mouseover="setsupercat(2)">
-                        <a href="/bazar-por-mayor">    
-                            ARTICULOS DE BAZAR <i class="fa fa-chevron-down"></i>  
-                        </a>
-                    </li>
-                    <li> <a href="/cotizador"> HACE TU PEDIDO</a></li>
-                     <li> <a href="/sucursales"> UBICACION</a></li>
-                    <li> <a href="/contacto"> CONTACTO</a></li>
-                </ul>
-            </div>
-        </div>
-          <transition enter-active-class="animated fadeIn fastest"
-                            leave-active-class="animated fadeOut fastest">
-                    <div v-if="overMenu || overNav" 
-                        @mouseover="overMenu=true"
-                        @mouseleave="overMenu=false" 
-                        class="nav-row row bg-first d-flex justify-content-center" >
-                        <a v-for="category in menucats" :key="category.id"
-                            :href="category.slug" 
-                             class="subcat col-2 align-items-center d-flex justify-content-center">
-
-                            {{category.name | uc}}
-                        
-                        </a>
-                    </div> 
-            </transition>
+           <div class="space"> </div>
     </div>
 </template>
 
@@ -83,38 +62,25 @@ export default {
     },
     data(){
         return{
-            supercat_id :1,
+           scrollOnTop : true,
             overMenu : false,
             overNav : false,
      }
     },
-    computed :{
-        ...mapGetters({
-            categories : 'categories/getCategories'
-        }),
-        menucats(){
-            return this.categories.filter(cat => {
-                return cat.supercategory_id == this.supercat_id
-            });
-        }
+    methods :{
+      handleScroll(){
+          this.scrollOnTop =  window.scrollY < 100;
+      }
+      
     },
-    methods:{
-        setsupercat(id){
-            this.supercat_id = id;
-            this.overNav = true;
-        },
-        mouseleaved(){
-            setTimeout(()=>{
-               if (!this.showMenu){
-                   this.supercat_id = null;
-               }
-            },1000);
-        }
-    }
+    created () {
+        window.addEventListener('scroll', this.handleScroll);
+},
+   
 }
 </script>
 
-<style lang="scss"  >
+<style lang="scss" scoped >
  $color-first : #1102FF;
 
 // El verde es 09cca2 
@@ -127,6 +93,57 @@ $color-focus: #1EAAFF;
 $color-back: #0FE0E8;
 
 $color-other: #104DE8;
+
+.displayed{
+    min-height: 100px;
+    transition: min-height 0.5s ease-in-out;
+}
+.nondisplayed{
+    min-height: 60px;
+    transition: min-height 0.5s ease-in-out;
+}
+
+.logo{
+    font-family: 'Permanent Marker', cursive;
+    font-size: 2.5rem;
+    transition: font-size 0.5s ease-in-out;
+}
+
+.biglogo{
+    font-size: 4rem;
+     transition: font-size 0.5s ease-in-out;
+}
+ul{
+    li{
+        display: block;
+        
+        font-weight: bold;
+        &:hover{
+            border-bottom: 3px solid #000;
+        }
+    }
+}
+
+.space{
+
+    height: 150px;
+}
+
+
+.fixed-navbar{
+   
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    margin-right: 0;
+    margin-left: -8%;
+    width: 100vw;
+    z-index: 300;
+   
+}
+
 
 .fa-chevron-down{
     margin-left: 5px;

@@ -8,6 +8,10 @@ use App\Metadata;
 class ProductController extends Controller
 {
 
+  public function getAll(){
+    return Product::with('images')->get();
+  }
+
     public function searchResults(Request $request)
     {
     
