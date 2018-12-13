@@ -88905,154 +88905,57 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "mt-4" }, [
-    _c("div", { staticClass: "row bg-first footer-row " }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            " col-12 col-lg-8 white-bold d-flex \n                    justify-content-around align-items-center p-2 row"
-        },
-        [
-          _c("h5", { staticClass: "col-12 col-lg-5 text-center" }, [
-            _vm._v("Recibir novedades por mail")
-          ]),
-          _vm._v(" "),
-          _c(
-            "form",
-            {
-              staticClass:
-                "form-inline col-12 col-lg-7 d-flex justify-content-center align-items-center",
-              attrs: { method: "post" },
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.suscribe($event)
-                }
-              }
-            },
-            [
-              _c("div", { staticClass: "input-group w-100" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.suscriptionMail,
-                      expression: "suscriptionMail"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    "aria-label": "Tu email aqui",
-                    type: "text",
-                    placeholder: "TuMailAqui@correo.com"
-                  },
-                  domProps: { value: _vm.suscriptionMail },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.suscriptionMail = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm._m(1)
-              ])
-            ]
-          )
-        ]
-      )
-    ]),
-    _vm._v(" "),
-    _c("hr"),
-    _vm._v(" "),
-    _vm._m(2)
-  ])
+  return _vm._m(0)
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass:
-          " col-12 col-lg-3 offset-lg-1 white-bold d-flex \n                    justify-content-center align-items-center bg-focus p-2 ",
-        attrs: { href: "/cotizador" }
-      },
-      [_c("h5", { staticClass: "white-bold" }, [_vm._v("Cotizador Online")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "input-group-prepend" }, [
-      _c(
-        "button",
-        {
-          staticClass:
-            " input-group-text d-flex justify-content-center bg-first white-bold",
-          attrs: { type: "submit", id: "basic-addon1" }
-        },
-        [
-          _vm._v(
-            "\n                            Suscribirme\n                        "
-          )
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-12 col-lg-4 row" }, [
-        _c("div", { staticClass: "col-2 offset-1  " }, [
-          _c("div", { staticClass: "mt-2 btn bg-second white-bold" }, [
-            _c("span", { staticClass: "fa fa-map-marker" })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-9" }, [
-          _c("ul", [
-            _c("li", [_vm._v("Pasteur 428 - CABA")]),
-            _vm._v(" "),
-            _c("li", [_vm._v("Sarmiento 2268, CABA   ")]),
-            _vm._v(" "),
-            _c("li", [_vm._v("Castelli 203, CABA ")])
-          ])
-        ])
-      ]),
+    return _c("div", { staticClass: "mt-4" }, [
+      _c("hr"),
       _vm._v(" "),
-      _c("div", { staticClass: "col-12 col-lg-4 row" }, [
-        _c("div", { staticClass: "col-2 offset-1  " }, [
-          _c("div", { staticClass: "mt-2 btn bg-second white-bold" }, [
-            _c("span", { staticClass: "fa fa-envelope" })
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-12 col-lg-4 row" }, [
+          _c("div", { staticClass: "col-2 offset-1  " }, [
+            _c("div", { staticClass: "mt-2 btn " }, [
+              _c("span", { staticClass: "fa fa-map-marker" })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-9" }, [
+            _c("ul", [
+              _c("li", [_vm._v("Pasteur 428 - CABA")]),
+              _vm._v(" "),
+              _c("li", [_vm._v("Sarmiento 2268, CABA   ")]),
+              _vm._v(" "),
+              _c("li", [_vm._v("Castelli 203, CABA ")])
+            ])
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-9 mt-3" }, [
-          _c("p", [_vm._v("Email: mayoristaredlimp@gmail.com  ")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-12 col-lg-4 row" }, [
-        _c("div", { staticClass: "col-2 offset-1  " }, [
-          _c("div", { staticClass: "mt-2 btn bg-second white-bold" }, [
-            _c("span", { staticClass: "fa fa-whatsapp" })
+        _c("div", { staticClass: "col-12 col-lg-4 row" }, [
+          _c("div", { staticClass: "col-2 offset-1  " }, [
+            _c("div", { staticClass: "mt-2 btn " }, [
+              _c("span", { staticClass: "fa fa-envelope" })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-9 mt-3" }, [
+            _c("p", [_vm._v("Email: mayoristaredlimp@gmail.com  ")])
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-9 mt-3" }, [
-          _c("p", [_vm._v(" 11 3008 5414 ")])
+        _c("div", { staticClass: "col-12 col-lg-4 row" }, [
+          _c("div", { staticClass: "col-2 offset-1  " }, [
+            _c("div", { staticClass: "mt-2 btn " }, [
+              _c("span", { staticClass: "fa fa-whatsapp" })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-9 mt-3" }, [
+            _c("p", [_vm._v(" 11 3008 5414 ")])
+          ])
         ])
       ])
     ])
@@ -91474,15 +91377,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    [
-      _c("home-banner"),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("home-products")
-    ],
+    [_c("br"), _vm._v(" "), _c("br"), _vm._v(" "), _c("home-products")],
     1
   )
 }

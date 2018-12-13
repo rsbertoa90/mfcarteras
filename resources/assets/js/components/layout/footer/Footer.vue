@@ -1,6 +1,6 @@
 <template>
     <div class="mt-4">
-        <div class="row bg-first footer-row ">
+     <!--    <div class="row bg-first footer-row ">
             <a  href="/cotizador" class=" col-12 col-lg-3 offset-lg-1 white-bold d-flex 
                         justify-content-center align-items-center bg-focus p-2 ">
                 <h5 class="white-bold">Cotizador Online</h5>
@@ -22,12 +22,12 @@
                     </div> 
                 </form>
             </div>
-        </div>
+        </div> -->
         <hr>
         <div class="row">
             <div class="col-12 col-lg-4 row">
                 <div class="col-2 offset-1  ">
-                    <div class="mt-2 btn bg-second white-bold">
+                    <div class="mt-2 btn ">
                         <span class="fa fa-map-marker"></span>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
             </div>
             <div class="col-12 col-lg-4 row">
                 <div class="col-2 offset-1  ">
-                    <div class="mt-2 btn bg-second white-bold">
+                    <div class="mt-2 btn ">
                         <span class="fa fa-envelope"></span>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
             </div>
             <div class="col-12 col-lg-4 row">
                 <div class="col-2 offset-1  ">
-                    <div class="mt-2 btn bg-second white-bold">
+                    <div class="mt-2 btn ">
                         <span class="fa fa-whatsapp"></span>
                     </div>
                 </div>
