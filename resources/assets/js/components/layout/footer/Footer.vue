@@ -33,9 +33,8 @@
                 </div>
                 <div class="col-9">
                     <ul>
-                        <li>Pasteur 428 - CABA</li>
-                        <li>Sarmiento 2268, CABA   </li>
-                        <li>Castelli 203, CABA </li>
+                       
+                        <li>XXXXXXXXX </li>
 
                     </ul>
                 </div>
@@ -47,7 +46,7 @@
                     </div>
                 </div>
                 <div class="col-9 mt-3">
-                   <p>Email: mayoristaredlimp@gmail.com  </p>
+                   <p>Email: XXXXXXXXXX  </p>
                 </div>
             </div>
             <div class="col-12 col-lg-4 row">
@@ -57,7 +56,7 @@
                     </div>
                 </div>
                 <div class="col-9 mt-3">
-                    <p> 11 3008 5414 </p>
+                    <p> XXXXXXX </p>
                 </div>
             </div>
         </div>
