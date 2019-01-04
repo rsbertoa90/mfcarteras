@@ -1,7 +1,7 @@
 <template>
     <a :href="product.slug" v-if="product">
         <div  class="image-container" v-if="image">
-            <v-lazy-image class="image" :src="image.url" :alt="product.name"></v-lazy-image>
+            <v-lazy-image class="image" :src="image" :alt="product.name"></v-lazy-image>
             <span class="price-badge">
                ${{product.price}}
             </span>
@@ -20,18 +20,40 @@ export default {
             image:null
         }
     },
-    created(){
-        if (this.product.images){
-            this.image = this.product.images[0];
-       
-        let i = 0;
-        setInterval(() => {
-            i++;
-            if (!this.product.images[i]){
-                i=0;
+    computed:{
+        images()
+        {
+            let res = [];
+            if (this.product.image){
+                res.push(this.product.image);
+               
             }
-            this.image = this.product.images[i];
-        },1000)
+            this.product.variants.forEach(variant => {
+                if (variant.images && variant.images.length > 0)
+                {
+                    res.push(variant.images);
+                }
+            });
+
+            return res;
+        }
+    },
+    watch:{
+        images(){
+              let i = 0;
+            setInterval(() => {
+                i++;
+                if (!this.images){
+                    i=0;
+                }
+            this.image = this.images[i];
+            },1000)
+        }
+    },
+    created(){
+        if (this.product.image){
+            this.image = this.product.image;
+      
          }
     }
 }

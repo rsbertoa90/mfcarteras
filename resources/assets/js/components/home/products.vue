@@ -48,7 +48,7 @@ export default {
         productsWithImages(){
             if (this.products){
                 return this.products.filter(prod => {
-                    return ( prod.images != undefined && prod.images.length > 0 );
+                    return ( prod.image != null );
                 });
             }
         },
