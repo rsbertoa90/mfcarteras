@@ -48,10 +48,10 @@ export default {
         productsWithImages(){
             if (this.products){
                 return this.products.filter(prod => {
-                    return ( prod.image != null );
+                    return ( prod.image != null && !prod.paused );
                 });
             }
-        },
+        }, 
     },
     watch:{
         productsWithImages(){
