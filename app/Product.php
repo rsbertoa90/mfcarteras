@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Category;
 use App\ProductImage;
+use App\Variant;
 
 
 class Product extends Model
@@ -12,15 +13,12 @@ class Product extends Model
     //
         protected $guarded =[];
 
-        public function category()
-        {
-            return $this->belongsTo(Category::class);
-        }
+       
 
-        public function images()
-        {
-            return $this->hasMany(ProductImage::class);
-        }
+      public function variants()
+      {
+          return $this->hasMany(Variant::class);
+      }
 
       public static function boot()
     {

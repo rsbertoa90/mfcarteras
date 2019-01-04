@@ -28,35 +28,38 @@
         data(){
             return {
             
-                newCategory :null,
+        
                 formData: {
 
                     price :null,
                     pck_price :null,
-                    pck_units :null,
-                    category_id : null,
+                    pck_units :null,           
                     name : null,
                     code :null
                 }
             }
         },
-        methods : {
+        computed:{
+            products() {
+                return this.$store.getters.getProducts;
+            }
+        },
+        methods : 
+        {
             valid(){
             
 
                 
                     var vm = this;
                     var duplicated = null;
-                    this.supercategory.categories.forEach(el => {
-                        let e = el.products.find(p => {
+                    
+                    duplicated =    this.products.find(p => {
                             return p.code == vm.formData.code;
                         });
-                        if (e != null){
-                            duplicated = e;
-                        }
-                    });
+                        
+                
 
-                    if (duplicated!=null){
+                    if (duplicated){
                         swal('error','ya existe un producto con el codigo'+vm.formData.code,'error');
                     } 
                     else {return true;}
@@ -65,7 +68,7 @@
             resetForm(){
                 this.formData =  {
                     price :null,
-                    category_id : null,
+                    
                     name : null,
                     code :null
                 }
@@ -75,43 +78,21 @@
                 var vm = this;
                 if (this.valid()){
 
-                    if (this.formData.category_id == 'new')
-                    {
                         
-                         var duplicated = this.categories.find(function(el){
-                             return el.name.toLowerCase() == vm.newCategory.toLowerCase();
-                         }); 
-                         if (duplicated != null){
-                             swal ('Error', `Ya existe la categoria ${vm.newCategory}`,'error');
-                         }else {
-                             vm.$http.post('/admin/category/',{name : this.newCategory, supercategory_id : this.supercategory.id})
-                                .then(response => {
-                                    var category = response.data;
-                                    vm.formData.category_id = category.id;
-                                    vm.$http.post('/admin/product/',vm.formData)
-                                        .then(response => {
-                                            vm.$emit('productSaved',response.data);
-                                            //   console.log(response.data);
-                                            swal('Product guardado','','success');
-                                            vm.resetForm();
-                                        
-                                    });
-                                });
-                         }
-                    }
-                    else {
-                        vm.$http.post('/admin/product/',vm.formData).then(response => {
+                    vm.$http.post('/admin/product/',vm.formData)
+                        .then(response => {
                             vm.$emit('productSaved',response.data);
-                            // console.log(response.data);
+                        //   console.log(response.data);
                             swal('Product guardado','','success');
                             vm.resetForm();
-                            
+                                        
                         });
-                    }
-                }
+                            
+                                
                 
-            }
-        },
+                }
+            },
        
+        }
     }
 </script>

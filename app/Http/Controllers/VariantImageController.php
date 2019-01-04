@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\ProductImage;
+use App\VariantImage;
 
 
-class ProductImageController extends Controller
+class VariantImageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,10 +26,10 @@ class ProductImageController extends Controller
     public function create(Request $request)
     {
         $image = $request->file('image');
-        $path = $image->storePublicly('/images/products');
+        $path = $image->storePublicly('/images/variants');
         $path = '/storage/'.$path;
-        $new = ProductImage::create([
-                'product_id' => $request->product,
+        $new = VariantImage::create([
+                'variant_id' => $request->variant_id,
                 'url' => $path,
                 'order'=>2]);
 
@@ -91,6 +91,6 @@ class ProductImageController extends Controller
      */
     public function destroy($id)
     {
-        ProductImage::destroy($id);
+        VariantImage::destroy($id);
     }
 }

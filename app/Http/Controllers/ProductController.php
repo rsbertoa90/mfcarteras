@@ -8,8 +8,21 @@ use App\Metadata;
 class ProductController extends Controller
 {
 
+
+  public function changeImage(Request $request)
+  {
+      $product = Product::find($request->product_id);
+        $file = $request->file('image');
+        $ext = $file->getClientOriginalExtension();
+        $path = $file->storeAs('/images/products',$product->slug.'.'.$ext);
+        $product->image = '/storage/'.$path;
+        $product->save();
+        return $product;
+  }
+
+
   public function getAll(){
-    return Product::with('images')->get();
+    return Product::with('variants.images')->with('variants.product')->get();
   }
 
     public function searchResults(Request $request)

@@ -1,9 +1,9 @@
 <template>
     <div class="modal fade" id="image-modal" tabindex="-1" role="dialog">
    <div class="modal-dialog" role="document">
-    <div  v-if="product" class="modal-content">
+    <div  v-if="variant" class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title"> {{product.name}} </h5>
+        <h5 class="modal-title">  {{variant.product.name}} - {{variant.name}} </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -12,14 +12,14 @@
           
           <form enctype="multipart/form-data" name="uploader" >
            <b-carousel  
-                        :controls="product.images.length > 1"
+                        :controls="variant.images.length > 1"
                         id="carousel"
                         background="#ababab"
                         :interval="4000"
                         img-width="600"
                         >
                   
-                  <b-carousel-slide v-if="product.images.length > 0" v-for="img in product.images" :key="img.id"
+                  <b-carousel-slide v-if="variant.images.length > 0" v-for="img in variant.images" :key="img.id"
                                      :img-src="img.url">
                         <button class="btn btn-sm btn-danger"
                                 @click.prevent="deleteImage(img)">X</button>
@@ -36,14 +36,14 @@
 
             <div class="d-flex flex-column mt-3">
                 <label class="text-info font-weight-bold">Nueva Imagen </label>
-                <input type="file" name="file"  accept="image/x-png,image/gif,image/jpeg">
+                <input @change="chargedImage = true"  type="file" name="file"  accept="image/x-png,image/gif,image/jpeg">
             </div>   
            
           </form>
        
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" @click="save">Guardar</button>
+        <button v-if="chargedImage" type="button" class="btn btn-primary" @click="save">Guardar</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
     </div>
@@ -53,17 +53,18 @@
 
 <script>
     export default {
-        props: ['product'],
+        props: ['variant'],
         data: function(){
             return {
                file : null,
+               chargedImage:false
             }
         },
         
         
         methods : {
             deleteImage(image){
-                this.$http.delete('/admin/product/image/'+image.id)
+                this.$http.delete('/admin/variant/image/'+image.id)
                     .then(()=>{
                         this.$emit('refresh')
                          $('#image-modal').modal('hide');
@@ -82,12 +83,12 @@
                     
                     var fdata =  new FormData();
                     fdata.append('image',file);
-                    fdata.append('product',this.product.id)
+                    fdata.append('variant_id',this.variant.id)
                     // console.log(fdata);
                     
     
                     $.ajax({
-                        url: "/admin/product/image",
+                        url: "/admin/variant/image",
                         type: "post",
                         data: fdata,
                         // async: false,

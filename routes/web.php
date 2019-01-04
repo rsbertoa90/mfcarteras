@@ -37,9 +37,14 @@ Route::middleware('CheckAdmin')->prefix('admin')->group(function(){
     Route::post('/product','ProductController@create');
     Route::put('/product','ProductController@update');
     Route::delete('/product/{id}','ProductController@destroy');
+    
+    Route::post('/variant','VariantController@create');
+    Route::put('/variant','VariantController@update');
+    Route::delete('/variant/{id}','VariantController@destroy');
 
-    Route::post('/product/image','ProductImageController@create')->middleware('OptimizeImages');
-    Route::delete('/product/image/{id}','ProductImageController@destroy');
+    Route::post('/product/image','ProductController@changeImage')->middleware('OptimizeImages');
+    Route::post('/variant/image','VariantImageController@create')->middleware('OptimizeImages');
+    Route::delete('/variant/image/{id}','VariantImageController@destroy');
 
     Route::put('/order','OrderController@edit');
     Route::get('/ordenes','AdminController@orders');

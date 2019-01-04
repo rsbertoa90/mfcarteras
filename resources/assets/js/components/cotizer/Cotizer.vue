@@ -8,7 +8,7 @@
              
              <hr v-if="user && user.role_id < 3">
              <div v-if="user && user.role_id < 3" class="row">
-                <form   @submit.prevent="addSelectorProduct"
+                <form   @submit.prevent="addSelectorvariant"
                         class="form form-inline w-100 d-flex  " 
                         :class="{'flex-column align-items-start justify-items-between':$mq != 'lg'}">
                     <div class=" d-flex ml-3 mt-2 " >
@@ -16,14 +16,14 @@
                         <input type="text" v-model="selector.code" class="form-control ml-2">
                     </div>
                     <div class=" d-flex ml-3 mt-2 " >
-                        <label for="">Producto</label>
+                        <label for="">varianto</label>
                         <label class="text-info ml-4"> {{selector.name}} </label>
                     </div>
                     <div class=" d-flex ml-3 mt-2 " >
                         <label class="mr-2" for="">Unidades</label>
                         <input type="number" min="0"  class="form-control" v-model="selector.units">
                     </div>
-                    <button type="submit" class="btn btn-md btn-secondary ml-2" :class="{'btn-outline-success':selector.product && selector.units > 0}"> <span class="fa fa-plus"></span> </button>
+                    <button type="submit" class="btn btn-md btn-secondary ml-2" :class="{'btn-outline-success':selector.variant && selector.units > 0}"> <span class="fa fa-plus"></span> </button>
                 </form>
                 <div class="w-100">
                    <pedido @change="listChange" v-if="list && list.length > 0" :list="list"></pedido>
@@ -32,37 +32,65 @@
              
              <hr>
              
-       
-         
-          
-               
+        <div id="accordion">
+            <div v-for="product in products" 
+                  :key="'product-'+product.id" 
+                  class="card flex-wrap"
+                  v-if="!product.paused">
+                <div class="card-header" :id="'card'+product.id">
+                  
+                    <h5 class="mb-0">
+                        <button class="btn  btn-link w-100 text-left text-big d-flex align-items-center w-100" 
+                                data-toggle="collapse" 
+                                :data-target="'#acordion'+product.id" 
+                                aria-expanded="true" 
+                                :aria-controls="product.name">
+                                   <div class="product-miniature">
+                                        <v-lazy-image :src="product.image"></v-lazy-image>
+                                    </div>
+                                    <span class="white-space-normal">
+                                        {{product.name.ucfirst()}}
+                                    </span>
+                                    <span class="ml-4">
+                                          ${{product.price}}
+                                    </span>
+                                   
+                        </button>
+                    </h5>
+                </div>
+                <div :id="'acordion'+product.id" class="collapse collapsed " aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
                        <table class="table table-striped table-bordered ">
                            <thead class="">
+                               <th></th>
                                <th>Foto</th>
-                                <th v-if="user && user.role_id < 3">Codigo</th>
-                               <th>Producto</th>
-                               <th>Precio</th>
+                               <th>Color</th>
+                               
                                <th>Quiero</th>
                                
                            </thead>
                            <tbody>
-                               <tr v-for="product in products" :key="product.id" v-if="!product.paused">
-                                   <td @click="show(product)" >
-                                        <v-lazy-image v-if="product.images.length > 0" 
-                                            class="sampleImage" :src="product.images[0].url" 
-                                            :alt="product.name"  /> 
+                               <tr v-for="variant in product.variants" :key="variant.id" v-if="!variant.paused">
+                                   <td></td>
+                                   <td @click="show(variant)" >
+                                        <v-lazy-image v-if="variant.images.length > 0" 
+                                            class="sampleImage" :src="variant.images[0].url" 
+                                            :alt="variant.name"  /> 
                                         <v-lazy-image class="sampleImage" v-else src="/storage/images/app/no-photo.png" 
                                             alt="Sin foto" />
                                     </td>
-                                    <td v-if="user && user.role_id < 3"> {{product.code}} </td>
-                                   <td style="cursor:pointer" @click="show(product)">  {{product.name | ucFirst}} </td>
-                                   <td class="text-info text-center font-weight-bold">${{product.price | price}}</td>
+                                   <td style="cursor:pointer" @click="show(variant)"> 
+                                       {{product.name}} - {{variant.name | ucFirst}} 
+                                        <br>
+                                        {{variant.description}}   
+                                    </td>
                                    
-                                   <td v-if="!product.paused"><input type="number" min="0" class="form-control " v-model="product.units">
+                                   
+                                   <td v-if="!variant.paused"><input type="number" min="0" class="form-control " v-model="variant.units">
                                         
-                                        <div v-if="product.units > 0" class="text-success d-flex flex-column p-0 m-0 justify-content-center align-items-center">
+                                        <div v-if="variant.units > 0" class="text-success d-flex flex-column p-0 m-0 justify-content-center align-items-center">
                                             
-                                            <span class="text-success font-weight-bold">  ${{(product.price * product.units) | price}} </span>
+                                            <span class="text-success font-weight-bold">  ${{(variant.product.price * variant.units) | price}} </span>
                                             
                                         </div>
                                    
@@ -74,7 +102,10 @@
                                </tr>
                            </tbody>
                        </table>
-                  
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <transition enter-active-class="animated bounceIn" leave-active-class="animated fadeOutDown">
             <div v-if="total > 0" id="total"  class="col-12 row d-flex flex-column justify-content-center align-items-center w-100">
@@ -97,29 +128,31 @@
         <div v-if="list.length > 0">
             <pedido :list="list"></pedido>
         </div>
-        <carousel ref="modal" :product ="carouselProduct"></carousel>
+        <carousel ref="modal" :variant ="carouselvariant" @closeModal="carouselvariant = null"></carousel>
+      <!--   <tutorial></tutorial> -->
     </div>
 </template>
 
 <script>
  import { mapActions } from 'vuex';
  import { mapGetters } from 'vuex';
-    import carousel from './Carousel.vue';
+    import carousel from './Img-modal.vue';
     import pedido from './pedido.vue';
+    import tutorial from './tutorial.vue'
     export default {
-        components : {carousel,pedido},
+        components : {carousel,pedido,tutorial},
         data(){
             return {
                 selector:{
                     code:'',
                     name:'',
-                    product:null,
+                    variant:null,
                     units:0
                 },
 
                 list : [],
                 showCarousel : false,
-                carouselProduct : null
+                carouselvariant : null
             }
         },
 
@@ -127,32 +160,27 @@
             'selector.code'(){
                 var  vm = this;
                 var res =false;
-               if (this.products){
-
-                   this.products.forEach(prod => {
-                       if (vm.selector.code == prod.code){
-                           vm.selector.product = prod;
-                           vm.selector.name = prod.name;
-                           res = true;
-                       }
-                   });
-               }
-            
+                this.products.forEach(cat => {
+                    cat.variants.forEach(prod => {
+                        if (vm.selector.code == prod.code){
+                            vm.selector.variant = prod;
+                            vm.selector.name = prod.name;
+                            res = true;
+                        }
+                    });
+                });
                 if (!res){
-                    vm.selector.product = null;
+                    vm.selector.variant = null;
                     vm.selector.name='';
                 }
             },
             total() {
-                if(this.products){
-
-                
                    var result = [];
                    var vm = this;
-                   
-                    var prods = this.products.filter(function(el){     
+                    vm.products.forEach(function(product){
+                    var prods = product.variants.filter(function(el){     
                         return ( el.units != null & el.units > 0 );
-                
+                    });
                     if (prods.length > 0){
                         result.push(prods);
                     }
@@ -160,30 +188,28 @@
                 });
                    
                 vm.list = [].concat.apply([], result);
-               }
+               
             }
         },
         computed: {
             ...mapGetters({
-               products : 'getProducts',
+                products : 'getProducts',
                user : 'getUser'
             }),
             
             total() {
                 var vm = this;
                 var tot = 0;
-                
-                if (this.products.length){
-                
-                    this.products.forEach(function(product){
-                        if (product.units > 0)
+                vm.products.forEach(function(product){
+                    product.variants.forEach(function(variant){
+                        if (variant.units > 0)
                         {
                             
-                           tot+= product.price * product.units
+                           tot+= variant.product.price * variant.units
                             
                         }
                     });
-                }
+                });
                 return tot;
             }
         },
@@ -191,31 +217,31 @@
         methods:
         {
              listChange(event){
-                let product = this.list.find(prod => {
+                let variant = this.list.find(prod => {
                     return prod.id == event.id;
                 });
-                product.units = event.units;
+                variant.units = event.units;
 
             },
-             addSelectorProduct(){
+             addSelectorvariant(){
                 var vm = this;
-                if (vm.selector.units > 0 && vm.selector.product != null ){
-                    let prod = this.selector.product;
+                if (vm.selector.units > 0 && vm.selector.variant != null ){
+                    let prod = this.selector.variant;
                     if (prod.units == undefined)
                     {
                         Vue.set(prod,'units',0);
                     }
                    prod.units = this.selector.units;
-                   vm.selector.product = null;
+                   vm.selector.variant = null;
                    vm.selector.code = '';
                    vm.selector.units = 0;
                    vm.selector.name ='';
                    
                 }
             },
-            show(product){
-                if (product.images[0]){
-                    this.carouselProduct = product;
+            show(variant){
+                if (variant.images[0]){
+                    this.carouselvariant = variant;
                     this.showCarousel = true;
     
                     let element = this.$refs.modal.$el;
@@ -235,6 +261,17 @@
 </script>
 
 <style scoped>
+.white-space-normal{
+    white-space: normal;
+}
+.text-big{
+    font-size: 1.5rem;
+}
+.product-miniature{
+    min-width: 200px;
+    width: 200px;
+    margin-right: 15px;
+}
 .container{
     
     margin-bottom: 100px;
@@ -248,7 +285,7 @@
         width: 70px;
     }
 
-    .sampleImage{width: 100px;}
+    .sampleImage{width:200px ;}
 
 
    .btn-link {color : black;}
@@ -261,6 +298,9 @@
     img{width:100%}
 
     @media(max-width: 600px){
+        .card-header{
+            padding:0;
+        }
         .container{
     
             margin-left: -7%;
@@ -278,7 +318,7 @@
     }
     
     @media(min-width: 600px){
-        .sampleImage{width: 150px;}
+        .sampleImage{width: 250px;}
         table{ font-size: 1rem; font-weight: normal}
         td {white-space: normal;}
         .card-body,.container{padding:1.25rem}
