@@ -33,10 +33,10 @@
              <hr>
              
         <div id="accordion">
-            <div v-for="product in products" 
+            <div v-for="product in notPausedProducts" 
                   :key="'product-'+product.id" 
                   class="card flex-wrap"
-                  v-if="!product.paused">
+                  >
                 <div class="card-header" :id="'card'+product.id">
                   
                     <h5 class="mb-0">
@@ -51,6 +51,7 @@
                                     <span class="white-space-normal">
                                         {{product.name.ucfirst()}}
                                     </span>
+                                    <br>
                                     <span class="ml-4">
                                           ${{product.price}}
                                     </span>
@@ -196,6 +197,11 @@
                 products : 'getProducts',
                user : 'getUser'
             }),
+            notPausedProducts(){
+                return this.products.filter(p => {
+                    return !p.paused
+                });
+            },
             
             total() {
                 var vm = this;
