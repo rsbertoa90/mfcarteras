@@ -66,8 +66,8 @@
                                <th></th>
                                <th>Foto</th>
                                <th>Color</th>
-                               
                                <th>Quiero</th>
+                               <th></th>
                                
                            </thead>
                            <tbody>
@@ -89,7 +89,7 @@
                                    
                                    <td v-if="!variant.paused"><input type="number" min="0" class="form-control " v-model="variant.units">
                                         
-                                        <div v-if="variant.units > 0" class="text-success d-flex flex-column p-0 m-0 justify-content-center align-items-center">
+                                        <div v-if="variant.units > 0" class="text-success d-flex flex-column p-0 m-0 justify-content-center align-items-start">
                                             
                                             <span class="text-success font-weight-bold">  ${{(variant.product.price * variant.units) | price}} </span>
                                             
@@ -99,7 +99,7 @@
                                   
                                    
                                   
-                                  
+                                  <td></td>
                                </tr>
                            </tbody>
                        </table>
@@ -179,11 +179,11 @@
                    var result = [];
                    var vm = this;
                     vm.products.forEach(function(product){
-                    var prods = product.variants.filter(function(el){     
+                    var vars = product.variants.filter(function(el){     
                         return ( el.units != null & el.units > 0 );
                     });
-                    if (prods.length > 0){
-                        result.push(prods);
+                    if (vars.length > 0){
+                        result.push(vars);
                     }
                     
                 });
@@ -223,8 +223,8 @@
         methods:
         {
              listChange(event){
-                let variant = this.list.find(prod => {
-                    return prod.id == event.id;
+                let variant = this.list.find(vari => {
+                    return vari.id == event.id;
                 });
                 variant.units = event.units;
 
@@ -291,7 +291,7 @@
         width: 70px;
     }
 
-    .sampleImage{width:200px ;}
+    
 
 
    .btn-link {color : black;}
@@ -304,6 +304,9 @@
     img{width:100%}
 
     @media(max-width: 600px){
+        .product-miniature{
+    min-width: 100px;
+}
         .card-header{
             padding:0;
         }
@@ -324,7 +327,7 @@
     }
     
     @media(min-width: 600px){
-        .sampleImage{width: 250px;}
+        .sampleImage{width: 150px;}
         table{ font-size: 1rem; font-weight: normal}
         td {white-space: normal;}
         .card-body,.container{padding:1.25rem}

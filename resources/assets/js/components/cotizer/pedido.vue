@@ -10,12 +10,16 @@
                 <th>-</th>
             </thead>
             <tbody>
-                <tr v-for="product in list" :key="product.id">
-                    <td> {{product.code}} </td>
-                    <td> {{product.name}} </td>
-                    <td>  <input type="number" class="form-control" style="width:100px" v-model.lazy="product.units" > </td>
-                    <td > ${{ product.price * product.units | price }} </td>
-                    <td> <button class="btn btn-sm btn-outline-danger" @click="del(product)"> <span class="fa fa-times"></span> </button> </td>
+                <tr v-for="variant in list" :key="variant.id">
+                    <td> {{variant.product.code}} </td>
+                    <td> {{variant.product.name}} - {{variant.name}} </td>
+                    <td>  <input type="number" class="form-control" style="width:100px" 
+                                v-model.lazy="variant.units" > </td>
+                    <td > ${{ variant.product.price * variant.units | price }} </td>
+                    <td> <button class="btn btn-sm btn-outline-danger" @click="del(variant)">
+                            <span class="fa fa-times"></span> 
+                         </button> 
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -26,9 +30,9 @@
 export default {
     props:['list'],
     methods:{
-        del(product)
+        del(variant)
         {
-            product.units = 0;
+            variant.units = 0;
           
         }
     }
