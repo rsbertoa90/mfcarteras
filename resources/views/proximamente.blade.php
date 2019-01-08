@@ -10,8 +10,8 @@
     <link rel="image_src" href="{{asset('/storage/images/app/logo.png')}}">
     <link rel="canonical" href="{{URL::current()}}">
     @if (isset($meta))
-        <title> {{$meta->metatitle}} </title>
-        <meta name="description" content="{{$meta->metadescription}}">
+        <title> MF Carteras</title>
+        <meta name="description" content="MF Carteras. Marroquineria y accesorios">
     @endif
 
 
