@@ -116,7 +116,7 @@ export default{
         state:null,
         loading:false,
         formData : {
-            shipping:false,
+            shipping:true,
             cp:'',
             address:'',
             transport:'',

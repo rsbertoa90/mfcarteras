@@ -52,6 +52,13 @@
      <div id="app" >
 
         <app-proximamente></app-proximamente>
+        <div class="row">
+            <div class="d-flex justify-content-center w-100">
+                <p style="font-size:1.4rem ; font-weight:bold ; padding:50px">
+                    Pronto: Febrero 2019  MF, importadores directos de carteras abre sus puertas. Vas a poder hacer tu pedido online o acercarte a nuestro local. Oportunidad para revendedoras, comercios. Tenemos calidad y precios unicos.
+                </p>
+            </div>
+        </div>
 
      </div>
 </body>
