@@ -9,12 +9,9 @@
         <img src="{{$logo}}}" alt="Redlimp">
         </div>
 
-      @foreach ($categories as $category)
+     
        {{-- <div class="breakNow"></div> --}}
-          <hr>
-          <div style="text-align: center ; width :100vw"></div>
-              <h2> {{strtoupper($category->name)}} </h2>
-          </div>
+         
           <hr>                 
           
               <table class="table table-bordered table-striped"  >
@@ -29,18 +26,19 @@
                   
                   <tbody>
                       
-                      @foreach ($category->products as $key => $product)
-                  
-                      <tr>
-                          <td> {{$product->code}} </td>
-                          <td> {{$product->name}} </td>
-                          <td> ${{number_format($product->price,2)}} </td>
-                      </tr>
+                      @foreach ($products as $key => $product)
+                            @foreach ($product->variants as $variant)
+                                <tr>
+                                    <td> {{$product->code}} </td>
+                                    <td> {{$product->name}} - {{$variant->name}} </td>
+                                    <td> ${{number_format($product->price,2)}} </td>
+                                </tr>
+                            @endforeach
                       @endforeach
                     </tbody>
                 </table>
                 <div class="breakNow"></div>
-      @endforeach
+      
   </main>
       
      

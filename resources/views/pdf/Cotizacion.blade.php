@@ -24,8 +24,8 @@
             <tbody>
                 @foreach($order->orderItems as $op)
                 <tr>
-                    <td> {{$op->product->code}} </td>
-                    <td> {{$op->product->name}} </td>
+                    <td> {{$op->variant->product->code}} </td>
+                    <td> {{$op->name}} </td>
                     <td> ${{$op->price}} </td>
                     <td> {{$op->qty}} </td>
                     <td> ${{$op->qty * $op->price}} </td>

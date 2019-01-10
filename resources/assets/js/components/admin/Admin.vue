@@ -118,10 +118,10 @@
                                             <td>
                                                 Nombre 
                                                 <br>
-                                                <input type="text" v-model="newvariant.name">
+                                                <input type="text" v-model.lazy="newvariant.name">
                                             </td>
                                             <td>
-                                                Descripcion <textarea type="text" v-model="newvariant.description"/>                                            </td>
+                                                Descripcion <textarea type="text" v-model.lazy="newvariant.description"/>                                            </td>
                                             <td>
                                                 <button @click="saveNewvariant(product.id)" class="btn btn-outline-success mt-1">Guardar</button>
                                             </td>

@@ -38,15 +38,15 @@
     <meta name="google-site-verification" content="NYmY4PL-kI89JjTkAUhCTkR8oWiGfabLWvgngOyFnf8" />
 
     
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-127092569-1"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+   <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132230957-1"></script>
+<script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
 
-    gtag('config', 'UA-127092569-1');
-    </script>
+ gtag('config', 'UA-132230957-1');
+</script>
 </head>
 <body>
      <div id="app" >

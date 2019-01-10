@@ -26,7 +26,7 @@
             </thead>
             <tbody>
                 <tr v-for="op in order.order_items"
-                    :key="'op'+op.product_id">
+                    :key="'op'+op.variant_id">
                     <td> {{op.code}} </td>
                     <td> {{op.name}} </td>
                     <td> ${{op.price | price}} </td>

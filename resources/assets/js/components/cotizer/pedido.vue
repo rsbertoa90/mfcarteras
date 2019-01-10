@@ -1,5 +1,5 @@
 <template>
-    <div v-if="list && list.length > 0" class="mt-5">
+    <div v-if="list && list.length > 0" class="mt-5 kalam">
         <h5>Pedido actual:</h5>
         <table class="table table-striped">
             <thead>
@@ -40,6 +40,12 @@ export default {
 </script>
 
 <style scoped>
+
+ .table,.accordion,.tr,.td,.kalam,.card{
+    font-family:  'Kalam', cursive;
+}
+
+
     .table{
         font-size:0.8rem;
     }

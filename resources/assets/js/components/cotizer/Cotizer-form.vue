@@ -185,7 +185,7 @@ export default{
                     data : data,
                     url : '/cotizer/send',
                     success(r){
-                        console.log(r);
+                      /*   console.log(r); */
                         if(vm.user.role_id > 2){
                             swal('Enviamos tu presupuesto', 'Te estaremos contactando a la brevedad','success')
                                 .then(confirm => {window.location.replace('/')});

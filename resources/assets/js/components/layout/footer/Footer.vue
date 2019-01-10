@@ -31,12 +31,8 @@
                         <span class="fa fa-map-marker"></span>
                     </div>
                 </div>
-                <div class="col-9">
-                    <ul>
-                       
-                        <li>XXXXXXXXX </li>
-
-                    </ul>
+                <div class="col-9 mt-3">
+                        <span>Pasteur 410 - CABA </span>
                 </div>
             </div>
             <div class="col-12 col-lg-4 row">
