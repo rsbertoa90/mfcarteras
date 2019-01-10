@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Variant;
 use App\Metadata;
 class ProductController extends Controller
 {
@@ -40,7 +41,17 @@ class ProductController extends Controller
       }
     })->pluck('id')->toArray();
       
-      
+      $variantSearch =  Variant::where('paused',0)->where(function ($q) use ($array) {
+      foreach ($array as $value) {
+        $q->orWhere('name', 'like', "%{$value}%");
+      }
+    })->pluck('product_id')->toArray();
+
+      if($variantSearch)
+      {
+        $products = array_merge($products,$variantSearch);
+      }
+
       return view('search-results',compact('products','search'));
     
 
