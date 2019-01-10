@@ -35,7 +35,7 @@
     <link rel="preconnect" href="https://www.google.com">
 
     {{-- Google search panel --}}
-    <meta name="google-site-verification" content="NYmY4PL-kI89JjTkAUhCTkR8oWiGfabLWvgngOyFnf8" />
+    <meta name="google-site-verification" content="smzaENmPlGZUDIeDWcF_W2ia0jxFtoc_3Pai2bhWHKA" />
 
     
    <!-- Global site tag (gtag.js) - Google Analytics -->
