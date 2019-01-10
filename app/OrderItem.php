@@ -3,6 +3,7 @@
 namespace App;
 use App\Order;
 use App\Product;
+use App\Variant;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,8 +27,8 @@ class OrderItem extends Model
             return $this->belongsTo(Order::class);
         }
 
-        public function product()
+        public function variant()
         {
-            return $this->belongsTo(Product::class);
+            return $this->belongsTo(Variant::class);
         }
 }

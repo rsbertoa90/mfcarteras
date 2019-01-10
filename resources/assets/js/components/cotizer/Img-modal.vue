@@ -1,9 +1,9 @@
 <template >
     <div  ref="modal" class="modal fade" id="image-modal" tabindex="-1" role="dialog">
    <div class="modal-dialog" role="document">
-    <div  v-if="product" class="modal-content">
+    <div  v-if="variant" class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title"> {{product.name}} </h5>
+        <h5 class="modal-title"> {{variant.name}} </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="close()">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -12,25 +12,25 @@
           <div class="image-container">
             <transition  leave-active-class=" animated slideOutRight faster position-absolute">
             
-               <img v-if="product.images && product.images.length > 0" 
-                        :key="product.images[i].id"
+               <img v-if="variant.images && variant.images.length > 0" 
+                        :key="variant.images[i].id"
                         class="w-100 " 
-                        :src="product.images[i].url" 
-                        :alt="product.name">
+                        :src="variant.images[i].url" 
+                        :alt="variant.name">
 
                 
                
             </transition>  
-                <img v-if="!product.images || ! product.images.length > 0" src="/storage/images/app/no-image.png" :alt="product.name">
+                <img v-if="!variant.images || ! variant.images.length > 0" src="/storage/images/app/no-image.png" :alt="variant.name">
 
-            <div class="controls"  v-if="product.images && product.images.length > 1" >
+            <div class="controls"  v-if="variant.images && variant.images.length > 1" >
                 <span class="fa fa-chevron-left " @click="changeImage('prev')" ></span>
                 <span class="fa fa-chevron-right " @click="changeImage('next')" ></span>
             </div>
 
-          <!--   <form v-if="product.images && product.images.length > 0"  action="/admin/product/deleteImage" method="POST">
+          <!--   <form v-if="variant.images && variant.images.length > 0"  action="/admin/variant/deleteImage" method="POST">
                 <input type="hidden" name="_token" :value="csrf">
-                <input type="hidden" name="id"  :value="product.images[i].id">
+                <input type="hidden" name="id"  :value="variant.images[i].id">
                 <button type="submit" class="close-button btn btn-danger btn-sm">X</button>
             </form> -->
 
@@ -59,7 +59,7 @@
 <script>
     export default {
         
-        props: ['product'],
+        props: ['variant'],
         data: function(){
             return {
                file : null,
@@ -70,7 +70,7 @@
         },
        
         watch:{
-            product(){
+            variant(){
                 this.show=true;
                 this.preloadImages();
             }
@@ -78,10 +78,10 @@
         methods : {
             preloadImages(){
                 /* console.log('preload'); */
-                if (this.product &&  this.product.images && this.product.images.length>0){
+                if (this.variant &&  this.variant.images && this.variant.images.length>0){
 
                     let images = [];
-                    this.product.images.forEach(image => {
+                    this.variant.images.forEach(image => {
                         let img = new Image();
                         img.src = image.url;
                         images.push(img);
@@ -100,13 +100,13 @@
         changeImage(where){
             if (where == 'next'){
                 this.i++;
-                if (! this.product.images[this.i]){
+                if (! this.variant.images[this.i]){
                     this.i = 0;
                 }
             } else{
                 this.i--;
                 if (this.i < 0){
-                        this.i = this.product.images.length - 1
+                        this.i = this.variant.images.length - 1
                     }
                 }
         }

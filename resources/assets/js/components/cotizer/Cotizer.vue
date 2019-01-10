@@ -1,46 +1,24 @@
 <template>
     <div class="container">   
         <div class="row">
-            <h1 class="col-12 col-lg-6 text-center" v-if="user && user.role_id > 2">Hace tu pedido</h1>
-            <h1 class="col-12 col-lg-6 text-center" v-else>Tomar pedido</h1>
-            <a href="/lista-de-precios" class="col-12 col-lg-6 btn btn-lg btn-outline-info"> <span class="fa fa-download"></span> Descargar lista de precios</a>
+            <h1 class="col-12 col-lg-6 text-center kalam" v-if="user && user.role_id > 2">Hace tu pedido</h1>
+            <h1 class="col-12 col-lg-6 text-center kalam" v-else>Tomar pedido</h1>
+            <a href="/lista-de-precios" class="col-12 col-lg-6 btn btn-lg btn-outline-info kalam"> <span class="fas fa-download"></span> Descargar lista de precios</a>
         </div>
              
-             <hr v-if="user && user.role_id < 3">
-             <div v-if="user && user.role_id < 3" class="row">
-                <form   @submit.prevent="addSelectorvariant"
-                        class="form form-inline w-100 d-flex  " 
-                        :class="{'flex-column align-items-start justify-items-between':$mq != 'lg'}">
-                    <div class=" d-flex ml-3 mt-2 " >
-                        <label for="">Codigo</label>
-                        <input type="text" v-model="selector.code" class="form-control ml-2">
-                    </div>
-                    <div class=" d-flex ml-3 mt-2 " >
-                        <label for="">varianto</label>
-                        <label class="text-info ml-4"> {{selector.name}} </label>
-                    </div>
-                    <div class=" d-flex ml-3 mt-2 " >
-                        <label class="mr-2" for="">Unidades</label>
-                        <input type="number" min="0"  class="form-control" v-model="selector.units">
-                    </div>
-                    <button type="submit" class="btn btn-md btn-secondary ml-2" :class="{'btn-outline-success':selector.variant && selector.units > 0}"> <span class="fa fa-plus"></span> </button>
-                </form>
-                <div class="w-100">
-                   <pedido @change="listChange" v-if="list && list.length > 0" :list="list"></pedido>
-                </div>
-             </div>
+            
+        
              
              <hr>
              
         <div id="accordion">
             <div v-for="product in notPausedProducts" 
                   :key="'product-'+product.id" 
-                  class="card flex-wrap"
-                  >
-                <div class="card-header" :id="'card'+product.id">
+                  class="card flex-wrap" >
+                <div class="card-header bg-white" :id="'card'+product.id">
                   
                     <h5 class="mb-0">
-                        <button class="btn  btn-link w-100 text-left text-big d-flex align-items-center w-100" 
+                        <button class="btn bg-white  btn-link w-100 text-left text-big d-flex align-items-center w-100" 
                                 data-toggle="collapse" 
                                 :data-target="'#acordion'+product.id" 
                                 aria-expanded="true" 
@@ -61,7 +39,7 @@
                 </div>
                 <div :id="'acordion'+product.id" class="collapse collapsed " aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
-                       <table class="table table-striped table-bordered ">
+                       <table class="table table-bordered border-black bg-white font-weight-bold ">
                            <thead class="">
                                <th></th>
                                <th>Foto</th>
@@ -81,7 +59,10 @@
                                             alt="Sin foto" />
                                     </td>
                                    <td style="cursor:pointer" @click="show(variant)"> 
-                                       {{product.name}} - {{variant.name | ucFirst}} 
+                                       <span style="font-size: 1.3rem">
+
+                                        {{product.name}} - {{variant.name | ucFirst}} 
+                                       </span>
                                         <br>
                                         {{variant.description}}   
                                     </td>
@@ -266,7 +247,13 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+
+ .table,.accordion,.tr,.td,.kalam,.card{
+    font-family:  'Kalam', cursive;
+}
+
+
 .white-space-normal{
     white-space: normal;
 }

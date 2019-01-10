@@ -1,5 +1,5 @@
 <template>
-    <div class="" v-if="user">
+    <div class="kalam" v-if="user">
         
          <div v-if="loading" class="loader">
             <fade-loader :loading="loading" size="200px"></fade-loader>
@@ -204,6 +204,12 @@ export default{
 </script>
 
 <style scoped lang="scss">
+
+   .kalam {
+
+        font-family:  'Kalam', cursive;
+    }
+
 .loader {
     position : fixed;
     height: 100%;
@@ -219,7 +225,7 @@ export default{
 }
 
     .warn{
-        font-size: 0.8rem;
+        font-size: 0.9rem;
         color: red;
         font-style: italic;
     }

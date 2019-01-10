@@ -50,11 +50,8 @@ class OrderController extends Controller
         if (Auth::check())
         {
             $user = Auth::user();
-        }else 
-        {
-            $user = User::where('email','pedidosonline@matesfabi.com')->get()->first();
+            $data['user_id'] = $user->id;
         }
-        $data['user_id'] = $user->id;
         $order = Order::create($data);
 
         $list = json_decode($request->list);
@@ -63,10 +60,10 @@ class OrderController extends Controller
         {
             OrderItem::create([
                 'order_id'=>$order->id,
-                'product_id' => $item->id,
-                'code'=>$item->code,
-                'name'=>$item->name,
-                'price'=>$item->price,
+                'variant_id' => $item->id,
+                'code'=>$item->product->code,
+                'name'=>$item->product->name.' - '.$item->name,
+                'price'=>$item->product->price,
                 'qty'=>$item->units,
             ]);
         }
@@ -92,14 +89,11 @@ class OrderController extends Controller
     public function getOrders()
     {
         
-        if (Auth::check()){
-            $user = Auth::user();
-            $orders = Order::where('user_id',$user->id)
-                        ->with('orderItems.product')
-                        ->get();
+       
+            $orders = Order::with('orderItems.variant.product')->get();
         
            return $orders;             
                         
-        }
+        
     }
 }
