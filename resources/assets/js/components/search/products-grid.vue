@@ -4,8 +4,8 @@
                  class="col-12 col-lg-4 mt-3" itemscope itemtype="https://schema.org/Product">
             
                 <div class="card text-center p-1">
-                    <v-lazy-image v-if="product.images[0]" class="card-img-top" :alt="product.name"
-                    :src="product.images[0].url" 
+                    <v-lazy-image v-if="product.image" class="card-img-top" :alt="product.name"
+                    :src="product.image" 
                     @click="show(product)"
                     :title="product.name"
                     itemprop="image" />

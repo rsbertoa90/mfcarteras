@@ -114,17 +114,24 @@ export default {
     components : {productsGrid,productsList},
     props : ['ids','searchString'],
     computed : {
+            allProducts(){
+                return this.$store.getters.getProducts;
+            },
             products()
             {
-                var vm=this;
-                let array=[];
-                this.ids.forEach(id => {
-                    let prod = this.$store.getters['categories/getProduct'](id);
-                    if (prod){
-                        array.push(prod);
-                    }
-                });
-                return array;
+                if(this.allProducts){
+
+                    var vm=this;
+                    let array=[];
+                    this.ids.forEach(id => {
+                        let prod = this.allProducts.filter(prod => {
+                            if (prod.id == id){
+                                array.push(prod);
+                            }
+                        });
+                    });
+                    return array;
+                }
             },
         
             filteredProducts(){

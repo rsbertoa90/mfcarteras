@@ -38,7 +38,7 @@ class ProductController extends Controller
       foreach ($array as $value) {
         $q->orWhere('name', 'like', "%{$value}%");
       }
-    })->pluck('id')->toArray();;
+    })->pluck('id')->toArray();
       
       
       return view('search-results',compact('products','search'));
@@ -46,9 +46,9 @@ class ProductController extends Controller
 
     }
 
-      public static function detail($categorySlug,$productSlug)
+      public static function detail($productSlug)
     {
-           $slug = '/'.$categorySlug.'/'.$productSlug;
+           $slug = '/'.$productSlug;
            $product = Product::where('slug',$slug)->get()->first();
            if($product){
                $meta = new Metadata();

@@ -3,14 +3,14 @@
         <div class="row justify-content-center" itemscope itemtype="http://schema.org/Product">
             <div class="col-12 col-lg-6 row">
                 <div class="col-12" @click="show">
-                    <v-lazy-image v-if="!product.images[0]"  src="/storage/images/app/no-photo.png" alt="sin foto"/>
+                    <v-lazy-image v-if="!images[0]"  src="/storage/images/app/no-photo.png" alt="sin foto"/>
                     <v-lazy-image  itemprop="image" v-else 
-                        :src="product.images[selectedImage].url" 
+                        :src="images[selectedImage]" 
                         :alt="product.name" />
                 </div>
-                <div class="col-12 row" v-if="product.images[1]">
-                    <div  v-if="i-1 != selectedImage"  class="col-4" v-for="i in product.images.length" :key="i" @click="selectedImage=i-1">
-                        <v-lazy-image :src="product.images[i-1].url" :alt="product.name"  />
+                <div class="col-12 row" v-if="images[1]">
+                    <div  v-if="i-1 != selectedImage"  class="col-4" v-for="i in images.length" :key="i" @click="selectedImage=i-1">
+                        <v-lazy-image :src="images[i-1]" :alt="product.name"  />
                     </div>
                 </div>
             </div>
@@ -18,11 +18,19 @@
                 <div class="d-flex flex-column align-items-start justify-content-around h-100">
                     <div class="d-flex flex-column">
                         <h2> {{product.name | ucFirst}} </h2>
-                        <span class="text-secondary"> {{product.category.name |ucFirst}} </span>
+                        
                     </div>
                     <div  class="d-flex align-items-center">
                         <h2>  ${{product.price}} </h2>
                         <h5> <del class="text-secondary ml-2"> ${{product.price*1.4 |price}} </del> </h5>
+                    </div>
+                    <div v-if="product.variants && product.variants.length>0">
+                        <span>Variedades disponibles:</span>
+                        <ul>
+                            <li v-for="variant in product.variants" class="ml-4" :key="variant.id" >
+                                <span class="fa fa-star"></span> {{variant.name | ucFirst}}
+                            </li>
+                        </ul>
                     </div>
                     <div class="d-flex flex-column mt-3" v-if="product.description">
                         <h4>Sobre el producto:</h4>
@@ -47,9 +55,9 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
             <related-products :category_id="product.category_id"></related-products>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -64,14 +72,38 @@ export default {
         }
     },
     computed:{
-        product(){
-            return this.$store.getters['categories/getProduct'](this.product_id);
+        products(){
+            return this.$store.getters.getProducts;
         },
+        product(){
+            if (this.products){
+                return this.products.find(prod=> {
+                    return prod.id ==this.product_id;
+                });
+            };
+        },
+        images(){
+            if (this.product){
+                let array = [];
+
+                if (this.product.image){
+                    array.push(this.product.image);
+                }
+                this.product.variants.forEach(variant => {
+                    if (variant.images && variant.images.length > 0){
+                        variant.images.forEach(image => {
+                            array.push(image.url);
+                        });
+                    }
+                });
+                return array;
+            }
+        }
     },
     methods:{
         show(){
-            if (this.product.images[0]){
-                let url = this.product.images[this.selectedImage].url;
+            if (this.images){
+                let url = this.images[this.selectedImage];
                 let image = document.createElement('img');
                 image.setAttribute('src',url);
                 swal({

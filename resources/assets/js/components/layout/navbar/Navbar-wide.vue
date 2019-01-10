@@ -11,7 +11,7 @@
                 <ul class="d-flex justify-content-around align-items-end mb-0">
                     <li> <a href="/cotizador"> Hace tu pedido </a> </li>
                     <li> <a href="/contacto"> Contacto  </a> </li>
-                    <li> <a href="/contacto"> Ubicacion  </a> </li>
+                    <li> <a href="/sucursales"> Ubicacion  </a> </li>
                 </ul>
             </div>
             
