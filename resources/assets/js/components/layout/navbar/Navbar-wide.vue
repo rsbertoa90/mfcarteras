@@ -14,14 +14,17 @@
                     <li> <a href="/contacto"> Ubicacion  </a> </li>
                 </ul>
             </div>
-            <div class="col-1"></div>
             
-            <div class="col-2 pt-3">
-                <a href="/">
-                    <span class="logo"
-                        :class="{'biglogo':scrollOnTop}">
-                        MF
-                    </span>
+            
+            <div class=" pt-3"
+               :class="{'big-logo':scrollOnTop,
+                        'logo':!scrollOnTop}">
+                <a href="/" 
+                        >
+                    <img class="w-100" src="/storage/images/app/logo.png" 
+                        alt="logo"
+                        >
+                        
                 </a>
             </div>
 
@@ -95,7 +98,7 @@ $color-back: #0FE0E8;
 $color-other: #104DE8;
 
 .displayed{
-    min-height: 100px;
+    min-height: 130px;
     transition: min-height 0.5s ease-in-out;
 }
 .nondisplayed{
@@ -104,14 +107,13 @@ $color-other: #104DE8;
 }
 
 .logo{
-    font-family: 'Permanent Marker', cursive;
-    font-size: 2.5rem;
-    transition: font-size 0.5s ease-in-out;
+    max-width: 17vw;
+    transition: max-width 0.5s ease-in-out;
 }
 
-.biglogo{
-    font-size: 4rem;
-     transition: font-size 0.5s ease-in-out;
+.big-logo{
+   max-width: 25vw;
+    transition: max-width 0.5s ease-in-out;
 }
 ul{
     li{
