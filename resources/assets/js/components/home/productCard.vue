@@ -7,7 +7,12 @@
     </div>
     <a :href="product.slug" v-if="product">
         <div  class="image-container" v-if="image" @mouseover="hovered=true" @mouseleave="hovered=false">
-            <v-lazy-image  class="image" :src="image" :alt="product.name" />
+            <v-lazy-image class="image" :src="image" :alt="product.name" />
+           <transition enter-active-class="animated fadeIn faster"
+                        leave-active-class="animated fadeOut faster position-absolute">
+                <v-lazy-image v-if="product.side_image && image == product.image && hovered" class="overlay" :src="product.side_image" :alt="product.name" />
+               <!--  <div v-if="!transition" style="height:500px; width:100%;"></div> -->
+           </transition>
                         
         </div>
         <div class="d-flex justify-content-between">
@@ -27,7 +32,8 @@ export default {
     data(){
         return{
             image:null,
-            hovered:false
+            hovered:false,
+            transition:true
         }
     },
     computed:{
@@ -48,29 +54,7 @@ export default {
             return res;
         }
     },
-    watch:{
-        hovered(){
-           
-            if(this.hovered){
-           
-                if (this.image == this.product.image){
-                    if (this.product.side_image){
-                        this.image = this.product.side_image;
-                    }
-                }
-            }
-            else{
-             
-                if (this.image == this.product.side_image){
-                  
-                    this.image = this.product.image;
-                  
-                }
-            
-            }
-        }
-    },
-
+   
     created(){
         if (this.product.image){
             this.image = this.product.image;
@@ -82,6 +66,17 @@ export default {
 
 <style lang="scss" scoped>
 
+.position-absolute{
+    position: absolute;
+}
+
+.overlay{
+        position:absolute;
+        top:0;
+        left:0;
+        z-index: 300;
+       
+}
 
 .square{
     display: flex;
