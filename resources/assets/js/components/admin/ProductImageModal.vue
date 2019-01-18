@@ -11,8 +11,15 @@
       <div class="modal-body">
           
           <form enctype="multipart/form-data" name="uploader" >
-         
-             <img v-if="product.image" :src="product.image" :alt="product.name">
+          <h4> {{selectedImage}} </h4>
+            <div class="img-container">
+                <img v-if="image" :src="image" :alt="product.name">
+                <img v-else src="/storage/images/app/no-image.png" alt="">
+                <div class="controls">
+                    <span @click="changeImage()"  class="fa fa-chevron-left"></span>
+                    <span  @click="changeImage()" class="fa fa-chevron-right"></span>
+                </div>
+            </div>
 
             <div class="d-flex flex-column mt-3">
                 <label class="text-info font-weight-bold">Cambiar Imagen </label>
@@ -37,12 +44,31 @@
         data: function(){
             return {
                file : null,
-               chargedImage:false
+               chargedImage:false,
+               image:null,
+               selectedImage:'frente'
             }
         },
         
-        
+        watch:{
+            product(){
+                if (this.product && this.product.image){
+                    this.image = this.product.image;
+                    this.selectedImage='frente';
+                }
+            },
+        },
         methods : {
+            changeImage()
+            {
+                if (this.image == this.product.image){
+                    this.image = this.product.side_image;
+                    this.selectedImage = 'costado';
+                }else{
+                    this.image = this.product.image;
+                    this.selectedImage='frente';
+                }
+            },
             
             save :  function(event){
                 var vm =this;
@@ -57,7 +83,8 @@
                     
                     var fdata =  new FormData();
                     fdata.append('image',file);
-                    fdata.append('product_id',this.product.id)
+                    fdata.append('product_id',this.product.id);
+                    fdata.append('selected',this.selectedImage);
                     // console.log(fdata);
                     
     
@@ -84,3 +111,24 @@
     }
 }
 </script>
+
+<style lang="scss" scoped>
+    .image-container{
+        position: relative;
+    }
+
+    .controls{
+        position:absolute;
+        top:30%;
+        width:90%;
+        display: flex;
+        justify-content: space-between;
+        .fa{
+            font-size:1.5rem;
+            color:blue;
+            background-color:pink;
+            cursor: pointer;
+            padding: 5px;
+        }
+    }
+</style>

@@ -91,6 +91,13 @@
                                                 <br>
                                                 <textarea class="mt-1" placeholder="descripcion" type="text" v-model="variant.description" @change="saveVariantChange(variant,'description')" />
                                             </td>
+                                            <td>
+                                                # <input type="text" v-model.lazy="variant.color_code"
+                                                        @change="saveVariantChange(variant,'color_code')">
+                                                     <span class="square ml-2" 
+                                                            :style="{backgroundColor:'#'+variant.color_code}">
+                                                     </span>
+                                            </td>
                                              <td class="d-flex flex-column justify-content-center align-items-center">
                                                
                                                 <button @click.prevent="deleteVariant(variant)" class="btn btn-sm btn-outline-danger m-1">
@@ -122,6 +129,11 @@
                                             </td>
                                             <td>
                                                 Descripcion <textarea type="text" v-model.lazy="newvariant.description"/>                                            </td>
+                                            </td>
+                                            <td>
+                                                Codigo color <input type="text" v-model.lazy="newvariant.color_code"/>
+                                                <span class="square" :style="{backgroundColor:'#'+newvariant.color_code}"></span>                                            </td>
+                                            </td>
                                             <td>
                                                 <button @click="saveNewvariant(product.id)" class="btn btn-outline-success mt-1">Guardar</button>
                                             </td>
@@ -183,7 +195,8 @@ import { mapActions } from 'vuex';
                 variant : 0,
                 newvariant:{
                     description:'',
-                    name: ''
+                    name: '',
+                    color_code:'',
                 },
                 list : [],
                 variant : null,
@@ -355,6 +368,14 @@ import { mapActions } from 'vuex';
 </script>
 
 <style scoped>
+.square{
+    display: flex;
+    max-width: 30px;
+    height: 30px;
+    margin:5px;
+    padding:5px;
+    border: 1px solid #ccc;
+}
 .btn-link {color : black;}
     td img {
         width: 10vw;

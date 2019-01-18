@@ -43,6 +43,11 @@ class HomeController extends Controller
         return view('home',compact('meta'));
     }
 
+    public function homeTest(){
+           $meta = Metadata::getPage('home');
+        return view('home',compact('meta'));
+    }
+
 
     public function getUser()
     {

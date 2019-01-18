@@ -15,8 +15,15 @@ class ProductController extends Controller
       $product = Product::find($request->product_id);
         $file = $request->file('image');
         $ext = $file->getClientOriginalExtension();
-        $path = $file->storeAs('/images/products',$product->slug.'.'.$ext);
-        $product->image = '/storage/'.$path;
+        $wich='image';
+    
+        if ($request->selected == 'costado'){
+          $wich ='side_image';
+        }
+
+        $path = $file->storeAs('/images/products',$product->slug.$wich.'.'.$ext);
+        
+        $product->$wich = '/storage/'.$path;
         $product->save();
         return $product;
   }

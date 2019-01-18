@@ -5,20 +5,15 @@
 
 
 
-                <div class="col-lg-6 d-flex flex-column">
-                    <div style="height:250px ; width:100%"></div>
-                    <div v-for="product in odds" :key="product.id">
+              
+                   <!--  <div style="height:250px ; width:100%"></div> -->
+                    <div class=" col-lg-4" v-for="product in productsWithImages" :key="product.id">
                         <productCard :product="product"> </productCard>
                     </div>
-                </div>
+            
 
-                <div class="col-lg-6 d-flex flex-column">
-                    <div v-for="product in evens" :key="product.id">
-                        <productCard :product="product"> </productCard>
-                    </div>
-                    <div style="height:250px ; width:100%"></div>
-                </div>
-
+                
+                
             
                 
 
@@ -33,10 +28,9 @@
 import productCard from './productCard.vue';
 export default {
     data(){
-        return{
-            odds:[],
-            evens:[]
-        }
+       return{
+           
+       }
     },
     components:{
         productCard
@@ -53,25 +47,6 @@ export default {
             }
         }, 
     },
-    watch:{
-        productsWithImages(){
-            if (this.productsWithImages){
-                for (const key in this.productsWithImages) {
-                    if (this.productsWithImages.hasOwnProperty(key)) {
-                        const element = this.productsWithImages[key];
-                        let rest = (parseInt(key) + 1) % 2;
-
-                        if (rest == 0){
-                            console.log('even',parseInt(key)+1,element.name)
-                            this.evens.push(element);
-                        }else{
-                             console.log('odd',parseInt(key)+1,element.name)
-                            this.odds.push(element);
-                        }
-                    }
-                }
-            }
-        }
-    }
+   
 }
 </script>

@@ -1,15 +1,24 @@
 <template>
+<div>
+    <div class="variants-clicker d-flex">
+        <span v-for="variant in product.variants" :key="variant.id" 
+              class="square" :style="{backgroundColor:'#'+variant.color_code}"
+              @click="image = variant.images[0].url"></span>
+    </div>
     <a :href="product.slug" v-if="product">
-        <div  class="image-container" v-if="image">
-            <v-lazy-image class="image" :src="image" :alt="product.name"></v-lazy-image>
-            <span class="price-badge">
-               ${{product.price}}
-            </span>
-            <div class="name-banner">
-                {{product.name}}
+        <div  class="image-container" v-if="image" @mouseover="hovered=true" @mouseleave="hovered=false">
+            <v-lazy-image  class="image" :src="image" :alt="product.name" />
+                        
+        </div>
+        <div class="d-flex justify-content-between">
+            <span> {{product.name}} </span>
+            <div>
+                <span> ${{product.price |price}} </span>
+                <strike class="ml-2 text-secondary"> ${{product.price*1.25 |price}} </strike>
             </div>
         </div>
     </a>
+</div>
 </template>
 
 <script>
@@ -17,7 +26,8 @@ export default {
     props:['product'],
     data(){
         return{
-            image:null
+            image:null,
+            hovered:false
         }
     },
     computed:{
@@ -39,17 +49,28 @@ export default {
         }
     },
     watch:{
-        images(){
-              let i = 0;
-            setInterval(() => {
-                i++;
-                if (!this.images){
-                    i=0;
+        hovered(){
+           
+            if(this.hovered){
+           
+                if (this.image == this.product.image){
+                    if (this.product.side_image){
+                        this.image = this.product.side_image;
+                    }
                 }
-            this.image = this.images[i];
-            },1000)
+            }
+            else{
+             
+                if (this.image == this.product.side_image){
+                  
+                    this.image = this.product.image;
+                  
+                }
+            
+            }
         }
     },
+
     created(){
         if (this.product.image){
             this.image = this.product.image;
@@ -61,6 +82,18 @@ export default {
 
 <style lang="scss" scoped>
 
+
+.square{
+    display: flex;
+    width: 20px;
+    height: 20px;
+    margin:5px;
+    padding:5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+
     .image-container{
         overflow: hidden;
         position:relative;
@@ -69,16 +102,16 @@ export default {
         cursor: pointer;
     }
 
-    .image:hover{
+    /* .image:hover{
             transform: scale(1.2);
             transition: all 1s;
-    }
+    } */
 
     .price-badge{
         position:absolute;
         top:5px;
         left:5px;
-        background-color: #fa3455cc;
+        background-color: #aaaa;
         color:#fff;
         font-weight: bold;
         padding: 10px;
@@ -93,7 +126,7 @@ export default {
         left:0px;
         display: block;
         width: 100%;
-        background-color: #fa345599;
+        background-color: #ccc8;
         color:#fff;
         font-weight: bold;
         padding: 10px;
