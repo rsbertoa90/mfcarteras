@@ -270,9 +270,18 @@ import { mapActions } from 'vuex';
                 
             },
             deleteProduct(product){
-                var vm = this;
-                this.$http.delete('/admin/product/'+product.id)
-                this.fetchProducts();
+                if (product.variants && product.variants.length > 0)
+                {
+                    swal('Alerta','Antes de borrar un producto elimine sus variantes','error');
+                }
+                else {
+                    var vm = this;
+                    this.$http.delete('/admin/product/'+product.id) 
+                        .then(res => {
+                            vm.refresh();
+                        });
+                    
+                }
             },
             logme(e){console.log(e)},
             refresh(){
@@ -353,6 +362,14 @@ import { mapActions } from 'vuex';
                 });
                 vm.refresh();
                 vm.variant = 0;
+            },
+            deleteVariant(variant)
+            {   
+                var vm=this;
+                this.$http.delete('/admin/variant/'+variant.id)
+                    .then(res => {
+                        vm.refresh();
+                    });
             }
         },
         

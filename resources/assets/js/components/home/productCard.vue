@@ -10,7 +10,8 @@
             <v-lazy-image class="image" :src="image" :alt="product.name" />
            <transition enter-active-class="animated fadeIn faster"
                         leave-active-class="animated fadeOut faster position-absolute">
-                <v-lazy-image v-if="product.side_image && image == product.image && hovered" class="overlay" :src="product.side_image" :alt="product.name" />
+                <v-lazy-image v-if="product.side_image && image == product.image && hovered" 
+                         class="overlay image" :src="product.side_image" :alt="product.name" />
                <!--  <div v-if="!transition" style="height:500px; width:100%;"></div> -->
            </transition>
                         
@@ -65,7 +66,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.variants-clicker{
+    height:40px;
+    width:90%;
+}
 .position-absolute{
     position: absolute;
 }
@@ -74,7 +78,8 @@ export default {
         position:absolute;
         top:0;
         left:0;
-        z-index: 300;
+        padding: 15px;
+        z-index: 50;
        
 }
 

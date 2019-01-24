@@ -44,8 +44,6 @@ Vue.component('image-logo', require('./components/layout/images/image-logo.vue')
 Vue.component('app-home', require('./components/home/Home.vue'));
 Vue.component('app-sucursales', require('./components/sucursales/Sucursales.vue'));
 Vue.component('app-contacto', require('./components/contacto/Contacto.vue'));
-Vue.component('app-supercategory', require('./components/supercategory/Supercategory.vue'));
-Vue.component('app-category', require('./components/category/Category.vue'));
 Vue.component('app-product', require('./components/product/Product.vue'));
 /* Vue.component('app-regalos', require('./components/regalos/Regalos.vue'));
 Vue.component('app-franquicia', require('./components/franquicia/Franquicia.vue')); */
