@@ -2,16 +2,17 @@
 <div>
     <div class="variants-clicker d-flex">
         <span v-for="variant in product.variants" :key="variant.id" 
-              class="square" :style="{backgroundColor:'#'+variant.color_code}"
-              @click="image = variant.images[0].url"></span>
+              class="square" :style="{backgroundColor:variant.color_code}"
+              @click="selectedVariant = variant"></span>
     </div>
     <a :href="product.slug" v-if="product">
-        <div  class="image-container" v-if="image" @mouseover="hovered=true" @mouseleave="hovered=false">
-            <v-lazy-image class="image" :src="image" :alt="product.name" />
+        <div  class="image-container" v-if="selectedVariant && selectedVariant.images[0]" 
+                @mouseover="hovered=true" @mouseleave="hovered=false">
+           <v-lazy-image class="image" :src="selectedVariant.images[0].url" :alt="product.name" />
            <transition enter-active-class="animated fadeIn faster"
                         leave-active-class="animated fadeOut faster position-absolute">
-                <v-lazy-image v-if="product.side_image && image == product.image && hovered" 
-                         class="overlay image" :src="product.side_image" :alt="product.name" />
+                <v-lazy-image v-if="selectedVariant.images[1] && hovered" 
+                         class="overlay image" :src="selectedVariant.images[1].url" :alt="product.name" />
                <!--  <div v-if="!transition" style="height:500px; width:100%;"></div> -->
            </transition>
                         
@@ -32,6 +33,7 @@ export default {
     props:['product'],
     data(){
         return{
+            selectedVariant:null,
             image:null,
             hovered:false,
             transition:true
@@ -41,10 +43,7 @@ export default {
         images()
         {
             let res = [];
-            if (this.product.image){
-                res.push(this.product.image);
-               
-            }
+            
             this.product.variants.forEach(variant => {
                 if (variant.images && variant.images.length > 0)
                 {
@@ -53,15 +52,21 @@ export default {
             });
 
             return res;
+        },
+         frontvariant(){
+            return this.product.variants.find(p => {
+                return p.isfront;
+            });
         }
     },
-   
     created(){
-        if (this.product.image){
-            this.image = this.product.image;
-      
-         }
-    }
+            this.selectedVariant = this.product.variants.find(p => {
+                                        return p.isfront;
+                                    });
+        }
+    
+   
+   
 }
 </script>
 

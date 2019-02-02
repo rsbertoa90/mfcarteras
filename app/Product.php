@@ -55,6 +55,11 @@ class Product extends Model
         return ucfirst($name);
     }
 
+    public function front()
+    {
+        return $this->variants()->where('isfront',1)->get()->first();
+    }
+
       
 
         

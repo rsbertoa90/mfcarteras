@@ -5,12 +5,12 @@
                 <div class="col-12" @click="show">
                     <v-lazy-image v-if="!images[0]"  src="/storage/images/app/no-photo.png" alt="sin foto"/>
                     <v-lazy-image  itemprop="image" v-else 
-                        :src="images[selectedImage]" 
+                        :src="images[selectedImage].url" 
                         :alt="product.name" />
                 </div>
                 <div class="col-12 row" v-if="images[1]">
                     <div  v-if="i-1 != selectedImage"  class="col-4" v-for="i in images.length" :key="i" @click="selectedImage=i-1">
-                        <v-lazy-image :src="images[i-1]" :alt="product.name"  />
+                        <v-lazy-image :src="images[i-1].url" :alt="product.name"  />
                     </div>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                         <h2> {{product.name | ucFirst}} </h2>
                         
                     </div>
-                    <div  class="d-flex align-items-center">
+                    <div  class="d-flex align-items-center" v-if="!config.hide_prices">
                         <h2>  ${{product.price}} </h2>
                         <h5> <del class="text-secondary ml-2"> ${{product.price*1.4 |price}} </del> </h5>
                     </div>
@@ -68,10 +68,13 @@ export default {
     props:['product_id'],
     data(){
         return{
-            selectedImage : 0
+            selectedImage : 0,
+            selectedVariant:null,
+            
         }
     },
     computed:{
+        config(){return this.$store.getters.getConfig},
         products(){
             return this.$store.getters.getProducts;
         },
@@ -82,28 +85,43 @@ export default {
                 });
             };
         },
-        images(){
+        frontvariant(){
             if (this.product){
-                let array = [];
+                return this.product.variants.find(v => {
+                    return v.isfront;
+                });
+            }
+        },
+        images(){
+            if(this.product){
 
-                if (this.product.image){
-                    array.push(this.product.image);
+            
+                let res =[];
+                if (this.frontvariant){
+                   res= res.concat(this.frontvariant.images);
+                    console.log(this.frontvariant.images);
                 }
-                this.product.variants.forEach(variant => {
-                    if (variant.images && variant.images.length > 0){
-                        variant.images.forEach(image => {
-                            array.push(image.url);
-                        });
+                this.product.variants.forEach(v=>{
+                    if (!v.isfront){
+                        res = res.concat(v.images);
+                         console.log(v.images);
                     }
                 });
-                return array;
+                console.log(res);
+                return res;
             }
+        }
+        
+    },
+     watch:{
+        frontvariant(){
+            this.selectedVariant = this.frontvariant;
         }
     },
     methods:{
         show(){
             if (this.images){
-                let url = this.images[this.selectedImage];
+                let url = this.images[this.selectedImage].url;
                 let image = document.createElement('img');
                 image.setAttribute('src',url);
                 swal({

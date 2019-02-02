@@ -15,77 +15,7 @@
             <div v-for="product in notPausedProducts" 
                   :key="'product-'+product.id" 
                   class="card flex-wrap" >
-                <div class="card-header bg-white" :id="'card'+product.id">
-                  
-                    <h5 class="mb-0">
-                        <button class="btn bg-white  btn-link w-100 text-left text-big d-flex align-items-center w-100" 
-                                data-toggle="collapse" 
-                                :data-target="'#acordion'+product.id" 
-                                aria-expanded="true" 
-                                :aria-controls="product.name">
-                                   <div class="product-miniature">
-                                        <v-lazy-image :src="product.image"></v-lazy-image>
-                                    </div>
-                                    <span class="white-space-normal">
-                                        {{product.name.ucfirst()}}
-                                    </span>
-                                    <br>
-                                    <span class="ml-4">
-                                          ${{product.price}}
-                                    </span>
-                                   
-                        </button>
-                    </h5>
-                </div>
-                <div :id="'acordion'+product.id" class="collapse collapsed " aria-labelledby="headingOne" data-parent="#accordion">
-                    <div class="card-body">
-                       <table class="table table-bordered border-black bg-white font-weight-bold ">
-                           <thead class="">
-                               <th></th>
-                               <th>Foto</th>
-                               <th>Color</th>
-                               <th>Quiero</th>
-                               <th></th>
-                               
-                           </thead>
-                           <tbody>
-                               <tr v-for="variant in product.variants" :key="variant.id" v-if="!variant.paused">
-                                   <td></td>
-                                   <td @click="show(variant)" >
-                                        <v-lazy-image v-if="variant.images.length > 0" 
-                                            class="sampleImage" :src="variant.images[0].url" 
-                                            :alt="variant.name"  /> 
-                                        <v-lazy-image class="sampleImage" v-else src="/storage/images/app/no-photo.png" 
-                                            alt="Sin foto" />
-                                    </td>
-                                   <td style="cursor:pointer" @click="show(variant)"> 
-                                       <span style="font-size: 1.3rem">
-
-                                        {{product.name}} - {{variant.name | ucFirst}} 
-                                       </span>
-                                        <br>
-                                        {{variant.description}}   
-                                    </td>
-                                   
-                                   
-                                   <td v-if="!variant.paused"><input type="number" min="0" class="form-control " v-model="variant.units">
-                                        
-                                        <div v-if="variant.units > 0" class="text-success d-flex flex-column p-0 m-0 justify-content-center align-items-start">
-                                            
-                                            <span class="text-success font-weight-bold">  ${{(variant.product.price * variant.units) | price}} </span>
-                                            
-                                        </div>
-                                   
-                                   </td>
-                                  
-                                   
-                                  
-                                  <td></td>
-                               </tr>
-                           </tbody>
-                       </table>
-                    </div>
-                </div>
+               <cotizer-producttable :product="product"></cotizer-producttable>
             </div>
         </div>
         
@@ -110,7 +40,7 @@
         <div v-if="list.length > 0">
             <pedido :list="list"></pedido>
         </div>
-        <carousel ref="modal" :variant ="carouselvariant" @closeModal="carouselvariant = null"></carousel>
+       
       <!--   <tutorial></tutorial> -->
     </div>
 </template>
@@ -118,11 +48,12 @@
 <script>
  import { mapActions } from 'vuex';
  import { mapGetters } from 'vuex';
-    import carousel from './Img-modal.vue';
+    import cotizerProducttable from './CotizerProductTable.vue';
+    
     import pedido from './pedido.vue';
     import tutorial from './tutorial.vue'
     export default {
-        components : {carousel,pedido,tutorial},
+        components : {pedido,tutorial,cotizerProducttable},
         data(){
             return {
                 selector:{
@@ -133,8 +64,7 @@
                 },
 
                 list : [],
-                showCarousel : false,
-                carouselvariant : null
+                
             }
         },
 
@@ -176,7 +106,8 @@
         computed: {
             ...mapGetters({
                 products : 'getProducts',
-               user : 'getUser'
+               user : 'getUser',
+               configs:'getConfig'
             }),
             notPausedProducts(){
                 return this.products.filter(p => {
@@ -226,23 +157,7 @@
                    
                 }
             },
-            show(variant){
-                if (variant.images[0]){
-                    this.carouselvariant = variant;
-                    this.showCarousel = true;
-    
-                    let element = this.$refs.modal.$el;
-                  
-                    $(element).modal('show');
-                }
-                else
-                {
-                    var content = document.createElement("img");
-                    $(content).attr('src','/storage/images/app/no-photo.png');
-                    content.style.width = '100%';
-                    swal({content : content});
-                }
-            }
+        
         },     
     }
 </script>

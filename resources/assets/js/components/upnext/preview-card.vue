@@ -1,10 +1,10 @@
 <template>
     <div @mousemove="hovered=true" @mouseleave="hovered=false">
        <div class="relatived">
-            <v-lazy-image :src="product.image" :alt="product.name"></v-lazy-image>
+            <v-lazy-image :src="frontVariant.images[0].url" :alt="product.name"></v-lazy-image>
         <transition enter-active-class="animated fadeIn fast"
                     leave-active-class="animated fadeOut fast">
-            <v-lazy-image v-if="product.side_image && hovered" class="absoluted"  :src="product.side_image" :alt="product.name"></v-lazy-image>
+            <v-lazy-image v-if="frontVariant.images[1] && hovered" class="absoluted"  :src="frontVariant.images[1].url" :alt="product.name"></v-lazy-image>
         </transition>
 
        </div>
@@ -17,6 +17,13 @@ export default {
     data(){
         return{
             hovered:false
+        }
+    },
+    computed:{
+        frontVariant(){
+            return this.product.variants.find(v=>{
+                return v.isfront;
+            });
         }
     }
 }

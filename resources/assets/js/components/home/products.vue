@@ -35,14 +35,29 @@ export default {
     components:{
         productCard
     },
+    methods:{
+         frontvariant(product){
+            if (product.variants){
+                return product.variants.find(v => {
+                    return v.isfront;
+                });
+            }
+            
+        },
+    },
     computed:{
         products(){
             return this.$store.getters.getProducts;
         },
+       
         productsWithImages(){
+            var vm =this;
             if (this.products){
                 return this.products.filter(prod => {
-                    return ( prod.image != null && !prod.paused );
+                    if ( vm.frontvariant(prod) ){
+                        let fv = vm.frontvariant(prod);
+                        return fv.images[0] != null;
+                    }     
                 });
             }
         }, 
