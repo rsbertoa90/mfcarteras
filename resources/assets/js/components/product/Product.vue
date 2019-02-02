@@ -2,14 +2,14 @@
     <div v-if="product">
         <div class="row justify-content-center" itemscope itemtype="http://schema.org/Product">
             <div class="col-12 col-lg-6 row">
-                <div class="col-12" @click="show">
+                <div class="col-12 image-frame" @click="show">
                     <v-lazy-image v-if="!images[0]"  src="/storage/images/app/no-photo.png" alt="sin foto"/>
                     <v-lazy-image  itemprop="image" v-else 
                         :src="images[selectedImage].url" 
                         :alt="product.name" />
                 </div>
                 <div class="col-12 row" v-if="images[1]">
-                    <div  v-if="i-1 != selectedImage"  class="col-4 mt-2" v-for="i in images.length" :key="i" @click="selectedImage=i-1">
+                    <div  v-if="i-1 != selectedImage"  class="col-4 mt-2 image-frame" v-for="i in images.length" :key="i" @click="selectedImage=i-1">
                         <v-lazy-image :src="images[i-1].url" :alt="product.name"  />
                     </div>
                 </div>
@@ -144,5 +144,10 @@ export default {
         font-size: 1.5rem;
         text-align: center;
         
+    }
+
+    .image-frame{
+        border:1px solid #ccc;
+        padding:5px;
     }
 </style>

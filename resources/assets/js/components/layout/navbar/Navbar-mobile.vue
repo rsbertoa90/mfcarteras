@@ -1,6 +1,6 @@
 <template>
     <div class="w-100" id="top">
-        <div style="height:50px">
+        <div style="height:90px">
 
         </div>
         <div class="fixthis row d-flex justify-content-between pt-2 pb-1">
