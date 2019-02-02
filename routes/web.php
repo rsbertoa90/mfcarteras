@@ -54,7 +54,7 @@ Route::get('/config','ConfigController@get');
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', function(){return redirect('/');});
-Route::get('/hometest', 'HomeController@homeTest');
+
 
 
 Route::get('/cotizador','HomeController@cotizer');

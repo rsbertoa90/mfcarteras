@@ -25,21 +25,7 @@
                                
                             </a>
                         </li>
-                        <li v-if="supercategories" 
-                            v-for="sup in supercategories" 
-                            :key="sup.id"
-                            @click="openSubmenu(sup)">
-                            <div class="w-100 d-flex justify-content-between">
-                                {{sup.name | uc}}
-                                 <i :class="{'fa fa-chevron-right':!sup.submenu,
-                                            'fa fa-chevron-down':sup.submenu}"></i>
-                            </div>
-                            <div v-if="sup.submenu" class="row mt-2">
-                                <div class="col-6 submenucat" v-for="cat in submenuCats" :key="cat.id">
-                                    <a :href="cat.slug">{{cat.name | uc}}</a>
-                                </div>
-                            </div>
-                        </li>
+                     
                     </ul>
                 </div>
        
@@ -73,30 +59,12 @@ export default {
             
      }
     },
-    computed :{
-        ...mapGetters({
-            categories : 'categories/getCategories',
-            supercategories: 'getSupercategories'
-
-        }),
-    },
+  
     methods:{
         close(){
             this.$emit('close');
         },
-        openSubmenu(supercat){
-            console.log('opensubmenu');
-            if (!supercat.submenu){
-                vue.set(supercat,'submenu',true);
-                this.submenuCats = this.categories.filter(cat => {
-                    return cat.supercategory_id == supercat.id;
-                });
-            }
-            else{
-                supercat.submenu=false;
-            }    
-            console.log(supercat.submenu);
-        },
+       
     },
     
 }
@@ -149,7 +117,7 @@ ul li {
     font-size: 1rem;
     color : #555;
     font-weight: bold;
-    border-bottom: 1px solid $color-first;
+    border-bottom: 1px solid #ccc;
     padding: 15px;
 
     a {

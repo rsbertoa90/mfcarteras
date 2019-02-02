@@ -1,11 +1,48 @@
-<template>
-<a href="/" title="home">
-
-     <span class="logo">
-                    MF
-    </span>
-</a>
+<template> 
+    <div class=" pt-3"
+        :class="{'big-logo':scrollOnTop,
+                'logo':!scrollOnTop}">
+        <a href="/" 
+                >
+            <img  src="/storage/images/app/logo.png" 
+                alt="logo"
+                >
+                
+        </a>
+    </div>
 </template>
+
+
+<script>
+export default {
+    
+      data(){
+        return{
+            showMenu : false,
+             scrollOnTop : true,
+     }
+    },
+
+    
+    methods:{
+        shomenu(){
+            this.showMenu=true;
+            window.scrollTo(0, 0);
+        },
+       
+      handleScroll(){
+          this.scrollOnTop =  window.scrollY < 100;
+      }
+      
+    },
+    created () {
+        window.addEventListener('scroll', this.handleScroll);
+},
+    
+
+
+}
+</script>
 
 <style scoped>
     img{width: 100%}

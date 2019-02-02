@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="variants-clicker d-flex">
+    <div class="variants-clicker d-flex mt-4">
         <span v-for="variant in product.variants" :key="variant.id" 
               class="square" :style="{backgroundColor:variant.color_code}"
               @click="selectedVariant = variant"></span>
@@ -19,7 +19,7 @@
         </div>
         <div class="d-flex justify-content-between">
             <span> {{product.name}} </span>
-            <div>
+            <div v-if="!config.hide_prices">
                 <span> ${{product.price |price}} </span>
                 <strike class="ml-2 text-secondary"> ${{product.price*1.25 |price}} </strike>
             </div>
@@ -40,6 +40,7 @@ export default {
         }
     },
     computed:{
+         config(){return this.$store.getters.getConfig},
         images()
         {
             let res = [];

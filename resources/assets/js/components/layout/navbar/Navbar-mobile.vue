@@ -10,15 +10,15 @@
                      @click="shomenu" >
                 <span class="fa fa-bars"></span>
             </button>
-            <div class="col-8 ">
+            <div class="col-6">
                 <image-logo></image-logo>
             </div>
-            <div class="col-2">
+            <div class="col-4">
 
             </div>
         </div>
          
-        <mobile-menu v-if="showMenu" :categories='categories' 
+        <mobile-menu v-if="showMenu" 
                         @close="showMenu=false"></mobile-menu>
 
   
@@ -43,20 +43,48 @@ export default {
     },
     data(){
         return{
-            showMenu : false
+            showMenu : false,
+             scrollOnTop : true,
      }
     },
-    computed :{
-        ...mapGetters({
-            categories : 'categories/getCategories'
-        }),
-    },
+ 
     methods:{
         shomenu(){
             this.showMenu=true;
             window.scrollTo(0, 0);
-        }
-    }
+        },
+       
+      handleScroll(){
+          this.scrollOnTop =  window.scrollY < 100;
+      }
+      
+    },
+    created () {
+        window.addEventListener('scroll', this.handleScroll);
+},
+     data(){
+        return{
+            showMenu : false,
+             scrollOnTop : true,
+     }
+    },
+    
+    
+    methods:{
+        shomenu(){
+            this.showMenu=true;
+            window.scrollTo(0, 0);
+        },
+       
+      handleScroll(){
+          this.scrollOnTop =  window.scrollY < 100;
+      }
+      
+    },
+    created () {
+        window.addEventListener('scroll', this.handleScroll);
+},
+    
 }
 </script>
 
