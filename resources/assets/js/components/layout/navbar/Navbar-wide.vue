@@ -21,7 +21,7 @@
                         'logo':!scrollOnTop}">
                 <a href="/" 
                         >
-                    <img class="w-100" src="/storage/images/app/logo.png" 
+                    <img  src="/storage/images/app/logo.png" 
                         alt="logo"
                         >
                         
@@ -107,12 +107,14 @@ $color-other: #104DE8;
 }
 
 .logo{
-    max-width: 17vw;
+    margin-top:-23px;
+   max-width: 8vw;
     transition: max-width 0.5s ease-in-out;
 }
 
 .big-logo{
-   max-width: 25vw;
+    margin-top:-28px;
+   max-width: 11vw;
     transition: max-width 0.5s ease-in-out;
 }
 ul{

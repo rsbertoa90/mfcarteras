@@ -9,7 +9,7 @@
                         :alt="product.name" />
                 </div>
                 <div class="col-12 row" v-if="images[1]">
-                    <div  v-if="i-1 != selectedImage"  class="col-4" v-for="i in images.length" :key="i" @click="selectedImage=i-1">
+                    <div  v-if="i-1 != selectedImage"  class="col-4 mt-2" v-for="i in images.length" :key="i" @click="selectedImage=i-1">
                         <v-lazy-image :src="images[i-1].url" :alt="product.name"  />
                     </div>
                 </div>
@@ -27,7 +27,7 @@
                     <div v-if="product.variants && product.variants.length>0">
                         <span>Variedades disponibles:</span>
                         <ul>
-                            <li v-for="variant in product.variants" class="ml-4" :key="variant.id" >
+                            <li v-for="variant in product.variants" :style="{color:variant.color_code}" class="ml-4" :key="variant.id" >
                                 <span class="fa fa-star"></span> {{variant.name | ucFirst}}
                             </li>
                         </ul>
@@ -40,7 +40,7 @@
                     <div class="mt-3">
                         <a href="/cotizador" class="btn btn-lg btn-outline-success"> <span class="fa fa-shopping-cart"></span> Hacer pedido</a>
                     </div>
-                    <div class="row mt-3">
+                   <!--  <div class="row mt-3">
                         <div class="col-6 d-flex align-items-center">
                              <span class="fa fa-truck mr-2"></span>
                              <span class="ml-2">Envio a todo el país</span>
@@ -51,7 +51,7 @@
                             <span><i class="fa fa-arrow-right"></i> Compra minima para envios: $3000</span>
                             <span><i class="fa fa-arrow-right"></i> Los despachos se realizaran de 1 a 5 días hábiles a partir del informe y acreditación del pago</span>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

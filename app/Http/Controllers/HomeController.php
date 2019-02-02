@@ -36,8 +36,7 @@ class HomeController extends Controller
             return redirect('/admin/cotizador');
         }
 
-        //TEMPORALMENTE REDIRIGIR A LANDING DE PROXIMAMENTE
-        return view('proximamente');
+     
 
         $meta = Metadata::getPage('home');
         return view('home',compact('meta'));
