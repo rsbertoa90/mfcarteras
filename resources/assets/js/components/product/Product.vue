@@ -99,15 +99,15 @@ export default {
                 let res =[];
                 if (this.frontvariant){
                    res= res.concat(this.frontvariant.images);
-                    console.log(this.frontvariant.images);
+                   
                 }
                 this.product.variants.forEach(v=>{
                     if (!v.isfront){
                         res = res.concat(v.images);
-                         console.log(v.images);
+                         
                     }
                 });
-                console.log(res);
+            
                 return res;
             }
         }
