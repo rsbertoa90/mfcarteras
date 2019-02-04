@@ -3,17 +3,19 @@
         <div style="height:90px">
 
         </div>
-        <div class="fixthis row d-flex justify-content-between pt-2 pb-1">
+        <div class="fixthis row d-flex justify-content-between  pt-2 pb-1">
+             
              <button aria-label="menu" 
              class="col-2 navbar-toggler
                     font-weight-bold" 
                      @click="shomenu" >
                 <span class="fa fa-bars"></span>
             </button>
-            <div class="col-6">
+            <div :class="{'big-logo':scrollOnTop,
+                        'logo':!scrollOnTop}">
                 <image-logo></image-logo>
             </div>
-            <div class="col-4">
+            <div :class="{'col-4':scrollOnTop, 'col-6':!scrollOnTop}">
 
             </div>
         </div>
@@ -47,9 +49,15 @@ export default {
              scrollOnTop : true,
      }
     },
- 
+    created () {
+        window.addEventListener('scroll', this.handleScroll);
+    },
     methods:{
-        shomenu(){
+       
+      handleScroll(){
+          this.scrollOnTop =  window.scrollY < 100;
+      },
+     shomenu(){
             this.showMenu=true;
             window.scrollTo(0, 0);
         },
@@ -96,7 +104,19 @@ export default {
         top:0;
         left:0;
         background-color: #f5f8fa;
-        width: 99.99vw;
+        width: 106vw;
     }
 
+
+.logo{
+   /*  margin-top:-23px; */
+    max-width: 25vw;
+    transition: max-width 0.5s ease-in-out;
+}
+
+.big-logo{
+  /*   margin-top:-28px; */
+    max-width: 40vw;
+    transition: max-width 0.5s ease-in-out;
+}
 </style>
