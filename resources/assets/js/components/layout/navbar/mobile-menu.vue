@@ -1,10 +1,10 @@
 <template>
-    <div id="menu" >
+    <div id="menu" v-on-click-outside="close" >
         <div id="overlay">
 
         </div>
         <div class="row w-100 p-0 m-0 d-flex ">
-            <div class="col-12 p-4 d-flex jusfify-conten-center align-items-center">
+            <div @click.prevent="" class="col-12 p-4 d-flex jusfify-conten-center align-items-center">
                  <form class="form-inline w-100" action="/buscar">
                     <div class="input-group w-100">
                         <input type="text" class="form-control" 
@@ -18,7 +18,7 @@
             <hr/>
            
                 <div class="col-12 p-0">
-                    <ul v-on-click-outside="close"> 
+                    <ul > 
                         <li v-for="route in routes" :key="route.url">
                             <a :href="route.url" >
                                 {{route.name | uc}}
@@ -108,7 +108,7 @@ export default {
        
         background-color: #eee;
         position: absolute;
-        top: 50px;
+        top: 105px;
         left: 0;
         z-index: 200;
     }
