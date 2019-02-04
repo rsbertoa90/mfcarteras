@@ -5,7 +5,7 @@
               class="square" :style="{backgroundColor:variant.color_code}"
               @click="selectedVariant = variant"></span>
     </div>
-    <a :href="product.slug" v-if="product">
+    <div v-if="product">
         <div  class="image-container" v-if="selectedVariant && selectedVariant.images[0]" 
                 @mouseover="hovered=true" @mouseleave="hovered=false">
            <v-lazy-image class="image" :src="selectedVariant.images[0].url" :alt="product.name" />
@@ -24,7 +24,10 @@
                 <strike class="ml-2 text-secondary"> ${{product.price*1.25 |price}} </strike>
             </div>
         </div>
-    </a>
+        <div class="d-flex">
+            <a :href="product.slug" class="btn btn-block btn-dark mt-2">VER MAS</a>
+        </div>
+    </div>
 </div>
 </template>
 
