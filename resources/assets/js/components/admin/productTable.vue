@@ -11,15 +11,16 @@
                                                     alt="no-image"> 
                                             </td>
                                             <td>  
-                                               COD: <input v-model.lazy="product.code" @change="saveChange(product,'code')" type="text" class="nametd"> 
+                                               COD: <input v-model.lazy="product.code" @change="saveChange('code')" type="text" class="nametd"> 
                                             </td>
                                             <td>  
-                                                <textarea rows="2" placeholder="Nombre" v-model.lazy="product.name" @change="saveChange(product,'name')" type="text"> </textarea> 
-                                                <textarea placeholder="Descripcion" v-model="product.description" @change="saveChange(product,'description')" rows="3"></textarea>
+                                                <textarea rows="2" placeholder="Nombre" v-model.lazy="product.name" @change="saveChange('name')" type="text"> </textarea> 
+                                                <textarea placeholder="Descripcion" v-model="product.description" @change="saveChange('description')" rows="3"></textarea>
+                                                <input type="text" placeholder="Medidas" v-model="product.messures" @change="saveChange('messures')" />
                                             </td>
                                             
                                             <td class="text-info text-center"> 
-                                                $<input style="width:80%" type="number" v-model.lazy="product.price" @change="saveChange(product,'price')"> 
+                                                $<input style="width:80%" type="number" v-model.lazy="product.price" @change="saveChange('price')"> 
                                                 <button class="btn btn-block mt-3" :class="{'bg-focus white-bold':product.offer}" @click="toggleOffer(product)">Oferta</button>
                                             </td>                
                                             <td class="d-flex flex-column justify-content-center align-items-center">
@@ -142,7 +143,7 @@ export default {
                 var variant = 1+(this.variant/100);
                 this.selectedProducts.forEach(prod => {
                     prod.price = prod.price * variant;
-                    vm.saveChange(prod,'price');
+                    vm.saveChange('price');
                 });
                 vm.refresh();
                 vm.variant = 0;
@@ -233,7 +234,7 @@ export default {
             togglePause(product){
                 var vm = this;
                 product.paused = !product.paused;
-                vm.saveChange(product,'paused');
+                vm.saveChange('paused');
                
 
                 

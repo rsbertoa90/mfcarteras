@@ -23,7 +23,9 @@
                 <span> ${{product.price |price}} </span>
                 <strike class="ml-2 text-secondary"> ${{product.price*1.25 |price}} </strike>
             </div>
+            
         </div>
+            <span v-if="product.messures" class="text-secondary">Medidas: {{product.messures}} </span>
         <div class="d-flex">
             <a :href="product.slug" class="btn btn-block btn-dark mt-2">VER MAS</a>
         </div>

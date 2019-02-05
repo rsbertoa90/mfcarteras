@@ -24,6 +24,9 @@
                         <h2>  ${{product.price}} </h2>
                         <h5> <del class="text-secondary ml-2"> ${{product.price*1.4 |price}} </del> </h5>
                     </div>
+                    <div  class="d-flex align-items-center" v-if="product.messures">
+                        <p>Medidas: {{product.messures}}</p>
+                    </div>
                     <div v-if="product.variants && product.variants.length>0">
                         <span>Variedades disponibles:</span>
                         <ul>
