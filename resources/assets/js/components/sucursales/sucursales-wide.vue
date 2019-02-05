@@ -12,7 +12,7 @@
                     <ul>
                        <li> <b> Dirección: </b> Pasteur 410 </li>
                        <li> <b>Atención: </b> Lunes a viernes de 9 a 18 hs </li>
-                       <li>  <b> Teléfono:</b> xxxxx   </li>
+                       <li>  <b> Teléfono:</b> 11-3187-8362   </li>
                     </ul>
                        <p> MF Carteras se encuentra a metros de Avenida 
                            Corrientes y de la estación Pasteur del subte B.</p>
