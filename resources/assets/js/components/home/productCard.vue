@@ -26,6 +26,7 @@
             
         </div>
             <span v-if="product.messures" class="text-secondary">Medidas: {{product.messures}} </span>
+            <span v-else class="text-secondary">Medidas no disponibles</span>
         <div class="d-flex">
             <a :href="product.slug" class="btn btn-block btn-dark mt-2">VER MAS</a>
         </div>
