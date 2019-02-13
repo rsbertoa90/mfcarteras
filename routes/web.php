@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/testear','HomeController@test');
+
 
 Auth::routes();
 
@@ -38,6 +40,8 @@ Route::middleware('CheckAdmin')->prefix('admin')->group(function(){
     Route::post('/product/image','ProductController@changeImage')->middleware('OptimizeImages');
     Route::post('/variant/image','VariantImageController@create')->middleware('OptimizeImages');
     Route::delete('/variant/image/{id}','VariantImageController@destroy');
+
+    Route::post('/model-upload','ModelImageController@create');
 
     Route::put('/order','OrderController@edit');
     Route::get('/ordenes','AdminController@orders');

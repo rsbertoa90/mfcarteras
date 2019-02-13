@@ -23,6 +23,17 @@ class HomeController extends Controller
         // $this->middleware('auth');
     }
 
+
+
+     public function test(){
+
+          $meta = Metadata::getPage('test');
+        return view('test',compact('meta'));
+
+    }
+
+
+
     /**
      * Show the application dashboard.
      *
@@ -107,4 +118,6 @@ class HomeController extends Controller
         
     }
 
+
+   
 }

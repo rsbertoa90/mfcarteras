@@ -38,6 +38,7 @@ Vue.component('app-footer', require('./components/layout/footer/Footer.vue'));
 Vue.component('app-whatsapp', require('./components/layout/Whatsapp-float.vue'));
 Vue.component('app-admin', require('./components/admin/Admin.vue'));
 Vue.component('app-super', require('./components/super/Super.vue'));
+Vue.component('app-model-upload', require('./components/modelImage/upload.vue'));
 Vue.component('image-logo', require('./components/layout/images/image-logo.vue'));
 /* Vue.component('app-side-menu', require('./components/layout/Side-menu.vue')); */
 
