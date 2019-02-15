@@ -33,6 +33,10 @@ class ProductController extends Controller
     return Product::with('variants.images')->with('variants.product')->get();
   }
 
+  public function get($id){
+    return Product::with('variants.images')->with('variants.modelImages')->with('variants.product')->find($id);
+  }
+
     public function searchResults(Request $request)
     {
     

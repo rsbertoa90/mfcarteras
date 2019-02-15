@@ -1,5 +1,18 @@
 <template>
     <div v-if="product">
+        
+        <div class="row mt-1 mb-4" v-if="models.length>0">
+            <div class="col-12 d-flex justify-content-center w-100"
+                :class="{'flex-column':$mq!='lg'}">
+                <div v-for="model in models" :key="model" class="model-container ml-2 mr-2">
+                    <variant-model :alt="product.name" :id="'asd'+model" :key="'asd'+model" :variant_id="model"></variant-model>
+                </div>
+            </div>
+            
+        </div>
+
+        <hr v-if="models.length>0">
+
         <div class="row justify-content-center" itemscope itemtype="http://schema.org/Product">
             <div class="col-12 col-lg-6 row">
                 <div class="col-12 image-frame" @click="show">
@@ -73,21 +86,27 @@ export default {
         return{
             selectedImage : 0,
             selectedVariant:null,
+            product:null,
+           
+           
             
         }
     },
     computed:{
-        config(){return this.$store.getters.getConfig},
-        products(){
-            return this.$store.getters.getProducts;
-        },
-        product(){
-            if (this.products){
-                return this.products.find(prod=> {
-                    return prod.id ==this.product_id;
+        models(){
+            let res=[];
+            if(this.product){
+                this.product.variants.forEach(variant=>{
+                    if(variant.model_images && variant.model_images.length>1){
+                        res.push(variant.id);
+                    }
                 });
-            };
+            }
+            return res;
         },
+        config(){return this.$store.getters.getConfig},
+       
+        
         frontvariant(){
             if (this.product){
                 return this.product.variants.find(v => {
@@ -137,6 +156,13 @@ export default {
                     swal({content : content});
             }
         }
+    },
+    created(){
+        var vm=this;
+        this.$http.get('/api/product/'+this.product_id)
+            .then(res => {
+                vm.product = res.data;
+            });
     }
 }
 </script>
@@ -152,5 +178,11 @@ export default {
     .image-frame{
         border:1px solid #ccc;
         padding:5px;
+    }
+
+    .model-container{
+        border:1px solid #ccc;
+        padding:30px;
+        max-width: 500px;
     }
 </style>

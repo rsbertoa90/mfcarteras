@@ -1,20 +1,28 @@
 <template>
-    <div  v-if="images && images.length > 0">
-      <v-touch  @panleft="panleft" @panright="panright" class="relative" >
-          <div id="container">
-            <img id="image" :src="images[0].url" >
+    <div  v-if="images && images.length > 0" @click="touched=true" >
+      <v-touch  @press="touched=true" @panleft="panleft" @panright="panright" class="relative" >
+          <div :id="'container'+variant_id">
+            <img :id="variant_id" :src="images[0].url" :alt="alt" >
           </div>
+         
+          <div class="overlay" v-if="!touched">
+              <span v-if="$mq!='lg'"> Desliza para girar la imagen </span>
+              <span v-else> Toca las flechas para girar la imagen </span>
+              <span class="mt-2">360°</span>
+          </div>
+
           <div v-if="$mq=='lg'" class="controls">
               <div class="p-1 bg-secondary text-info" @mousedown="spin('left')" @mouseup="stop"> <span class="fa fa-chevron-left"/> </div>
               <div class="p-1 bg-secondary text-info" @mousedown="spin('right')" @mouseup="stop"> <span class="fa fa-chevron-right"></span> </div>
           </div>
+
       </v-touch>
     </div>
 </template>
 
 <script>
 export default {
-    props:['variant_id'],
+    props:['variant_id','alt'],
     data(){
         return{
             pressing:false,
@@ -24,7 +32,8 @@ export default {
             interval:null,
             direction:'left',
             mousex:0,
-            ralentizer:0
+            ralentizer:0,
+            touched:false,
          
 
         }
@@ -44,6 +53,7 @@ export default {
     },
     methods:{
         panright(){
+            this.touched=true;
             if(this.ralentizer > 1){
                 if(this.images[this.current+1]){
                     this.current++
@@ -57,6 +67,7 @@ export default {
          
         },
         panleft(){
+            this.touched=true;
             if(this.ralentizer > 1){
                 if(this.images[this.current-1]){
                 this.current--
@@ -87,7 +98,8 @@ export default {
                 this.images.forEach(img => {
                     let element  = new Image();
                     element.src = img.url;
-                    element.id="image";
+                    element.id=this.variant_id;
+                    element.alt=this.alt;
                     this.imgarray.push(element);
                 });
             }
@@ -97,8 +109,8 @@ export default {
     watch:{
         current(){
             if(this.images && this.images.length>0){
-
-                let cont = document.getElementById("container");
+                let container_id="container"+this.variant_id;
+                let cont = document.getElementById(container_id);
                 if(cont){
 
                     cont.removeChild(cont.childNodes[0]);
@@ -121,5 +133,23 @@ export default {
         width:100%;
         display: flex;
         justify-content: space-between;   
+        font-size: 2rem;
+       
+    }
+
+    .overlay{
+        position:absolute;
+        top:25%;
+        width:60%;
+        margin-left: 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;   
+        font-size: 1.3rem;
+        background-color: #555c;
+        text-align: center;
+        border-radius: 10%;
+        color:#fff;
+
     }
 </style>

@@ -10,11 +10,13 @@ export const store = new Vuex.Store({
         states:[],
         products:[],
         
+        
     },
     getters :{
         getProducts(store){
             return store.products;
         },
+       
         getUser(store){
             return store.user;
         },
