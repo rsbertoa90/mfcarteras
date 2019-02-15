@@ -96,9 +96,15 @@ export default {
     },
     watch:{
         current(){
-            let cont = document.getElementById("container");
-            cont.removeChild(cont.childNodes[0]);
-            cont.appendChild(this.imgarray[this.current]);
+            if(this.images && this.images.length>0){
+
+                let cont = document.getElementById("container");
+                if(cont){
+
+                    cont.removeChild(cont.childNodes[0]);
+                    cont.appendChild(this.imgarray[this.current]);
+                }
+            }
         }
     },
 
