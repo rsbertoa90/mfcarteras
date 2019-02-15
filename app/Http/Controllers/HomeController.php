@@ -25,10 +25,10 @@ class HomeController extends Controller
 
 
 
-     public function test(){
+     public function test($id){
 
           $meta = Metadata::getPage('test');
-        return view('test',compact('meta'));
+        return view('test',compact('meta','id'));
 
     }
 

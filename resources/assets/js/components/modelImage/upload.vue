@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div class="bg-white p-2">
+        <h3>Subir modelo 360</h3>
         <div class="form-group col-md-12">
             <label for="logo" class="control-label">Attachments</label>
             <br><br>
@@ -21,7 +22,7 @@
 <script>
     export default {
         props: [
-            'settings'
+            'variant_id'
         ],
         data() {
             return {
@@ -50,6 +51,7 @@
             prepareFields() {
                 
                 if (this.attachments.length > 0) {
+
                     for (var i = 0; i < this.attachments.length; i++) {
                         let attachment = this.attachments[i];
                         this.data.append('attachments[]', attachment);
@@ -83,13 +85,18 @@
                     }.bind(this)
                 };
                 // Make HTTP request to store announcement
+                
+                this.data.append('variant_id',this.variant_id);
+
                 axios.post('/admin/upload-model', this.data, config)
                 .then(function (response) {
-                    console.log(response);
-                    if (response.data.success) {
+                    console.log(response.data);
+                    if (response.data == 'ok') {
+                        
                         console.log('Successfull Upload');
-                        toastr.success('Files Uploaded!', 'Success');
+                        
                         this.resetData();
+                        this.$emit('close');
                     } else {
                         console.log('Unsuccessful Upload');
                         this.errors = response.data.errors;

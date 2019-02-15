@@ -1,5 +1,5 @@
-<template>
-    <div class="modal fade" id="image-modal" tabindex="-1" role="dialog">
+<template v-if="variant">
+    <div class="modal fade" ref="modal" id="image-modal" tabindex="-1" role="dialog">
    <div class="modal-dialog" role="document">
     <div  v-if="variant" class="modal-content">
       <div class="modal-header">
@@ -46,13 +46,19 @@
         <button v-if="chargedImage" type="button" class="btn btn-primary" @click="save">Guardar</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
+    <app-model-gallery :variant_id="variant.id"></app-model-gallery>
+    <app-model-upload @close="close()" v-if="variant" :variant_id="variant.id"></app-model-upload>
     </div>
   </div>
 </div>
 </template>
 
 <script>
+import appModelGallery from '../modelImage/staticmodel.vue';
+import appModelUpload from '../modelImage/upload.vue';
     export default {
+        components:{'app-model-gallery':appModelGallery,
+                    'app-model-upload':appModelUpload},
         props: ['variant'],
         data: function(){
             return {
@@ -63,6 +69,9 @@
         
         
         methods : {
+            close(){
+                window.location.replace('/admin');
+            },
             deleteImage(image){
                 this.$http.delete('/admin/variant/image/'+image.id)
                     .then(()=>{

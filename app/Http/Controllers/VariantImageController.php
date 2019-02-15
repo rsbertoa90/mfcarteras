@@ -91,6 +91,11 @@ class VariantImageController extends Controller
      */
     public function destroy($id)
     {
+        $image = VariantImage::find($id);
+        
+        if(\File::exists(public_path($image->url))){
+                    \File::delete(public_path($image->url));
+                }
         VariantImage::destroy($id);
     }
 }

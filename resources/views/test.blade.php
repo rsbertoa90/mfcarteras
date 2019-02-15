@@ -7,5 +7,9 @@
 @endsection
 
 @section('content')
-   <app-model-upload></app-model-upload>
+<div class="row">
+    <div class="col-12 col-lg-4">
+        <variant-model :variant_id={{$id}}></variant-model>
+    </div>
+</div>
 @endsection

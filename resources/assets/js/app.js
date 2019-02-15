@@ -10,6 +10,11 @@ import Vue from 'vue';
 window.vue = Vue;
 window.Vue = Vue;
 
+
+
+
+
+
 var VueResource = require('vue-resource');
 Vue.use(VueResource);
 Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name="csrf-token"]').attr('content');
@@ -27,6 +32,21 @@ Vue.use(BootstrapVue);
 
 import VueMq from 'vue-mq'
 
+/* import Vue2TouchEvents from 'vue2-touch-events'
+
+
+Vue.use(Vue2TouchEvents, {
+    disableClick: false,
+    touchClass: '',
+    tapTolerance: 10,
+    swipeTolerance: 30,
+    longTapTimeInterval: 400
+}) */
+
+import VueTouch from 'vue-touch';
+
+Vue.use(VueTouch);
+
 Vue.component('fade-loader', require('vue-spinner/src/FadeLoader.vue'));
 Vue.component('app-proximamente', require('./components/proximamente.vue'));
 Vue.component('app-cotizer', require('./components/cotizer/Cotizer.vue'));
@@ -38,10 +58,9 @@ Vue.component('app-footer', require('./components/layout/footer/Footer.vue'));
 Vue.component('app-whatsapp', require('./components/layout/Whatsapp-float.vue'));
 Vue.component('app-admin', require('./components/admin/Admin.vue'));
 Vue.component('app-super', require('./components/super/Super.vue'));
-Vue.component('app-model-upload', require('./components/modelImage/upload.vue'));
 Vue.component('image-logo', require('./components/layout/images/image-logo.vue'));
 /* Vue.component('app-side-menu', require('./components/layout/Side-menu.vue')); */
-
+Vue.component('variant-model', require('./components/modelImage/model.vue'));
 Vue.component('app-home', require('./components/home/Home.vue'));
 Vue.component('app-sucursales', require('./components/sucursales/Sucursales.vue'));
 Vue.component('app-contacto', require('./components/contacto/Contacto.vue'));
