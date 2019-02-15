@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import appModelGallery from '../modelImage/staticmodel.vue';
+import appModelGallery from '../modelImage/model.vue';
 import appModelUpload from '../modelImage/upload.vue';
     export default {
         components:{'app-model-gallery':appModelGallery,
