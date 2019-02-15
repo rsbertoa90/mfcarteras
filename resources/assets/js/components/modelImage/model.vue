@@ -1,7 +1,7 @@
 <template>
     <div  v-if="images && images.length > 0" @click="touched=true" >
       <v-touch  @press="touched=true" @panleft="panleft" @panright="panright" class="relative" >
-          <div :id="'container'+variant_id">
+          <div :id="'container'+variant_id" class="img-container">
             <img :id="variant_id" :src="images[0].url" :alt="alt" >
           </div>
          
@@ -21,7 +21,9 @@
 </template>
 
 <script>
+import pinchImage from './PinchImage.vue';
 export default {
+    commponents:{pinchImage},
     props:['variant_id','alt'],
     data(){
         return{
@@ -152,4 +154,9 @@ export default {
         color:#fff;
 
     }
+
+    .img-container{
+        overflow: hidden;
+    }
+
 </style>

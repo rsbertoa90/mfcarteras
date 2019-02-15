@@ -182,7 +182,7 @@ export default {
 
     .model-container{
         border:1px solid #ccc;
-        padding:30px;
+        padding:10px;
         max-width: 500px;
     }
 </style>
