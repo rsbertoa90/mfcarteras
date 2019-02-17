@@ -5,10 +5,15 @@
             <img :id="variant_id" :src="images[0].url" :alt="alt" >
           </div>
          
-          <div class="overlay" v-if="!touched">
-              <span v-if="$mq!='lg'"> Desliza para girar la imagen </span>
+          <div class="overlay" v-if="!touched && $mq!='lg'">
+              <!-- <span v-if="$mq!='lg'"> Desliza para girar la imagen </span>
               <span v-else> Toca las flechas para girar la imagen </span>
-              <span class="mt-2">360°</span>
+              <span class="mt-2">360°</span> -->
+              <span class="fas fa-hand-point-up bigicon" :style="handmove"></span>
+              <div class="arrows">
+                <span v-for="i in 5" :key="i" class="fas fa-arrow-right ml-2"></span>
+              </div>
+              
           </div>
 
           <div v-if="$mq=='lg'" class="controls">
@@ -30,12 +35,15 @@ export default {
             pressing:false,
             images:null,
             imgarray:[],
-            current:null,
-            interval:null,
+            current:0,
             direction:'left',
             mousex:0,
             ralentizer:0,
             touched:false,
+            handmovemargin:1,
+            interval:null,
+            handmoveinterval:null,
+            softspininterval:null
          
 
         }
@@ -48,6 +56,7 @@ export default {
                 if (res.data){
                     this.current = 0;
                     this.preloadImages();
+                    this.softspin();
                     /* this.$refs.touch.enable('swipeleft');
                     this.$refs.touch.enable('swiperight'); */
                 }
@@ -83,6 +92,7 @@ export default {
         },
         spin(dir){
             var vm=this;
+            this.touched=true;
             this.interval = setInterval(function(){
                
                 if(dir=='right'){
@@ -90,13 +100,37 @@ export default {
                 }else{vm.panleft();}
             },30);
         },
+        softspin(){
+            var vm=this;
+            if(this.images && this.images.length > 0){
+
+                vm.softspininterval = setInterval(function(){
+                   
+                    if(vm.images[vm.current+1]){
+                        vm.current++
+                    }
+                    else{
+                        vm.current=0;
+                    }
+                },200);
+
+                vm.handmoveinterval = setInterval(function(){
+                     if(vm.handmovemargin < 90){
+                        vm.handmovemargin++;
+                    }
+                    else {vm.handmovemargin=0;}
+                },10);
+            }
+        },
         stop(){
+             this.touched=true;
             clearInterval(this.interval);
+            clearInterval(this.handmoveinterval);
         },
         preloadImages(){
             if (this.images)
             {
-                console.log("PRELOADING");
+             
                 this.images.forEach(img => {
                     let element  = new Image();
                     element.src = img.url;
@@ -119,8 +153,25 @@ export default {
                     cont.appendChild(this.imgarray[this.current]);
                 }
             }
+        },
+        touched(){
+            if (this.touched){
+               
+
+                
+               clearInterval(this.softspininterval);
+               clearInterval(this.interval);
+               
+               clearInterval(this.handmoveinterval);
+            }
         }
     },
+    computed:{
+        handmove(){
+            return `margin-left:${this.handmovemargin}%;` ;
+        }
+    }
+    
 
 }
 </script>
@@ -141,17 +192,18 @@ export default {
 
     .overlay{
         position:absolute;
-        top:25%;
-        width:60%;
-        margin-left: 20%;
+        top:60%;
+        width:80%;
+        margin-left: 10%;
         display: flex;
-        flex-direction: column;
-        justify-content: center;   
-        font-size: 1.3rem;
-        background-color: #555c;
-        text-align: center;
+        
+        justify-content: flex-start;   
+      
+        background-color: #0FE0E8cc;
+        
         border-radius: 10%;
         color:#fff;
+        padding:5px;
 
     }
 
@@ -159,4 +211,15 @@ export default {
         overflow: hidden;
     }
 
+    .bigicon{font-size:3rem}
+
+    .arrows{
+        position:absolute;
+        top:25%;
+        width:100%;
+        display: flex;
+        justify-content: space-around;
+        font-size: 2rem;
+        padding:5px;
+    }
 </style>
