@@ -14,7 +14,7 @@
                 <span v-for="i in 5" :key="i" class="fas fa-arrow-right ml-2"></span>
               </div>
               <div class="slidetext">
-                  <span>Desliza!</span>
+                  <span>DESLIZA!</span>
               </div>
               
           </div>
@@ -229,8 +229,8 @@ export default {
     .slidetext{
          position:absolute;
         bottom:-100%;
-        width:50%;
-        margin-left: 25%;
+        width:70%;
+        margin-left: 15%;
         display: flex;
         justify-content: space-around;
         font-size: 2rem;
