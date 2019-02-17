@@ -13,6 +13,9 @@
               <div class="arrows">
                 <span v-for="i in 5" :key="i" class="fas fa-arrow-right ml-2"></span>
               </div>
+              <div class="slidetext">
+                  <span>Desliza!</span>
+              </div>
               
           </div>
 
@@ -119,7 +122,7 @@ export default {
                         vm.handmovemargin++;
                     }
                     else {vm.handmovemargin=0;}
-                },10);
+                },30);
             }
         },
         stop(){
@@ -192,7 +195,7 @@ export default {
 
     .overlay{
         position:absolute;
-        top:60%;
+        top:40%;
         width:80%;
         margin-left: 10%;
         display: flex;
@@ -221,5 +224,18 @@ export default {
         justify-content: space-around;
         font-size: 2rem;
         padding:5px;
+    }
+
+    .slidetext{
+         position:absolute;
+        bottom:-100%;
+        width:50%;
+        margin-left: 25%;
+        display: flex;
+        justify-content: space-around;
+        font-size: 2rem;
+         background-color: #0FE0E8cc;
+         border-radius: 10%;
+       
     }
 </style>
