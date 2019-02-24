@@ -1,6 +1,10 @@
 <template>
     <div  v-if="images && images.length > 0" @click="touched=true" >
-      <v-touch @pinchout="pinchout" @pinchin="pinchin" @pandown="movedown" @panup="moveup"  @press="touched=true" @panleft="panleft" @panright="panright" class="relative" >
+      <v-touch ref="touchdiv"
+                @pinchout="pinchout" @pinchin="pinchin" 
+                @pandown="movedown" @panup="moveup"  
+                @press="touched=true" @panleft="panleft" 
+                @panright="panright" class="relative" >
           <div :id="'container'+variant_id" class="img-container">
             <img :id="variant_id" :src="images[0].url" :alt="alt"
                 :style="imagestyle" >
@@ -52,7 +56,11 @@ export default {
 
         }
     },
+   
     created(){
+
+        
+
         this.$http.get('/api/model/'+this.variant_id)
             .then(res => {
                 this.images = res.data;
@@ -71,11 +79,15 @@ export default {
             if (this.zoom < 9){
 
                 this.zoom++;
+                console.log(this.zoom);
+                console.log(this.imagestyle);
             }
         },
         pinchin(){
             if (this.zoom > 0){
                 this.zoom--;
+                  console.log(this.zoom);
+                console.log(this.imagestyle);
             }
         },
         moveup(){
@@ -162,6 +174,9 @@ export default {
                     element.alt=this.alt;
                     this.imgarray.push(element);
                 });
+
+               
+
             }
         },
         
@@ -188,7 +203,8 @@ export default {
                
                clearInterval(this.handmoveinterval);
             }
-        }
+        },
+       
     },
     computed:{
         imagestyle(){
