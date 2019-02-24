@@ -77,7 +77,7 @@ export default {
     methods:{
         pinchout(){
             if (this.zoom < 9){
-
+                swal(this.imagestyle);
                 this.zoom++;
                 console.log(this.zoom);
                 console.log(this.imagestyle);
@@ -85,6 +85,7 @@ export default {
         },
         pinchin(){
             if (this.zoom > 0){
+                 swal(this.imagestyle);
                 this.zoom--;
                   console.log(this.zoom);
                 console.log(this.imagestyle);
@@ -202,6 +203,12 @@ export default {
                clearInterval(this.interval);
                
                clearInterval(this.handmoveinterval);
+
+               console.log(this.$refs.touchdiv);
+               console.log(this.$refs.touchdiv.isEnabled('swipe'));
+            /*    this.$refs.touchdiv.enable('pinchin');
+               this.$refs.touchdiv.enable('pinchout'); */
+
             }
         },
        
