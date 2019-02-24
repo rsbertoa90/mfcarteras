@@ -6,8 +6,10 @@
                 @press="touched=true" @panleft="panleft" 
                 @panright="panright" class="relative" >
           <div :id="'container'+variant_id" class="img-container">
-            <img :id="variant_id" :src="images[0].url" :alt="alt"
+            <div :style="imagestyle">
+                <img ref="imageref" :id="variant_id" :src="images[0].url" :alt="alt"
                 :style="imagestyle" >
+            </div>
           </div>
          
           <div class="overlay" v-if="!touched && $mq!='lg'">
@@ -52,7 +54,7 @@ export default {
             interval:null,
             handmoveinterval:null,
             softspininterval:null,
-            zoom:0,
+            zoom:1,
 
         }
     },
@@ -79,6 +81,7 @@ export default {
             if (this.zoom < 9){
         
                 this.zoom+=.1;
+                this.$refs.imageref.$el.style=this.imagestyle;
                
             }
         },
@@ -86,6 +89,7 @@ export default {
             if (this.zoom > 1){
                 
                 this.zoom-=.1;
+                this.$refs.imageref.$el.style=this.imagestyle;
                  
             }
         },
@@ -110,7 +114,8 @@ export default {
 
                 this.ralentizer = 0;
             }else{this.ralentizer++}
-         
+           
+             
         },
         panleft(){
             this.touched=true;
@@ -123,7 +128,8 @@ export default {
                 }
                 this.ralentizer=0;
             }else{this.ralentizer++}
-         
+           
+             
         },
         spin(dir){
             var vm=this;
@@ -162,6 +168,7 @@ export default {
             clearInterval(this.interval);
             clearInterval(this.handmoveinterval);
         },
+       
         preloadImages(){
             if (this.images)
             {
@@ -171,7 +178,7 @@ export default {
                     element.src = img.url;
                     element.id=this.variant_id;
                     element.alt=this.alt;
-                    element.setAttribute(':style',this.imagestyle);
+                    element.setAttribute('ref','imageref');
                     this.imgarray.push(element);
                 });
 
@@ -189,7 +196,10 @@ export default {
                 if(cont){
 
                     cont.removeChild(cont.childNodes[0]);
+                    this.imgarray[this.current].style=this.imagestyle;
                     cont.appendChild(this.imgarray[this.current]);
+
+                    
                 }
             }
         },
@@ -203,10 +213,6 @@ export default {
                
                clearInterval(this.handmoveinterval);
 
-               console.log(this.$refs.touchdiv);
-               console.log(this.$refs.touchdiv.isEnabled('swipe'));
-            /*    this.$refs.touchdiv.enable('pinchin');
-               this.$refs.touchdiv.enable('pinchout'); */
 
             }
         },
