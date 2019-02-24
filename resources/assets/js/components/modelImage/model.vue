@@ -78,14 +78,14 @@ export default {
         pinchout(){
             if (this.zoom < 9){
         
-                this.zoom++;
+                this.zoom+=.1;
                
             }
         },
         pinchin(){
-            if (this.zoom > 0){
+            if (this.zoom > 1){
                 
-                this.zoom--;
+                this.zoom-=.1;
                  
             }
         },
@@ -171,7 +171,7 @@ export default {
                     element.src = img.url;
                     element.id=this.variant_id;
                     element.alt=this.alt;
-                    element.style=this.imagestyle;
+                    element.setAttribute(':style',this.imagestyle);
                     this.imgarray.push(element);
                 });
 
@@ -214,7 +214,7 @@ export default {
     },
     computed:{
         imagestyle(){
-            return `transform: scale(1.${this.zoom});`;
+            return `transform: scale(${this.zoom});`;
         },
         handmove(){
             return `margin-left:${this.handmovemargin}%;` ;
