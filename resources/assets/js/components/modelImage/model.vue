@@ -1,6 +1,6 @@
 <template>
     <div  v-if="images && images.length > 0" @click="touched=true" >
-      <v-touch  @press="touched=true" @panleft="panleft" @panright="panright" class="relative" >
+      <v-touch @pandown="movedown" @panup="moveup"  @press="touched=true" @panleft="panleft" @panright="panright" class="relative" >
           <div :id="'container'+variant_id" class="img-container">
             <img :id="variant_id" :src="images[0].url" :alt="alt" >
           </div>
@@ -66,6 +66,15 @@ export default {
             });
     },
     methods:{
+        moveup(){
+            window.scrollY+=10;
+            window.scrollTo(window.scrollX,window.scrollY);
+             },
+        movedown(){
+            window.scrollY-=10;
+            window.scrollTo(window.scrollX,window.scrollY);
+            
+        },
         panright(){
             this.touched=true;
             if(this.ralentizer > 1){
