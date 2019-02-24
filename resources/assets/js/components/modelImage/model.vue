@@ -1,8 +1,9 @@
 <template>
     <div  v-if="images && images.length > 0" @click="touched=true" >
-      <v-touch @pandown="movedown" @panup="moveup"  @press="touched=true" @panleft="panleft" @panright="panright" class="relative" >
+      <v-touch @pinchout="pinchout" @pinchin="pinchin" @pandown="movedown" @panup="moveup"  @press="touched=true" @panleft="panleft" @panright="panright" class="relative" >
           <div :id="'container'+variant_id" class="img-container">
-            <img :id="variant_id" :src="images[0].url" :alt="alt" >
+            <img :id="variant_id" :src="images[0].url" :alt="alt"
+                :style="imagestyle" >
           </div>
          
           <div class="overlay" v-if="!touched && $mq!='lg'">
@@ -46,8 +47,8 @@ export default {
             handmovemargin:1,
             interval:null,
             handmoveinterval:null,
-            softspininterval:null
-         
+            softspininterval:null,
+            zoom:0,
 
         }
     },
@@ -66,6 +67,17 @@ export default {
             });
     },
     methods:{
+        pinchout(){
+            if (this.zoom < 9){
+
+                this.zoom++;
+            }
+        },
+        pinchin(){
+            if (this.zoom > 0){
+                this.zoom--;
+            }
+        },
         moveup(){
             window.scrollY+=10;
             window.scrollTo(window.scrollX,window.scrollY);
@@ -179,6 +191,9 @@ export default {
         }
     },
     computed:{
+        imagestyle(){
+            return `transform: scale(1.${this.zoom});`;
+        },
         handmove(){
             return `margin-left:${this.handmovemargin}%;` ;
         }
