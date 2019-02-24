@@ -187,23 +187,22 @@ export default {
             }
         },
         replacecurrent(){
-            cont.removeChild(cont.childNodes[0]);
-            this.imgarray[this.current].style=this.imagestyle;
-             cont.appendChild(this.imgarray[this.current]);
+            let container_id="container"+this.variant_id;
+            let cont = document.getElementById(container_id);
+            if(cont){
+                cont.removeChild(cont.childNodes[0]);
+                this.imgarray[this.current].style=this.imagestyle;
+                cont.appendChild(this.imgarray[this.current]);
+            }
         }
         
     },
     watch:{
         current(){
             if(this.images && this.images.length>0){
-                let container_id="container"+this.variant_id;
-                let cont = document.getElementById(container_id);
-                if(cont){
-
+                
                   this.replacecurrent();
 
-                    
-                }
             }
         },
         touched(){
