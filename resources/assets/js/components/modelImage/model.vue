@@ -77,18 +77,16 @@ export default {
     methods:{
         pinchout(){
             if (this.zoom < 9){
-                swal(this.imagestyle);
+        
                 this.zoom++;
-                console.log(this.zoom);
-                console.log(this.imagestyle);
+               
             }
         },
         pinchin(){
             if (this.zoom > 0){
-                 swal(this.imagestyle);
+                
                 this.zoom--;
-                  console.log(this.zoom);
-                console.log(this.imagestyle);
+                 
             }
         },
         moveup(){
@@ -173,6 +171,7 @@ export default {
                     element.src = img.url;
                     element.id=this.variant_id;
                     element.alt=this.alt;
+                    element.style=this.imagestyle;
                     this.imgarray.push(element);
                 });
 
