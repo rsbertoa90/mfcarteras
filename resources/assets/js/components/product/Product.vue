@@ -2,10 +2,20 @@
     <div v-if="product">
         
         <div class="row mt-1 mb-4" v-if="models.length>0">
+           
             <div class="col-12 d-flex justify-content-center w-100"
                 :class="{'flex-column':$mq!='lg'}">
-                <div v-for="model in models" :key="model" class="model-container ml-2 mr-2">
-                    <variant-model :alt="product.name" :id="'asd'+model" :key="'asd'+model" :variant_id="model"></variant-model>
+                <div class="d-flex ml-1" v-if="models && models.length>1">
+                    <div  v-for="model in models" 
+                            :key="model.name" class="square" 
+                            :style="{'background-color':model.color_code}"
+                            @click="selectedmodel=model.id">
+
+                    </div>
+                </div>
+                <div v-for="model in models" :key="model.id" class="model-container ml-2 mr-2">
+                    
+                    <variant-model v-if="selectedmodel==model.id" :alt="product.name" :id="'asd'+model.id" :key="'asd'+model" :variant_id="model.id"></variant-model>
                 </div>
             </div>
             
@@ -87,6 +97,7 @@ export default {
             selectedImage : 0,
             selectedVariant:null,
             product:null,
+           selectedmodel:0,
            
            
             
@@ -98,9 +109,12 @@ export default {
             if(this.product){
                 this.product.variants.forEach(variant=>{
                     if(variant.model_images && variant.model_images.length>1){
-                        res.push(variant.id);
+                        res.push(variant);
                     }
                 });
+                if (res.length>0){
+                    this.selectedmodel=res[0].id;
+                }
             }
             return res;
         },
@@ -185,4 +199,14 @@ export default {
         padding:10px;
         max-width: 500px;
     }
+
+    .square{
+    display: flex;
+    width: 20px;
+    height: 20px;
+    margin:5px;
+    padding:5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
 </style>

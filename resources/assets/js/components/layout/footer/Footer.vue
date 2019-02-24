@@ -56,6 +56,7 @@
                 </div>
             </div>
         </div>
+        <div class="row w-100" v-if="$mq!='lg'" style="height:50px"></div>
     </div>
 </template>
 
