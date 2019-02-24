@@ -78,18 +78,18 @@ export default {
     },
     methods:{
         pinchout(){
-            if (this.zoom < 9){
+            if (this.zoom < 2){
         
-                this.zoom+=.1;
-                this.$refs.imageref.$el.style=this.imagestyle;
+                this.zoom+=.01;
+                this.replacecurrent();
                
             }
         },
         pinchin(){
             if (this.zoom > 1){
                 
-                this.zoom-=.1;
-                this.$refs.imageref.$el.style=this.imagestyle;
+                this.zoom-=.01;
+               this.replacecurrent();
                  
             }
         },
@@ -186,6 +186,11 @@ export default {
 
             }
         },
+        replacecurrent(){
+            cont.removeChild(cont.childNodes[0]);
+            this.imgarray[this.current].style=this.imagestyle;
+             cont.appendChild(this.imgarray[this.current]);
+        }
         
     },
     watch:{
@@ -195,9 +200,7 @@ export default {
                 let cont = document.getElementById(container_id);
                 if(cont){
 
-                    cont.removeChild(cont.childNodes[0]);
-                    this.imgarray[this.current].style=this.imagestyle;
-                    cont.appendChild(this.imgarray[this.current]);
+                  this.replacecurrent();
 
                     
                 }
