@@ -1,11 +1,11 @@
 <template>
-<div>
+<div v-if="product">
     <div class="variants-clicker d-flex mt-4">
         <span v-for="variant in product.variants" :key="variant.id" 
               class="square" :style="{backgroundColor:variant.color_code}"
               @click="selectedVariant = variant"></span>
     </div>
-    <div v-if="product">
+    <a v-if="product" :href="product.slug">
         <div  class="image-container" v-if="selectedVariant && selectedVariant.images[0]" 
                 @mouseover="hovered=true" @mouseleave="hovered=false">
            <v-lazy-image class="image" :src="selectedVariant.images[0].url" :alt="product.name" />
@@ -30,7 +30,7 @@
         <div class="d-flex">
             <a :href="product.slug" class="btn btn-block btn-dark mt-2">VER MAS</a>
         </div>
-    </div>
+    </a>
 </div>
 </template>
 

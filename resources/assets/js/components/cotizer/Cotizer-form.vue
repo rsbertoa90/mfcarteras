@@ -34,8 +34,8 @@
        <br>
        <span class="warn">*Los precios no incluyen IVA</span>
         <div v-if="user.role_id > 2" class="col-12 row form-group-row mb-3">
-                    <span class=" warn" v-if="!formData.shipping">*El minimo de compra retirando en el local es de ${{minBuy}}</span>
-                    <span class=" warn" v-if="formData.shipping">*El minimo de compra para envios es de ${{minBuy}} </span>
+                    <span class=" warn" v-if="!formData.shipping">*El minimo de compra es de {{minBuy}} unidades</span>
+                    
         </div> 
 
              
@@ -133,11 +133,8 @@ export default{
     }},
     computed : {
         minBuy(){
-           if(this.user && this.user.role_id > 2)
-           {
-              return this.formData.shipping ? 4000 : 1500 ;
-           }
-           return 1;
+          
+           return 3;
         },
         user(){
             return this.$store.getters.getUser;
@@ -163,9 +160,9 @@ export default{
             {   
                 swal('No hay productos seleccionados','','error');
                 return false;
-            } else if (this.total < this.minBuy)
+            } else if (this.list.length < this.minBuy)
             {
-                swal('El minimo de compra es de $'+this.minBuy,'','error');
+                swal('El minimo de compra es de '+this.minBuy+' unidades','','error');
                 return false;
             } else {return true;}
         },

@@ -3,16 +3,16 @@
         
         <div class="row mt-1 mb-4" v-if="models.length>0">
            
-            <div class="col-12 d-flex justify-content-center w-100"
+            <div class="col-12 d-flex justify-content-center  align-items-center flex-column w-100"
                 :class="{'flex-column':$mq!='lg'}">
-                <div class="d-flex ml-1" v-if="models && models.length>1">
+                <div class="d-flex ml-1 w-100 justify-content-center" v-if="models && models.length>1">
                     <div  v-for="model in models" 
                             :key="model.name" class="square" 
                             :style="{'background-color':model.color_code}"
                             @click="selectedmodel=model.id">
 
                     </div>
-                </div>
+                </div> <br>
                 <div v-for="model in models" :key="model.id" class="model-container ml-2 mr-2">
                     
                     <variant-model v-if="selectedmodel==model.id" :alt="product.name" :id="'asd'+model.id" :key="'asd'+model" :variant_id="model.id"></variant-model>
