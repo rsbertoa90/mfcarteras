@@ -5,9 +5,9 @@
  
   <main>
       
-       <div style="width:100% ; text-align : center;">
-        <img src="{{$logo}}}" alt="Redlimp">
-        </div>
+       <div style="width:30% ;margin-left:35%; text-align : center;">
+            <img style="width:100% " src="{{$logo}}}" alt="MF carteras">
+       </div>
 
      
        {{-- <div class="breakNow"></div> --}}

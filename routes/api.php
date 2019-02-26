@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/model/{id}','ModelImageController@get');
 Route::get('/products','ProductController@getAll');
+Route::get('/products-not-paused','ProductController@getNotPaused');
 Route::get('/product/{id}','ProductController@get');
 Route::get('/categories','CategoryController@getAll');
 Route::get('/supercategories','SupercategoryController@getAll');

@@ -11,7 +11,9 @@ class PdfController extends Controller
 {
     public function prices()
     {
-        $products = Product::where('paused',0)->get();
+        $products = Product::where('paused',0)->whereHas('variants',function ($q){
+            $q->where('paused',0);
+        })->get();
         $today = Carbon::now()->format('d/m/Y');
         $logo = $this->imageEmbed(public_path('/storage/images/app/logo.png'));
         $pdf = PDF::loadView('pdf.ListaDePrecios', compact('products','today','logo'));

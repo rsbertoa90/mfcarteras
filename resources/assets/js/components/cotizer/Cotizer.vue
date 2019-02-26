@@ -105,7 +105,7 @@
         },
         computed: {
             ...mapGetters({
-                products : 'getProducts',
+                products : 'getProductsnotpaused',
                user : 'getUser',
                configs:'getConfig'
             }),

@@ -33,6 +33,16 @@ class ProductController extends Controller
     return Product::with('variants.images')->with('variants.product')->get();
   }
 
+   public function getNotPaused(){
+    return Product::where('paused',0)
+        ->with('variants.product')
+        ->with('variants.images')
+        ->whereHas('variants', function($q){
+            $q->where('paused',0);
+        })
+        ->get();
+  }
+
   public function get($id){
     return Product::with('variants.images')->with('variants.modelImages')->with('variants.product')->find($id);
   }

@@ -140,7 +140,8 @@ const app = new Vue({
             fetchUser : 'fetchUser',
             fetchConfig : 'fetchConfig',
             fetchStates : 'fetchStates',
-            fetchProducts: 'fetchProducts'
+            fetchProducts: 'fetchProducts',
+            fetchProductsnotpaused: 'fetchProductsnotpaused'
            
         }),
         
@@ -152,6 +153,7 @@ const app = new Vue({
         this.fetchConfig();
         this.fetchStates();
         this.fetchProducts();
+        this.fetchProductsnotpaused();
     }
 });
 

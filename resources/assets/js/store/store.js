@@ -9,6 +9,7 @@ export const store = new Vuex.Store({
         config : null,
         states:[],
         products:[],
+        productsnotpaused:[],
         
         
     },
@@ -16,6 +17,10 @@ export const store = new Vuex.Store({
         getProducts(store){
             return store.products;
         },
+        getProductsnotpaused(store){
+            return store.productsnotpaused;
+        },
+
        
         getUser(store){
             return store.user;
@@ -45,6 +50,9 @@ export const store = new Vuex.Store({
         setProducts(state,payload){
             state.products = payload;
         },
+        setProductsnotpaused(state,payload){
+            state.productsnotpaused = payload;
+        },
         setUser(state,payload){
             state.user = payload;
            
@@ -62,6 +70,12 @@ export const store = new Vuex.Store({
             Vue.http.get('/api/products')
                 .then(res => {
                     commit('setProducts',res.data);
+                });
+        },  
+        fetchProductsnotpaused : ({commit},payload) => {
+            Vue.http.get('/api/products-not-paused')
+                .then(res => {
+                    commit('setProductsnotpaused',res.data);
                 });
         },  
        fetchUser: ({
