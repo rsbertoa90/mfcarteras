@@ -15,7 +15,7 @@
                                         {{product.name.ucfirst()}}
                                     </span>
                                     <br>
-                                    <span v-if="!configs.hide_prices" class="ml-4">
+                                    <span v-if="!configs.hide_prices" class="ml-4 price-badge">
                                           ${{product.price}}
                                     </span>
                                    
@@ -126,6 +126,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+.price-badge{
+    background-color: #dc3545;
+    color:#fff;
+    padding:3px;
+    border-radius:10%;
+}
 
  .table,.accordion,.tr,.td,.kalam,.card{
     font-family:  'Kalam', cursive;
