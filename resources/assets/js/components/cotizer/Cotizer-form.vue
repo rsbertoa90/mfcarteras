@@ -34,7 +34,8 @@
        <br>
        <span class="warn">*Los precios no incluyen IVA</span>
         <div v-if="user.role_id > 2" class="col-12 row form-group-row mb-3">
-                    <span class=" warn" v-if="!formData.shipping">*El minimo de compra es de {{minBuy}} unidades</span>
+                    <span class=" warn" v-if="!formData.shipping">*El minimo de compra es de ${{minBuy}} </span>
+                    <span class=" warn" v-else>*El minimo de compra para envíos es de ${{minBuy}} </span>
                     
         </div> 
 
@@ -132,9 +133,16 @@ export default{
        
     }},
     computed : {
+        config(){
+            return this.$store.getters.getConfig;
+        },
         minBuy(){
-          
-           return 3;
+          if(this.config){
+              if (this.formData.shipping){
+                  return this.config.minbuy_ship;
+              }else {return this.config.minbuy;}
+          }
+        
         },
         user(){
             return this.$store.getters.getUser;
@@ -160,9 +168,9 @@ export default{
             {   
                 swal('No hay productos seleccionados','','error');
                 return false;
-            } else if (this.list.length < this.minBuy)
+            } else if (this.total < this.minBuy)
             {
-                swal('El minimo de compra es de '+this.minBuy+' unidades','','error');
+                swal('El minimo de compra es de $'+this.minBuy,'','error');
                 return false;
             } else {return true;}
         },

@@ -14,7 +14,7 @@
         
             <div class="col-10 offset-2 offset-lg-0 col-lg-4 icon-container">
                     <i class="icon fa fa-shopping-basket"></i>
-                    <span class="text-center">La compra mínima por local es de $1500, para envío de $3000</span>
+                    <span class="text-center" v-if="config">La compra mínima por local es de ${{config.minbuy}}, para envío de ${{config.minbuy_ship}}</span>
             </div>
         
             <div class="col-10 offset-2 offset-lg-0 col-lg-4 icon-container">
@@ -29,7 +29,11 @@
 
 <script>
 export default {
-    
+    computed:{
+        config(){
+            return this.$store.getters.getConfig;
+        }
+    }
 }
 </script>
 

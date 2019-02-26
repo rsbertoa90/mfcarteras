@@ -51,7 +51,7 @@ export default {
         this.$http.get('/api/metadatas')
             .then(response => {
                 this.metadatas = _.sortBy(response.data,'page');
-                console.log(this.metadatas);
+               
             });
     },
     methods :{
