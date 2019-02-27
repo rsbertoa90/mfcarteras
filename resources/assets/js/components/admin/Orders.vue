@@ -48,6 +48,7 @@
                     <thead>
                         <th>Fecha</th>
                         <th>Cliente</th>
+                        <th> - </th>
                     </thead>
                     <tbody>
                         <tr  v-for="order in filteredOrders" 
@@ -57,6 +58,7 @@
                                 :class="{'bg-info' : order == selected}">
                             <td>{{order.created_at | datetime}}</td>
                             <td>{{order.client}}</td>
+                            <td> <input type="checkbox" @click="toggleviewed(order)"  v-model.lazy="order.viewed" class="form-control"> </td>
                         </tr>
                     </tbody>
                 </table>
@@ -88,7 +90,14 @@ export default {
         }
     },
     methods : {
-       
+        toggleviewed(order){
+            let data = {
+                field: 'viewed',
+                value : order.viewed ? 1 : 0 ,
+                id: order.id
+            }
+            this.$http.put('/admin/order',data);
+        },
         statusChanged(event){
             this.status = event.status;
         },
