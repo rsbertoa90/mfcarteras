@@ -59,6 +59,10 @@ export default {
         add(){
            this.selectedvariant.units = this.qty;
            this.list.push(this.selectedvariant);
+
+           this.qty=0;
+
+           this.newitemcode = '';
         }
     }
    
