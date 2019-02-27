@@ -5,7 +5,7 @@
 
     <main>
          <div style="width:100% ; text-align : center; margin-bottom: 20px">
-            <img style="width: 120px" src="{{App\Config::base64('/storage/images/app/logo.png')}}" alt="Redlimp" />
+            <img style="width: 120px" src="{{App\Config::base64('/storage/images/app/logo.png')}}" alt="MF" />
         </div>
 
          @php
@@ -25,7 +25,7 @@
                 @foreach($order->orderItems as $op)
                 <tr>
                     <td> {{$op->variant->product->code}} </td>
-                    <td> {{$op->name}} </td>
+                    <td> {{$op->name}}  </td>
                     <td> ${{$op->price}} </td>
                     <td> {{$op->qty}} </td>
                     <td> ${{$op->qty * $op->price}} </td>
