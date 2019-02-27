@@ -11,6 +11,9 @@
                                    <div class="product-miniature" v-if="frontVariant && frontVariant.images[0]">
                                         <v-lazy-image :src="frontVariant.images[0].url"></v-lazy-image>
                                     </div>
+                                    <span v-if="user && user.role_id <= 2">
+                                       COD: {{product.code}} - 
+                                    </span>
                                     <span class="white-space-normal">
                                         {{product.name.ucfirst()}}
                                     </span>

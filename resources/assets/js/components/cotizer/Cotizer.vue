@@ -6,8 +6,12 @@
             <a href="/lista-de-precios" class="col-12 col-lg-6 btn btn-lg btn-outline-info kalam"> <span class="fas fa-download"></span> Descargar lista de precios</a>
         </div>
              
-            
-        
+          <div class="row d-flex flex-column" v-if="user && user.role_id <= 2">
+            <code-selector @listChange="listChange" :products="products" :list="list" v-if="user.role_id <= 2"></code-selector>
+             <div v-if="list.length > 0">
+                <pedido :list="list"></pedido>
+             </div>
+          </div>  
              
              <hr>
              
@@ -49,11 +53,12 @@
  import { mapActions } from 'vuex';
  import { mapGetters } from 'vuex';
     import cotizerProducttable from './CotizerProductTable.vue';
+    import codeSelector from './code-selector.vue';
     
     import pedido from './pedido.vue';
     import tutorial from './tutorial.vue'
     export default {
-        components : {pedido,tutorial,cotizerProducttable},
+        components : {pedido,tutorial,cotizerProducttable,codeSelector},
         data(){
             return {
                 selector:{
@@ -134,11 +139,15 @@
 
         methods:
         {
+            
              listChange(event){
+                 
                 let variant = this.list.find(vari => {
                     return vari.id == event.id;
                 });
-                variant.units = event.units;
+                if(variant){
+                    variant.units = event.units;
+                }
 
             },
              addSelectorvariant(){
