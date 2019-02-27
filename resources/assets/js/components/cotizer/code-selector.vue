@@ -60,7 +60,7 @@ export default {
            this.selectedvariant.units = this.qty;
            this.list.push(this.selectedvariant);
 
-           this.qty=0;
+           this.qty=1;
 
            this.newitemcode = '';
         }
