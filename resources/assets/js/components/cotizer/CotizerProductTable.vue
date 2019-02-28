@@ -8,19 +8,24 @@
                                 :data-target="'#acordion'+product.id" 
                                 aria-expanded="true" 
                                 :aria-controls="product.name">
-                                   <div class="product-miniature" v-if="frontVariant && frontVariant.images[0]">
-                                        <v-lazy-image :src="frontVariant.images[0].url"></v-lazy-image>
-                                    </div>
+
+                                <div class="product-miniature" v-if="frontVariant && frontVariant.images[0]">
+                                    <v-lazy-image :src="frontVariant.images[0].url"></v-lazy-image>
+                                </div>
+                                <div class="d-flex" :class="{'flex-column':$mq !='lg'}">
                                     <span v-if="user && user.role_id <= 2">
                                        COD: {{product.code}} - 
                                     </span>
+                                    
                                     <span class="white-space-normal">
                                         {{product.name.ucfirst()}}
                                     </span>
                                     <br>
-                                    <span v-if="!configs.hide_prices" class="ml-4 price-badge">
+                                    <span v-if="!configs.hide_prices" class="price-badge" 
+                                            :class="{'ml-3':$mq=='lg'}">
                                           ${{product.price}}
                                     </span>
+                                </div>
                                    
                         </button>
                     </h5>
