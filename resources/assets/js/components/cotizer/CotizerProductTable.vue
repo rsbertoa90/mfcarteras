@@ -10,7 +10,7 @@
                                 :aria-controls="product.name">
 
                                 <div class="product-miniature" v-if="frontVariant && frontVariant.images[0]">
-                                    <v-lazy-image :src="frontVariant.images[0].url"></v-lazy-image>
+                                    <v-lazy-image :src="frontVariant.images[0].url" class="product-image"></v-lazy-image>
                                 </div>
                                 <div class="d-flex" :class="{'flex-column':$mq !='lg'}">
                                     <span v-if="user && user.role_id <= 2">
@@ -184,6 +184,12 @@ export default {
     img{width:100%}
 
     @media(max-width: 600px){
+
+    .product-image{
+        width: 168px;
+    }
+
+
         .product-miniature{
     min-width: 100px;
 }
@@ -211,7 +217,13 @@ export default {
         table{ font-size: 1rem; font-weight: normal}
         td {white-space: normal;}
         .card-body,.container{padding:1.25rem}
+
         
+    .product-image{
+        width: 200px;
     }
+
+    }
+
    
 </style>
