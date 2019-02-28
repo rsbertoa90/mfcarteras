@@ -3,7 +3,7 @@
          <div class="card-header bg-white" :id="'card'+product.id">
                   
                     <h5 class="mb-0">
-                        <button class="btn bg-white  btn-link w-100 text-left text-big d-flex align-items-center w-100" 
+                        <button class="btn bg-white  btn-link w-100 text-left text-big d-flex align-items-center white-space-normal" 
                                 data-toggle="collapse" 
                                 :data-target="'#acordion'+product.id" 
                                 aria-expanded="true" 
