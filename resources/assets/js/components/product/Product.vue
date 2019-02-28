@@ -81,9 +81,9 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="row">
+        <div class="row">
             <related-products :category_id="product.category_id"></related-products>
-        </div> -->
+        </div>
     </div>
 </template>
 

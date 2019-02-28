@@ -4,25 +4,22 @@
   <hr>
   <h2 class="mb-4">Productos relacionados</h2>
       <!-- swiper -->
-      <swiper :options="swiperOption" v-if="render">
-        <swiper-slide  v-for="product in products" :key="product.id" v-if="!product.paused">
+      <swiper :options="swiperOption" v-if="render && filteredproducts" class="align-items-stretch">
+        <swiper-slide  v-for="product in filteredproducts" :key="product.id" >
             <div class="card" itemscope itemtype="https://schema.org/Product">
                 <div>
-                  <v-lazy-image v-if ="product.images[0]" class="card-img card-img-top" 
-                        :src="product.images[0].url"
+                  <v-lazy-image class="card-img card-img-top" 
+                        :src="product.variants[0].images[0].url"
                         :title="product.name"
                         itemprop="image" 
                         alt="Card image cap" />
-                  <v-lazy-image v-else src="/storage/images/app/no-photo.png" alt="no image" />
-                    <div v-if="product.offer" class="card-img-overlay">
-                      <span v-if="product.offer" class=" badge bg-focus white-bold"> Oferta! </span>
-                    </div>
+                    
                 </div>
                 <div class="card-body">
                     <h5 class="card-title" itemprop="name" style="height:60px"> {{product.name | ucFirst}}  </h5>
                     <h4 v-if="!$store.getters.getConfig.hide_prices" class="second">  
                       ${{product.price | price}} 
-                      <strike style="font-size:1rem"  v-if="product.offer && !$store.getters.getConfig.hide_prices" class="text-secondary"> ${{product.price * 1.67 | price}}</strike> 
+                      <strike style="font-size:1rem"  v-if="!$store.getters.getConfig.hide_prices" class="text-secondary"> ${{product.price * 1.67 | price}}</strike> 
                     </h4>
                    
                     <a :href="product.slug" style="cursor:pointer" class="btn btn-outline-second  white-bold mb-4 mt-1"> Ver mas</a>
@@ -63,18 +60,27 @@
     created(){
         if (this.$mq == 'lg')
         {
-            this.swiperOption.slidesPerView = 4;
+            this.swiperOption.slidesPerView = 6;
         } else{
-            this.swiperOption.slidesPerView = 1.5;
+            this.swiperOption.slidesPerView = 2.5;
         }
         this.render=true;
     },
     computed:{
-        category(){
-            return this.$store.getters['categories/getCategory'](this.category_id);
-        },
         products(){
-            return this.category.products;
+            return this.$store.getters.getProducts;
+        },
+        filteredproducts(){
+          if (this.products){
+            return this.products.filter(prod =>  {
+              return (!prod.paused 
+                      && prod.variants 
+                      && prod.variants[0]
+                      && prod.variants[0].images
+                      && prod.variants[0].images[0]
+                      );
+            });
+          }
         }
     },
     methods: {
