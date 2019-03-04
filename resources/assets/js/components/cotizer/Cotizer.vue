@@ -5,6 +5,9 @@
             <h1 class="col-12 col-lg-6 text-center kalam" v-else>Tomar pedido</h1>
             <a href="/lista-de-precios" class="col-12 col-lg-6 btn btn-lg btn-outline-info kalam"> <span class="fas fa-download"></span> Descargar lista de precios</a>
         </div>
+        <div class="row">
+            <home-info></home-info>
+        </div>
              
           <div class="row d-flex flex-column" v-if="user && user.role_id <= 2">
             <code-selector @listChange="listChange" :products="products" :list="list" v-if="user.role_id <= 2"></code-selector>
@@ -54,11 +57,12 @@
  import { mapGetters } from 'vuex';
     import cotizerProducttable from './CotizerProductTable.vue';
     import codeSelector from './code-selector.vue';
+    import homeInfo from '../home/info.vue';
     
     import pedido from './pedido.vue';
     import tutorial from './tutorial.vue'
     export default {
-        components : {pedido,tutorial,cotizerProducttable,codeSelector},
+        components : {homeInfo,pedido,tutorial,cotizerProducttable,codeSelector},
         data(){
             return {
                 selector:{
