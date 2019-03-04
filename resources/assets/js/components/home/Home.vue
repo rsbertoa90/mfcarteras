@@ -1,7 +1,10 @@
 <template>
     <div>
-          <!--   <home-banner></home-banner> -->
+          
             <br>
+            <home-title></home-title>
+            <br>
+            <home-info></home-info>
             <br>
            <home-products></home-products>
 
@@ -9,14 +12,15 @@
 </template>
 
 <script>
-import homeBanner from './banner.vue'
+
 import homeInfo from './info.vue'
-import homeOffers from './offers.vue'
 import homeProducts from './products.vue'
+import homeTitle from './title.vue'
 export default {
     components: {
-        homeBanner,
+        homeInfo,
         homeProducts,
+        homeTitle
         
         
     }

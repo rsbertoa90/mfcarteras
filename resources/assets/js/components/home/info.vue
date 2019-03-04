@@ -1,30 +1,24 @@
 <template>
-    <div class="row mt-4">
-        <div class="col-12 text-center">
-            <h2>
-                SOMOS UN MAYORISTA DE PRODUCTOS DE LIMPIEZA Y BAZAR
-            </h2>
-        </div>
         <div class="col-12 row d-flex mt-3">
            
             <div class="col-10 offset-2 offset-lg-0 col-lg-4 icon-container">
-                    <span class="icon fa fa-truck mr-2"></span>
-                    <span class="text-center">Realizamos envíos a toda Argentina</span>
+                    <i class="icon fas fa-chart-line"></i>
+                    <span class="text-center">Aumenta tus ingresos con nuestros productos</span>
             </div>
         
             <div class="col-10 offset-2 offset-lg-0 col-lg-4 icon-container">
-                    <i class="icon fa fa-shopping-basket"></i>
-                    <span class="text-center" v-if="config">La compra mínima por local es de ${{config.minbuy}}, para envío de ${{config.minbuy_ship}}</span>
+                    <i class="fas fa-dollar-sign"></i>
+                    <span class="text-center" v-if="config">Inversion minima: Por local ${{config.minbuy}} / Envio ${{config.minbuy_ship}}</span>
             </div>
         
             <div class="col-10 offset-2 offset-lg-0 col-lg-4 icon-container">
-                    <i class="icon fa fa-comment"></i>
-                    <span class="text-center">Preguntas? contactanos al <br> 15 6963 5896</span>
+                    <i class="icon fas fa-truck"></i>
+                    <span class="text-center">Envío a todo el país</span>
             </div>
     
 
         </div>
-    </div>
+
 </template>
 
 <script>
@@ -38,7 +32,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
- $color-first : #1102FF;
+ 
 
       .fa,.far,.fas{
         font-size: 40px;
@@ -49,16 +43,16 @@ export default {
         display: flex;
         padding: 15px;
         align-items:center;
-    
+        font-size:1.5rem;
     }
 
 
    .icon{
         padding: 10px;
-        background-color: $color-first;
+       
         display:flex;
         align-items:center;
         justify-content: center;
-        color:#fff;
+       
     }
 </style>
