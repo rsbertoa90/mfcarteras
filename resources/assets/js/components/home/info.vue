@@ -42,7 +42,7 @@ export default {
     .icon-container{
         display: flex;
         padding: 15px;
-        align-items:center;
+        align-items:flex-start;
         font-size:1.5rem;
     }
 
@@ -54,5 +54,12 @@ export default {
         align-items:center;
         justify-content: center;
        
+    }
+
+    @media(max-width:600px){
+         .icon-container{
+             font-size:1.25rem;
+         }
+
     }
 </style>
