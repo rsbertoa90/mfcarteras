@@ -19,7 +19,7 @@
         </div>
         <div class="d-flex justify-content-between">
             <span> {{product.name}} </span>
-            <div v-if="!config.hide_prices">
+            <div v-if="config && !config.hide_prices">
                 <span> ${{product.price |price}} </span>
                 <strike class="ml-2 text-secondary"> ${{product.price*1.25 |price}} </strike>
             </div>
