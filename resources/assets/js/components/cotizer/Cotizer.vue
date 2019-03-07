@@ -19,10 +19,10 @@
              <hr>
              
         <div id="accordion">
-            <div v-for="product in notPausedProducts" 
+            <div v-for="(product,i) in notPausedProducts" 
                   :key="'product-'+product.id" 
                   class="card flex-wrap" >
-               <cotizer-producttable :product="product"></cotizer-producttable>
+               <cotizer-producttable :product="product" :first="i == 0"></cotizer-producttable>
             </div>
         </div>
         

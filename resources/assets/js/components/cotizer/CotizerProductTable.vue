@@ -30,7 +30,9 @@
                         </button>
                     </h5>
                 </div>
-                <div :id="'acordion'+product.id" class="collapse collapsed " aria-labelledby="headingOne" data-parent="#accordion">
+                <div :id="'acordion'+product.id" class="collapse collapsed"
+                    :class="{'show':first}" 
+                        aria-labelledby="headingOne" data-parent="#accordion">
                     <div class="card-body">
                        <table class="table table-bordered border-black bg-white font-weight-bold ">
                            <thead class="">
@@ -88,7 +90,7 @@
  import { mapGetters } from 'vuex';
  import carousel from './Img-modal.vue';
 export default {
-    props:['product'],
+    props:['product','first'],
     components:{carousel},
     data(){
         return{

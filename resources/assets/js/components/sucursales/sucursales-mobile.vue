@@ -15,9 +15,8 @@
                 <div id="" class="" aria-labelledby="headingOne" >
                     <div class="card-body row">
                        <div class="col-12">
-                          <iframe title="MF Pasteur" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.998628875948!2d-58.40179358477038!3d-34.60419618045944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf355d9f72cc6a37!2sMates+Fabi!5e0!3m2!1ses!2sar!4v1538754534548" 
-                                width="100%" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
-                       </div>
+                           <map-iframe></map-iframe>
+                         </div>
                        <div class="col-12">
                             <ul>
                                 <li> <b> Dirección: </b> Pasteur 410 </li>
@@ -36,7 +35,12 @@
     </div>
 </template>
 
-
+<script>
+import mapIframe from './iframe.vue';
+export default {
+    components:{mapIframe}
+}
+</script>
 
 <style scoped lang="scss">
 // violeta oscuro es b2037a
