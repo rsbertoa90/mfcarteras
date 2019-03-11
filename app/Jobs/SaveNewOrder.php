@@ -58,14 +58,14 @@ class SaveNewOrder implements ShouldQueue
             OrderItem::create([
                 'order_id'=>$order->id,
                 'variant_id' => $item->id,
-                'code'=>$item->product->code,
+                'code'=>$item->code,
                 'name'=>$item->product->name.' - '.$item->name,
                 'price'=>$item->product->price,
                 'qty'=>$item->units,
             ]);
         }
 
-       if($order->mail){
+       if($order->email){
            MailController::mailOrderToClient($order);
         }
     }

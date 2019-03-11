@@ -1,109 +1,118 @@
 <template>
 <div>
     <table class="table table-striped table-bordered ">
-                                        <tr>
+            <tr>
 
-                                            <td >
-                                                <img v-if="frontvariant && frontvariant.images[0]" 
-                                                    :src="frontvariant.images[0].url" 
-                                                    :alt="product.name" >  
-                                                <img v-else src="/storage/images/app/no-image.png" 
-                                                    alt="no-image"> 
-                                            </td>
-                                            <td>  
-                                               COD: <input v-model.lazy="product.code" @change="saveChange('code')" type="text" class="nametd"> 
-                                            </td>
-                                            <td>  
-                                                <textarea rows="2" placeholder="Nombre" v-model.lazy="product.name" @change="saveChange('name')" type="text"> </textarea> 
-                                                <textarea placeholder="Descripcion" v-model="product.description" @change="saveChange('description')" rows="3"></textarea>
-                                                <input type="text" placeholder="Medidas" v-model="product.messures" @change="saveChange('messures')" />
-                                            </td>
-                                            
-                                            <td class="text-info text-center"> 
-                                                $<input style="width:80%" type="number" v-model.lazy="product.price" @change="saveChange('price')"> 
-                                                <button class="btn btn-block mt-3" :class="{'bg-focus white-bold':product.offer}" @click="toggleOffer(product)">Oferta</button>
-                                            </td>                
-                                            <td class="d-flex flex-column justify-content-center align-items-center">
-                                                <input type="checkbox" class="form-control" v-model="product.selected">
-                                                <button @click.prevent="deleteProduct(product)" class="btn btn-sm btn-outline-danger m-1">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                                <button @click.prevent="togglePause(product)" class="btn btn-sm m-1" :class="{'btn-info' : !product.paused, 'btn-success': product.paused}">
-                                                    <i :class="{'fa fa-pause-circle' : !product.paused , 'fa fa-play' : product.paused}"></i>
-                                                </button>
-                                                
-                                            </td>
-                                        </tr>
+                <td >
+                    <img v-if="frontvariant && frontvariant.images[0]" 
+                        :src="frontvariant.images[0].url" 
+                        :alt="product.name" >  
+                    <img v-else src="/storage/images/app/no-image.png" 
+                        alt="no-image"> 
+                </td>
+                <td>  
+                    COD: <input v-model.lazy="product.code" @change="saveChange('code')" type="text" class="nametd"> 
+                </td>
+                <td>  
+                    <textarea rows="2" placeholder="Nombre" v-model.lazy="product.name" @change="saveChange('name')" type="text"> </textarea> 
+                    <textarea placeholder="Descripcion" v-model="product.description" @change="saveChange('description')" rows="3"></textarea>
+                    <input type="text" placeholder="Medidas" v-model="product.messures" @change="saveChange('messures')" />
+                </td>
+                
+                <td class="text-info text-center"> 
+                    $<input style="width:80%" type="number" v-model.lazy="product.price" @change="saveChange('price')"> 
+                    <button class="btn btn-block mt-3" :class="{'bg-focus white-bold':product.offer}" @click="toggleOffer(product)">Oferta</button>
+                </td>                
+                <td class="d-flex flex-column justify-content-center align-items-center">
+                    <input type="checkbox" class="form-control" v-model="product.selected">
+                    <button @click.prevent="deleteProduct(product)" class="btn btn-sm btn-outline-danger m-1">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                    <button @click.prevent="togglePause(product)" class="btn btn-sm m-1" :class="{'btn-info' : !product.paused, 'btn-success': product.paused}">
+                        <i :class="{'fa fa-pause-circle' : !product.paused , 'fa fa-play' : product.paused}"></i>
+                    </button>
+                    
+                </td>
+            </tr>
 
-                                        <tr v-if="product.variants && product.variants.length > 0"
-                                            v-for="variant in product.variants" :key="variant.id">
-                                            <td></td>
+            <tr v-if="product.variants && product.variants.length > 0"
+                v-for="variant in product.variants" :key="variant.id">
+                <td></td>
 
-                                            <td v-if="variant.images && variant.images.length > 0" >
-                                                <img :src="variant.images[0].url" :alt="variant.name"  @click="variantImgModal(variant)">
-                                            </td>
-                                            <td v-else>
-                                                <img src="/storage/images/app/no-image.png" :alt="variant.name"  @click="variantImgModal(variant)">
-                                            </td>
-                                            <td>
-                                                <input type="text" v-model.lazy="variant.name" placeholder="nombre" @change="saveVariantChange(variant,'name')">
-                                                <br>
-                                                <textarea class="mt-1" placeholder="descripcion" type="text" v-model="variant.description" @change="saveVariantChange(variant,'description')" />
-                                            </td>
-                                            <td>
-                                                 <input type="text" placeholder="#fff" v-model.lazy="variant.color_code"
-                                                        @change="saveVariantChange(variant,'color_code')">
-                                                     <span class="square ml-2" 
-                                                            :style="{backgroundColor:variant.color_code}">
-                                                     </span>
-                                            </td>
-                                             <td class="d-flex flex-column justify-content-center align-items-center">
-                                               
-                                                <button @click.prevent="deleteVariant(variant)" class="btn btn-sm btn-outline-danger m-1">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                                 <button @click.prevent="toggleVariantPause(variant)" 
-                                                         class="btn btn-sm m-1" :class="{'btn-info' : !variant.paused,
-                                                                                         'btn-success': variant.paused}">
-                                                    <i :class="{'fa fa-pause-circle' : !variant.paused , 
-                                                                'fa fa-play' : variant.paused}"></i>
-                                                </button>
-                                                
-                                                <button @click="toggleVariantIsfront(variant)" class="btn btn-sm m-1" :class="{'btn-secondary' : !variant.isfront,
-                                                                                         'btn-success': variant.isfront}"  >
-                                                        <i class="fas fa-portrait"></i>
-                                                </button>
-                                                
-                                            </td>
-                                            
-                                        </tr>
+                <td v-if="variant.images && variant.images.length > 0" >
+                    <img :src="variant.images[0].url" :alt="variant.name"  @click="variantImgModal(variant)">
+                </td>
+                <td v-else>
+                    <img src="/storage/images/app/no-image.png" :alt="variant.name"  @click="variantImgModal(variant)">
+                </td>
+                
+               
+                <td>
+                    <input type="text" v-model.lazy="variant.code" placeholder="Codigo" @change="saveVariantChange(variant,'code')">
+                    <br>
+                    <input type="text" v-model.lazy="variant.name" placeholder="nombre" @change="saveVariantChange(variant,'name')">
+                    <br>
+                    <textarea class="mt-1" placeholder="descripcion" type="text" v-model="variant.description" @change="saveVariantChange(variant,'description')" />
+                </td>
+                <td>
+                        <input type="text" placeholder="#fff" v-model.lazy="variant.color_code"
+                            @change="saveVariantChange(variant,'color_code')">
+                            <span class="square ml-2" 
+                                :style="{backgroundColor:variant.color_code}">
+                            </span>
+                </td>
+                    <td class="d-flex flex-column justify-content-center align-items-center">
+                    
+                    <button @click.prevent="deleteVariant(variant)" class="btn btn-sm btn-outline-danger m-1">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                        <button @click.prevent="toggleVariantPause(variant)" 
+                                class="btn btn-sm m-1" :class="{'btn-info' : !variant.paused,
+                                                                'btn-success': variant.paused}">
+                        <i :class="{'fa fa-pause-circle' : !variant.paused , 
+                                    'fa fa-play' : variant.paused}"></i>
+                    </button>
+                    
+                    <button @click="toggleVariantIsfront(variant)" class="btn btn-sm m-1" :class="{'btn-secondary' : !variant.isfront,
+                                                                'btn-success': variant.isfront}"  >
+                            <i class="fas fa-portrait"></i>
+                    </button>
+                    
+                </td>
+                
+            </tr>
 
-                                        <tr>
-                                            
-                                            <td>
-                                                <b>
-                                                    Nueva Variacion
-                                                </b>
-                                            </td>
-                                            <td>
-                                                Nombre 
-                                                <br>
-                                                <input type="text" v-model.lazy="newvariant.name">
-                                            </td>
-                                            <td>
-                                                Descripcion <textarea type="text" v-model.lazy="newvariant.description"/>                                            </td>
-                                            </td>
-                                            <td>
-                                                Codigo color <input placeholder="#fff" type="text" v-model.lazy="newvariant.color_code"/>
-                                                <span class="square" :style="{backgroundColor:newvariant.color_code}"></span>                                            </td>
-                                            </td>
-                                            <td>
-                                                <button @click="saveNewvariant(product.id)" class="btn btn-outline-success mt-1">Guardar</button>
-                                            </td>
-                                            
-                                            
-                                        </tr>
-                                </table>
+            <tr>
+                
+                <td>
+                    <b>
+                        Nueva Variacion
+                    </b>
+                </td>
+                <td>
+                    Codigo
+                    <br>
+                    <input type="text" v-model.lazy="newvariant.code">
+                </td>
+                <td>
+                    Nombre 
+                    <br>
+                    <input type="text" v-model.lazy="newvariant.name">
+                </td>
+                <td>
+                    Descripcion <textarea type="text" v-model.lazy="newvariant.description"/>                                            </td>
+                </td>
+                <td>
+                    Codigo color <input placeholder="#fff" type="text" v-model.lazy="newvariant.color_code"/>
+                    <span class="square" :style="{backgroundColor:newvariant.color_code}"></span>                                            </td>
+                </td>
+                <td>
+                    <button @click="saveNewvariant(product.id)" class="btn btn-outline-success mt-1">Guardar</button>
+                </td>
+                
+                
+            </tr>
+    </table>
             <variantimage-modal :variant="variant"  ref="variantModal" @refresh="refresh()" />
          
         </div>
@@ -118,6 +127,7 @@ export default {
     data(){return{
         variant:null,
          newvariant:{
+                    code:'',
                     description:'',
                     name: '',
                     color_code:'',
@@ -209,7 +219,8 @@ export default {
 
                 this.$http.post('/admin/variant',data)
                     .then(res => {
-                        this.newvariant = {
+                        vm.newvariant = {
+                            code:'',
                             name:'',
                             color:'000',
                             product_id:0

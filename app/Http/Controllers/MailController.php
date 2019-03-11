@@ -87,6 +87,7 @@ class MailController extends Controller
     public static function mailOrderToClient($order)
     {
         Mail::to($order->email)
+            ->cc('roominagii@gmail.com')
             ->send(new Cotizacion($order));
     }
 }

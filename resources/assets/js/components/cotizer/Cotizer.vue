@@ -81,11 +81,11 @@
             'selector.code'(){
                 var  vm = this;
                 var res =false;
-                this.products.forEach(cat => {
-                    cat.variants.forEach(prod => {
-                        if (vm.selector.code == prod.code){
-                            vm.selector.variant = prod;
-                            vm.selector.name = prod.name;
+                this.products.forEach(prod => {
+                    prod.variants.forEach(variant => {
+                        if (vm.selector.code == variant.code){
+                            vm.selector.variant = variant;
+                            vm.selector.name = variant.name;
                             res = true;
                         }
                     });

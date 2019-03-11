@@ -11,7 +11,7 @@
             </thead>
             <tbody>
                 <tr v-for="variant in list" :key="variant.id">
-                    <td> {{variant.product.code}} </td>
+                    <td> {{variant.code}} </td>
                     <td> {{variant.product.name}} - {{variant.name}} </td>
                     <td>  <input type="number" class="form-control" style="width:100px" 
                                 v-model.lazy="variant.units" > </td>

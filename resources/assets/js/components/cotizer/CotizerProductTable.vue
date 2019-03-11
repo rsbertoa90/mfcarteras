@@ -13,10 +13,7 @@
                                     <v-lazy-image :src="frontVariant.images[0].url" class="product-image"></v-lazy-image>
                                 </div>
                                 <div class="d-flex" :class="{'flex-column':$mq !='lg'}">
-                                    <span v-if="user && user.role_id <= 2">
-                                       COD: {{product.code}} - 
-                                    </span>
-                                    
+                                   
                                     <span class="white-space-normal">
                                         {{product.name.ucfirst()}}
                                     </span>
@@ -36,7 +33,7 @@
                     <div class="card-body">
                        <table class="table table-bordered border-black bg-white font-weight-bold ">
                            <thead class="">
-                               <th></th>
+                               <th>  </th>
                                <th>Foto</th>
                                <th>Color</th>
                                <th>Quiero</th>
@@ -44,8 +41,10 @@
                                
                            </thead>
                            <tbody>
-                               <tr v-for="variant in product.variants" :key="variant.id" v-if="!variant.paused">
-                                   <td></td>
+                               <tr v-for="variant in product.variants" :key="variant.id" >
+                                   <td> 
+                                       
+                                   </td>
                                    <td @click="show(variant)" >
                                         <v-lazy-image v-if="variant.images.length > 0" 
                                             class="sampleImage" :src="variant.images[0].url" 
@@ -54,6 +53,11 @@
                                             alt="Sin foto" />
                                     </td>
                                    <td style="cursor:pointer" @click="show(variant)"> 
+                                        <span v-if="variant.code && user && user.role_id <= 2">
+                                           COD: {{variant.code}}  
+                                        </span>
+                                        <br v-if="variant.code && user && user.role_id <= 2">
+
                                        <span style="font-size: 1.3rem">
 
                                         {{product.name}} - {{variant.name | ucFirst}} 
@@ -100,7 +104,7 @@ export default {
     },
      computed: {
             ...mapGetters({
-                products : 'getProducts',
+                products : 'getProductsnotpaused',
                user : 'getUser',
                configs:'getConfig'
             }),
