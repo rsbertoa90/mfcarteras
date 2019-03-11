@@ -58,7 +58,7 @@
                                 :class="{'bg-info' : order == selected}">
                             <td>{{order.created_at | datetime}}</td>
                             <td>{{order.client}}</td>
-                            <td> <input type="checkbox" @click="toggleviewed(order)"  v-model.lazy="order.viewed" class="form-control"> </td>
+                            <td> <input type="checkbox" @click="toggleviewed(order)"  v-model.lazy="order.viewed" class="form-control checkbox"> </td>
                         </tr>
                     </tbody>
                 </table>
@@ -138,6 +138,11 @@ export default {
 <style>
     .cursor-pointer {
         cursor: pointer;
+    }
+
+    .checkbox{
+        width:30px;
+        height: 30px;
     }
    
 </style>
