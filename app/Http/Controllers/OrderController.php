@@ -51,11 +51,7 @@ class OrderController extends Controller
         $data = $request->except('list');
         $list = $request->list;
 
-        if (Auth::check())
-        {
-            $user = Auth::user();
-            $data['user_id'] = $user->id;
-        }
+       
 
         Queue::push(new SaveNewOrder($data,$list));
 
@@ -75,7 +71,7 @@ class OrderController extends Controller
     {
         
        
-            $orders = Order::with('orderItems.variant.product')->get();
+           $orders = Order::with('orderItems.variant.product')->get();
         
            return $orders;             
                         
