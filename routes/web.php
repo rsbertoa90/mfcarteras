@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/testear/{id}','HomeController@test');
+Route::get('/test','HomeController@test');
 
 
 Auth::routes();
