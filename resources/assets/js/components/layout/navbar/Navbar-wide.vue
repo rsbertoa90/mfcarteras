@@ -28,7 +28,7 @@
                 </a>
             </div>
 
-             <div class="col-4 offset-1">
+             <div class="col-4 offset-1 input-group w-50">
                 <form class="form-inline" action="/buscar">
                     <div class="input-group w-100">
                         <input type="text" class="form-control" 
