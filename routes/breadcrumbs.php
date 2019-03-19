@@ -19,14 +19,14 @@ Breadcrumbs::for('contacto', function ($trail) {
 // Home > cotizador
 Breadcrumbs::for('cotizador', function ($trail) {
     $trail->parent('home');
-    $trail->push('cotizador', '/cotizador');
+    $trail->push('Cotizador', '/cotizador');
 });
 
 
 // Home > sucursales
 Breadcrumbs::for('sucursales', function ($trail) {
     $trail->parent('home');
-    $trail->push('sucursales', '/sucursales');
+    $trail->push('Sucursales', '/sucursales');
 });
 
 
