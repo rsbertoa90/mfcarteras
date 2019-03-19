@@ -1,11 +1,11 @@
 <template>
 <div v-if="product">
    
-    <div v-if="product" >
+    <div v-if="product" class="product-card" >
+        
         <div class="d-flex justify-content-center text-center">
             <span class="text-center title"> {{product.name}} </span>
         </div>
-        
         <div  class="image-container" v-if="selectedVariant" 
                 @mouseover="hovered=true" @mouseleave="hovered=false">
            <v-lazy-image v-if="selectedVariant.images[0]" class="image" :src="selectedVariant.images[0].url" :alt="product.name" />
@@ -86,10 +86,15 @@ export default {
 <style lang="scss" scoped>
 
 
+.product-card{
+         border:1px solid #ccc; 
+        padding:15px;
+}
+
  .image-container{
         overflow: hidden;
         position:relative;
-        border:1px solid #ccc;
+      /*   border:1px solid #ccc; */
         padding:15px;
         cursor: pointer;
     }
