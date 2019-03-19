@@ -23,7 +23,7 @@
         </div>
          <div class="variants-clicker d-flex mt-1">
             <span v-for="variant in product.variants" :key="variant.id" 
-                class="square" :style="{backgroundColor:variant.color_code}"
+                class="square" :class="{'selected-square': selectedVariant.id == variant.id}"  :style="{backgroundColor:variant.color_code}"
                 @click="selectedVariant = variant"></span>
         </div>
         <span v-if="product.messures" class="text-secondary">Medidas: {{product.messures}} </span>
@@ -155,7 +155,9 @@ export default {
     border: 1px solid #ccc;
     cursor: pointer;
 }
-
+.selected-square{
+    border:2px solid blue;
+}
 
    
 

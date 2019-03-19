@@ -28,12 +28,12 @@
         
         <transition enter-active-class="animated bounceIn" leave-active-class="animated fadeOutDown">
             <div v-if="total > 0" id="total"  class="col-12 row d-flex flex-column justify-content-center align-items-center w-100">
-                <div  class="bg-success p-1 col-6 col-lg-2">
+                <div  class="total-bg p-1 col-6 col-lg-2">
                     <div class="col-12 bg-white d-flex justify-content-center">
                     TOTAL : ${{total | price}}
                     </div>
                 </div>
-                <div  class="bg-success p-1 col-6 col-lg-2">
+                <div  class="total-bg p-1 col-6 col-lg-2">
                     <div class="col-12 bg-white d-flex justify-content-center">
                         <a href="#form">Terminar pedido</a>
                     </div>
@@ -177,6 +177,7 @@
 
 <style scoped lang="scss">
 
+  
  .table,.accordion,.tr,.td,.kalam,.card{
     font-family:  'Kalam', cursive;
 }
@@ -214,11 +215,18 @@
         position: fixed;
         /* margin-left:50vw; */
         bottom: 20px;
-        z-index: 100;
+        z-index: 200;
     }
     img{width:100%}
 
+    .total-bg{
+        background-color: #0FE0E8;
+    }
+
+
     @media(max-width: 600px){
+
+    
         .product-miniature{
     min-width: 100px;
 }
@@ -246,7 +254,9 @@
         table{ font-size: 1rem; font-weight: normal}
         td {white-space: normal;}
         .card-body,.container{padding:1.25rem}
-        
+        .total-bg{
+            font-size: 1.3rem;
+        }
     }
    
 </style>

@@ -14,7 +14,7 @@
 
     .floating{
         position: fixed;
-        z-index:500;
+        z-index:150;
         bottom:10px;
         right:10px;
         display:flex;
