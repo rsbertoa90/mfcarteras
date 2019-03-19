@@ -48,7 +48,7 @@
             <div class="col-12 col-lg-4 row">
                 <div class="col-2 offset-1  ">
                     <div class="mt-2 btn ">
-                        <span class="fa fa-whatsapp"></span>
+                       <i class="fab fa-whatsapp"></i>
                     </div>
                 </div>
                 <div class="col-9 mt-3">
