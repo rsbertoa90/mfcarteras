@@ -21,7 +21,7 @@
         <div class="row">
             <div v-for="(product,i) in notPausedProducts" 
                   :key="'product-'+product.id" 
-                  class="card flex-wrap col-12 col-lg-4 p-lg-4" >
+                  class=" flex-wrap col-12 col-lg-4 p-lg-4" >
                <cotizer-productcard :product="product" :first="i == 0"></cotizer-productcard>
             </div>
         </div>

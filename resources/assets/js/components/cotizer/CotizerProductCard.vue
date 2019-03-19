@@ -5,11 +5,7 @@
         <div class="d-flex justify-content-center text-center">
             <span class="text-center title"> {{product.name}} </span>
         </div>
-         <div class="variants-clicker d-flex mt-4">
-            <span v-for="variant in product.variants" :key="variant.id" 
-                class="square" :style="{backgroundColor:variant.color_code}"
-                @click="selectedVariant = variant"></span>
-        </div>
+        
         <div  class="image-container" v-if="selectedVariant" 
                 @mouseover="hovered=true" @mouseleave="hovered=false">
            <v-lazy-image v-if="selectedVariant.images[0]" class="image" :src="selectedVariant.images[0].url" :alt="product.name" />
@@ -25,12 +21,16 @@
             </div>
                      
         </div>
-        
+         <div class="variants-clicker d-flex mt-1">
+            <span v-for="variant in product.variants" :key="variant.id" 
+                class="square" :style="{backgroundColor:variant.color_code}"
+                @click="selectedVariant = variant"></span>
+        </div>
         <span v-if="product.messures" class="text-secondary">Medidas: {{product.messures}} </span>
         <span v-else class="text-secondary">Medidas no disponibles</span>
         <div v-if="selectedVariant" class="row">
             <label class="col-4 quiero">Quiero</label>
-            <input type="number" min="0" class="form-control col-8 " v-model="selectedVariant.units">
+            <input type="number" min="0" class="form-control col-7 quiero-input " v-model="selectedVariant.units">
         </div>
       
     </div>
@@ -97,6 +97,10 @@ export default {
 .quiero{
     font-size:1.3rem;
     font-weight: bold;
+}
+
+.quiero-input{
+    border:1px solid #000;
 }
 
 .price-overlay{

@@ -49,4 +49,9 @@ export default {
     .table{
         font-size:0.8rem;
     }
+
+    @media(min-width:600px)
+    {
+        .table{font-size:2rem;}
+    }
 </style>
