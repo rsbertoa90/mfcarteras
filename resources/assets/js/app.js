@@ -49,7 +49,6 @@ Vue.use(VueTouch);
 
 Vue.component('fade-loader', require('vue-spinner/src/FadeLoader.vue'));
 Vue.component('app-proximamente', require('./components/proximamente.vue'));
-Vue.component('app-cotizer-test', require('./components/cotizer/Cotizer-test.vue'));
 Vue.component('app-cotizer', require('./components/cotizer/Cotizer.vue'));
 Vue.component('cotizer-form', require('./components/cotizer/Cotizer-form.vue'));
 // Vue.component('csrf', require('./components/csrf.vue'));

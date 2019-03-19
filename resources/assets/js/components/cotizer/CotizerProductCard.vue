@@ -114,12 +114,14 @@ export default {
     bottom:0;
     left:0;
     width:100%;
+    
     display: flex;
     justify-content:center;
     align-items:flex-end;
-    background-color:#000c;
+    background-color:#111;
     color:#fff;
     font-size: 2rem;
+    
 }
 
 .title{

@@ -18,11 +18,11 @@
              
              <hr>
              
-        <div id="accordion">
+        <div class="row">
             <div v-for="(product,i) in notPausedProducts" 
                   :key="'product-'+product.id" 
-                  class="card flex-wrap" >
-               <cotizer-producttable :product="product" :first="i == 0"></cotizer-producttable>
+                  class=" flex-wrap col-12 col-lg-4 p-lg-4" >
+               <cotizer-productcard :product="product" :first="i == 0"></cotizer-productcard>
             </div>
         </div>
         
@@ -55,14 +55,14 @@
 <script>
  import { mapActions } from 'vuex';
  import { mapGetters } from 'vuex';
-    import cotizerProducttable from './CotizerProductTable.vue';
+    import cotizerProductcard from './CotizerProductCard.vue';
     import codeSelector from './code-selector.vue';
     import homeInfo from '../home/info.vue';
     
     import pedido from './pedido.vue';
     import tutorial from './tutorial.vue'
     export default {
-        components : {homeInfo,pedido,tutorial,cotizerProducttable,codeSelector},
+        components : {homeInfo,pedido,tutorial,cotizerProductcard,codeSelector},
         data(){
             return {
                 selector:{

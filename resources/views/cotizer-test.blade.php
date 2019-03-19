@@ -12,6 +12,6 @@
             <h2> En Marzo : nuestro local abrira sus puertas en Pasteur 410, Once</h2>
         </div>
     @else
-        <app-cotizer-test></app-cotizer-test>
+     <h1>test</h1>
     @endif
 @endsection
