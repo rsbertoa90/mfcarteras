@@ -7,6 +7,7 @@
             </div>
         
             <div class="col-12  col-lg-4 icon-container row d-flex align-items-center">
+                   
                     <i class="fas fa-dollar-sign col-1"></i>
                     <span class="text-center col-10" v-if="config">Inversion minima: Por local ${{config.minbuy}} / Envio ${{config.minbuy_ship}}</span>
             </div>

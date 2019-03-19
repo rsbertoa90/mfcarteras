@@ -1,11 +1,15 @@
 <template>
 <div v-if="product">
-    <div class="variants-clicker d-flex mt-4">
-        <span v-for="variant in product.variants" :key="variant.id" 
-              class="square" :style="{backgroundColor:variant.color_code}"
-              @click="selectedVariant = variant"></span>
-    </div>
+   
     <div v-if="product" >
+        <div class="d-flex justify-content-center text-center">
+            <span class="text-center title"> {{product.name}} </span>
+        </div>
+         <div class="variants-clicker d-flex mt-4">
+            <span v-for="variant in product.variants" :key="variant.id" 
+                class="square" :style="{backgroundColor:variant.color_code}"
+                @click="selectedVariant = variant"></span>
+        </div>
         <div  class="image-container" v-if="selectedVariant" 
                 @mouseover="hovered=true" @mouseleave="hovered=false">
            <v-lazy-image v-if="selectedVariant.images[0]" class="image" :src="selectedVariant.images[0].url" :alt="product.name" />
@@ -16,20 +20,16 @@
                          class="overlay image" :src="selectedVariant.images[1].url" :alt="product.name" />
                <!--  <div v-if="!transition" style="height:500px; width:100%;"></div> -->
            </transition>
-                        
-        </div>
-        <div class="d-flex justify-content-between">
-            <span> {{product.name}} </span>
-            <div v-if="config && !config.hide_prices">
-                <span> ${{product.price |price}} </span>
-                <strike class="ml-2 text-secondary"> ${{product.price*1.25 |price}} </strike>
+            <div v-if="config && !config.hide_prices" class="price-overlay">
+               <span> ${{product.price |price}} </span>
             </div>
-            
+                     
         </div>
+        
         <span v-if="product.messures" class="text-secondary">Medidas: {{product.messures}} </span>
         <span v-else class="text-secondary">Medidas no disponibles</span>
         <div v-if="selectedVariant" class="row">
-            <label class="col-4">Quiero</label>
+            <label class="col-4 quiero">Quiero</label>
             <input type="number" min="0" class="form-control col-8 " v-model="selectedVariant.units">
         </div>
       
@@ -84,6 +84,40 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+
+ .image-container{
+        overflow: hidden;
+        position:relative;
+        border:1px solid #ccc;
+        padding:15px;
+        cursor: pointer;
+    }
+
+.quiero{
+    font-size:1.3rem;
+    font-weight: bold;
+}
+
+.price-overlay{
+    position:absolute;
+    z-index: 100;
+    bottom:0;
+    left:0;
+    width:100%;
+    display: flex;
+    justify-content:center;
+    align-items:flex-end;
+    background-color:#000c;
+    color:#fff;
+    font-size: 2rem;
+}
+
+.title{
+    font-size:2rem;
+}
+
+
 .variants-clicker{
     height:40px;
     width:90%;
@@ -112,13 +146,7 @@ export default {
 }
 
 
-    .image-container{
-        overflow: hidden;
-        position:relative;
-        border:1px solid #ccc;
-        padding:15px;
-        cursor: pointer;
-    }
+   
 
     /* .image:hover{
             transform: scale(1.2);

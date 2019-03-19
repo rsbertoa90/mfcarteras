@@ -24,13 +24,13 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
     {{-- fontawesome --}}
-    {{-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"> --}}
+    {{-- <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script> --}} {{-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"> --}}
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     {{-- <link href="{{ asset('css/animate.css') }}" rel="stylesheet"> --}}
 
     {{-- PRECONECTS --}}
-    <link rel="preconnect" href="https://use.fontawesome.com">
+   {{--  <link rel="preconnect" href="https://use.fontawesome.com"> --}}
     <link rel="preconnect" href="https://maps.google.com">
     <link rel="preconnect" href="https://www.google.com">
 
@@ -39,7 +39,7 @@
 
     
    <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132230957-1"></script>
+<script defer async src="https://www.googletagmanager.com/gtag/js?id=UA-132230957-1"></script>
 <script>
  window.dataLayer = window.dataLayer || [];
  function gtag(){dataLayer.push(arguments);}

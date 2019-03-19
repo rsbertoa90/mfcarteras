@@ -1,7 +1,7 @@
 <template>
     <a class="floating" rel="noreferrer" target="_blank" href="https://wa.me/541131878362">
         
-        <span class="fa fa-whatsapp"></span>
+       <i class="fab fa-whatsapp"></i>
         <span>¿Necesitas ayuda?</span>
     </a>
 </template>
@@ -14,7 +14,7 @@
 
     .floating{
         position: fixed;
-        z-index:100;
+        z-index:500;
         bottom:10px;
         right:10px;
         display:flex;
