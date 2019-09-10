@@ -21,7 +21,7 @@
 
             
           <div style="text-align: center ; width : 780px; text-decoration:underline">
-          <h4> {{strtoupper($category->name)}} Cod.{{$category->code}}</h4>
+      {{--     <h4> {{strtoupper($category->name)}} Cod.{{$category->code}}</h4> --}}
           </div>
                          
             <table>
