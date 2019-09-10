@@ -85671,37 +85671,7 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row mt-3" }, [
-                    _vm._m(1),
-                    _vm._v(" "),
-                    _vm.config
-                      ? _c(
-                          "div",
-                          { staticClass: "col-12 d-flex flex-column" },
-                          [
-                            _c("span", [
-                              _c("i", { staticClass: "fa fa-arrow-right" }),
-                              _vm._v(
-                                " Compra minima en local: $" +
-                                  _vm._s(_vm.config.minbuy)
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("span", [
-                              _c("i", { staticClass: "fa fa-arrow-right" }),
-                              _vm._v(
-                                " Compra minima para envios: $" +
-                                  _vm._s(_vm.config.minbuy_ship)
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _vm._m(2)
-                          ]
-                        )
-                      : _vm._e()
-                  ])
+                  _vm._m(0)
                 ]
               )
             ])
@@ -85726,39 +85696,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mt-3" }, [
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-lg btn-outline-success",
-          attrs: { href: "/cotizador" }
-        },
-        [
-          _c("span", { staticClass: "fa fa-shopping-cart" }),
-          _vm._v(" Hacer pedido")
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 d-flex align-items-center" }, [
-      _c("span", { staticClass: "fa fa-truck mr-2" }),
-      _vm._v(" "),
-      _c("span", { staticClass: "ml-2" }, [_vm._v("Envio a todo el país")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", [
-      _c("i", { staticClass: "fa fa-arrow-right" }),
-      _vm._v(
-        " Los despachos se realizaran de 1 a 5 días hábiles a partir del informe y acreditación del pago"
-      )
+    return _c("div", { staticClass: "row mt-3" }, [
+      _c("div", { staticClass: "col-6 d-flex align-items-center" }, [
+        _c("span", { staticClass: "fa fa-truck mr-2" }),
+        _vm._v(" "),
+        _c("span", { staticClass: "ml-2" }, [_vm._v("Envio a todo el país")])
+      ])
     ])
   }
 ]
@@ -90159,7 +90102,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("h2", [
             _vm._v(
-              "importador  mayorista en el corazón de Once, Envíos a todo el pais"
+              "importador directo en el corazón de Once, Envíos a todo el pais"
             )
           ])
         ]

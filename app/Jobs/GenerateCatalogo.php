@@ -64,14 +64,11 @@ class GenerateCatalogo implements ShouldQueue
             Cache::forget('catalogoRaw');
         }
         
-        
-        Cache::rememberForever('catalogoRaw',function(){
-            $date = str_slug(Carbon::now());
-            return '/catalogoRaw'.$date.'.pdf' ;
-        } );
-
-       $date = str_slug(Carbon::now());
+        $date = str_slug(Carbon::now());
         $path= '/catalogoRaw'.$date.'.pdf' ;
+        
+        Cache::forever('catalogoRaw',$path);
+
 
         $categories =Product::with('variants.images')->orderBy('name')->get();
         

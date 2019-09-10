@@ -27,8 +27,10 @@ class PdfController extends Controller
     {
          
         
-        if ($path = Cache::has('catalogoRaw'))
+        if (Cache::has('catalogoRaw'))
         {
+            $path=Cache::get('catalogoRaw');
+         /*    dd($path); */
             return redirect($path);
         }
         
