@@ -16,6 +16,8 @@
 
 Auth::routes();
 
+Route::get('/descargar-catalogo','PdfController@catalogoDownload');
+
 Route::middleware('CheckSuper')->prefix('super')->group(function(){
     Route::get('/', 'SuperController@panel');
 

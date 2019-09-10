@@ -3,8 +3,8 @@
           
             <br>
             <home-title></home-title>
-            <br>
-            <home-info></home-info>
+            <!-- <br>
+            <home-info></home-info> -->
             <br>
            <home-products></home-products>
 

@@ -25,7 +25,7 @@
         </div> -->
         <hr>
         <div class="row">
-            <div class="col-12 col-lg-4 row">
+           <!--  <div class="col-12 col-lg-4 row">
                 <div class="col-2 offset-1  ">
                     <div class="mt-2 btn ">
                         <span class="fa fa-map-marker"></span>
@@ -34,7 +34,8 @@
                 <div class="col-9 mt-3">
                         <span>Pasteur 410 - CABA </span>
                 </div>
-            </div>
+            </div> -->
+            <div class="col-lg-2"></div>
             <div class="col-12 col-lg-4 row">
                 <div class="col-2 offset-1  ">
                     <div class="mt-2 btn ">
@@ -52,7 +53,7 @@
                     </div>
                 </div>
                 <div class="col-9 mt-3">
-                    <p> 11-3187-8362 </p>
+                    <p> 11-3643-0547 </p>
                 </div>
             </div>
         </div>

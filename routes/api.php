@@ -17,6 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/catalogo-job','PdfController@dispatchCatalogoJob');
 Route::get('/model/{id}','ModelImageController@get');
 Route::get('/products','ProductController@getAll');
 Route::get('/products-not-paused','ProductController@getNotPaused');

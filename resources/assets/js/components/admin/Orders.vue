@@ -51,6 +51,9 @@
                         <th> - </th>
                     </thead>
                     <tbody>
+                        <tr>
+                            <input type="text" v-model="searchTerm" class="form-control">
+                        </tr>
                         <tr  v-for="order in filteredOrders" 
                                 :key="'order'+order.id"
                                 @click ="selected = order"
@@ -82,6 +85,7 @@ export default {
     },
     data(){
         return {
+            searchTerm:'',
             orders : [],
             status : 'pendiente',
             filtered : [],
@@ -115,9 +119,22 @@ export default {
               
                 return (order.status == vm.status);
             });
+            
+            if ( vm.searchTerm.trim().length > 2 )
+            {
+                res = res.filter(order => {
+                    let searchTerm = vm.searchTerm.trim().toLowerCase();
+                    let client = order.client.trim().toLowerCase();
+                    let  email = order.email.trim().toLowerCase();
+                    return (client.indexOf(searchTerm) > -1
+                            || email.indexOf(searchTerm) > -1);
+                });
+            }
+
             res = _.sortBy(res,'created_at');
             res = res.reverse();
-         
+
+
             return res;
         }
     },

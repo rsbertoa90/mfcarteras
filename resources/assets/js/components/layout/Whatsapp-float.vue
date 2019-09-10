@@ -1,5 +1,5 @@
 <template>
-    <a class="floating" rel="noreferrer" target="_blank" href="https://wa.me/541131878362">
+    <a class="floating" rel="noreferrer" target="_blank" href="https://wa.me/541136430547">
         
        <i class="fab fa-whatsapp"></i>
         <span>¿Necesitas ayuda?</span>

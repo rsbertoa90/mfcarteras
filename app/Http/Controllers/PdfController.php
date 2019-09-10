@@ -7,8 +7,36 @@ use App\Product;
 use PDF;
 use Carbon\Carbon;
 
+use App\Jobs\GeneratePricesList;
+use App\Jobs\GenerateCatalogo;
+use Queue;
+use Illuminate\Support\Facades\Cache;
+
 class PdfController extends Controller
 {
+
+     public function dispatchCatalogoJob()
+    {
+        
+        Queue::push(new GenerateCatalogo());
+
+        return;
+    }
+
+    public function catalogoDownload()
+    {
+         
+        
+        if ($path = Cache::has('catalogoRaw'))
+        {
+            return redirect($path);
+        }
+        
+    
+    }
+
+
+
     public function prices()
     {
         $products = Product::where('paused',0)->whereHas('variants',function ($q){

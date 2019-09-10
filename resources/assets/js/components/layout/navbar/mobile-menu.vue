@@ -51,8 +51,8 @@ export default {
             showMenu : false,
             routes : [
             {url : '/',name : 'home'},
-            {url : '/cotizador',name : 'Hace tu pedido'},
-            {url : '/sucursales',name : 'Ubicacion'},
+         /*    {url : '/cotizador',name : 'Hace tu pedido'}, */
+         /*    {url : '/sucursales',name : 'Ubicacion'}, */
             {url : '/contacto',name : 'Contacto'},
         ]
                 

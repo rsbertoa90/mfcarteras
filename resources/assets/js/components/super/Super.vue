@@ -2,6 +2,10 @@
     
     <div class="row">
        <div class="row" v-if="config">
+           <div class="row mt-4 mb-4">
+               <button class="ml-4 btn btn-lg btn-info" @click="generarCatalogo()">Generar Catalogo</button>
+               <a href="/descargar-catalogo" class="ml-4 btn btn-lg btn-info">Descargar Catalogo</a>
+           </div>
            <div class="col-12">
                Minimo de compra en local
                <input type="number" v-model.lazy="config.minbuy" 
@@ -38,6 +42,12 @@ export default {
         }
     },
     methods:{
+        generarCatalogo(){
+            this.$http.get('/api/catalogo-job')
+                .then(()=>{
+                    swal('Procedimiento iniciado','espera unos minutos para ver los cambios','success');
+                });
+        },
         updateconfig(field)
         {
             let data = {
