@@ -4,7 +4,7 @@
        <div class="row" v-if="config">
            <div class="row mt-4 mb-4">
                <button class="ml-4 btn btn-lg btn-info" @click="generarCatalogo()">Generar Catalogo</button>
-               <a href="/descargar-catalogo" class="ml-4 btn btn-lg btn-info">Descargar Catalogo</a>
+               <a target="_blank" href="/descargar-catalogo" class="ml-4 btn btn-lg btn-info">Descargar Catalogo</a>
            </div>
            <div class="col-12">
                Minimo de compra en local
