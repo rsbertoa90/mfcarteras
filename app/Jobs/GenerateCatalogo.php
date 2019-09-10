@@ -8,6 +8,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use App\Product;
+use App\Variant;
 use App\ProductImage;
 use Carbon\Carbon;
 
@@ -71,11 +72,12 @@ class GenerateCatalogo implements ShouldQueue
 
 
         $categories =Product::with('variants.images')->orderBy('name')->get();
+        $variants = Variant::all();
         
 
         $logo = $this->imageEmbed(public_path('/storage/images/app/logo.png'));
         $today = Carbon::now()->format('d/m/Y');
-        $html = View::make('pdf.catalogo.Catalogo',compact('categories','today','logo'))->render();
+        $html = View::make('pdf.catalogo.Catalogo',compact('variants','today','logo'))->render();
 
         PDF::loadHTML($html)->save(public_path().$path); 
 

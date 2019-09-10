@@ -5,13 +5,11 @@
  
   <main>
       
-    @if ($categories)
+    @if ($variants)
          
    
 
-      @foreach ($categories as $category)
       
-         @if (count($category->variants)>0)
              
             <table>
                 <tr>
@@ -20,9 +18,7 @@
             </table>
 
             
-          <div style="text-align: center ; width : 780px; text-decoration:underline">
-      {{--     <h4> {{strtoupper($category->name)}} Cod.{{$category->code}}</h4> --}}
-          </div>
+         
                          
             <table>
                 <tr>
@@ -33,13 +29,13 @@
 
                   <tbody >
                     @php
-                        $max = count($category->variants) / 2 ;
+                        $max = count($variants) / 2 ;
                     @endphp      
                       @for ($i = 0; $i < $max; $i++)
                             @php
-                            $products = $category->variants;
-                            if (isset($products[$i*2+0])){ $product1 = $category->variants[($i*2)+0];} else {$product1 = null;};
-                            if (isset($products[$i*2+1])) {   $product2 = $category->variants[($i*2)+1];} else {$product2 = null;};
+                            $products = $variants;
+                            if (isset($products[$i*2+0])){ $product1 = $variants[($i*2)+0];} else {$product1 = null;};
+                            if (isset($products[$i*2+1])) {   $product2 = $variants[($i*2)+1];} else {$product2 = null;};
                           
                             @endphp
                           <tr>
@@ -57,8 +53,7 @@
                   </tbody>
               </table>
               <hr>
-        @endif
-        @endforeach
+        
 
     @endif
   </main>
