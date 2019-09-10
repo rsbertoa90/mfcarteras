@@ -63,20 +63,20 @@
                         <p class="texto"> {{product.description | ucFirst}} </p>
                         <span style="font-size: 0.7rem ; font-style:italic">* Los diseños estan sujetos a disponibilidad</span>
                     </div>
-                    <div class="mt-3">
+                  <!--   <div class="mt-3">
                         <a href="/cotizador" class="btn btn-lg btn-outline-success"> <span class="fa fa-shopping-cart"></span> Hacer pedido</a>
-                    </div>
+                    </div> -->
                     <div class="row mt-3">
                         <div class="col-6 d-flex align-items-center">
                              <span class="fa fa-truck mr-2"></span>
                              <span class="ml-2">Envio a todo el país</span>
                         </div>
                      
-                        <div class="col-12 d-flex flex-column" v-if="config">
+                        <!-- <div class="col-12 d-flex flex-column" v-if="config">
                             <span><i class="fa fa-arrow-right"></i> Compra minima en local: ${{config.minbuy}}</span>
                             <span><i class="fa fa-arrow-right"></i> Compra minima para envios: ${{config.minbuy_ship}}</span>
                             <span><i class="fa fa-arrow-right"></i> Los despachos se realizaran de 1 a 5 días hábiles a partir del informe y acreditación del pago</span>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
