@@ -87337,7 +87337,7 @@ var render = function() {
               "a",
               {
                 staticClass: "ml-4 btn btn-lg btn-info",
-                attrs: { href: "/descargar-catalogo" }
+                attrs: { target: "_blank", href: "/descargar-catalogo" }
               },
               [_vm._v("Descargar Catalogo")]
             )
